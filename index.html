@@ -13,42 +13,50 @@
       --tech-orange-hover: #ff7538;
       --tech-amber: #ffaa00;
       
-      /* Dark Theme (Default) */
-      --bg: #0c0e12;
-      --panel: #13171d;
-      --panel-inner: #0a0c0f;
+      /* Dark Theme (Pure Deep Tech Dark) */
+      --bg: #090b0e;
+      --panel: #12161d;
+      --panel-inner: #090c10;
       --text: #d1d5db;
       --text-muted: #9ca3af;
       --text-heading: #ffffff;
-      --border: #262c36;
-      --border-subtle: #1c222b;
-      --grid-line: rgba(255, 94, 26, 0.07);
+      --border: #232a35;
+      --border-subtle: #191f27;
+      --grid-line: rgba(255, 94, 26, 0.05);
       --stamp-border: #ff5e1a;
       --stamp-bg: rgba(255, 94, 26, 0.05);
-      --btn-secondary-bg: #1a1f26;
-      --btn-secondary-hover: #252c36;
+      --btn-secondary-bg: #1a2028;
+      --btn-secondary-hover: #262e3a;
+      --modal-bg: rgba(5, 7, 10, 0.88);
     }
     
     [data-theme="light"] {
-      /* Light Theme (Clean Technical Paper) */
-      --bg: #f3f5f8;
+      /* Light Theme (Clean Blueprint Technical Paper) */
+      --bg: #f4f6f9;
       --panel: #ffffff;
       --panel-inner: #f8fafc;
       --text: #334155;
       --text-muted: #64748b;
       --text-heading: #0f172a;
-      --border: #d8e0ea;
+      --border: #d4dde8;
       --border-subtle: #e2e8f0;
       --grid-line: rgba(255, 94, 26, 0.06);
       --stamp-border: #ea580c;
       --stamp-bg: rgba(234, 88, 12, 0.05);
       --btn-secondary-bg: #e2e8f0;
       --btn-secondary-hover: #cbd5e1;
+      --modal-bg: rgba(15, 23, 42, 0.75);
     }
     
+    html, body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       font-family: 'JetBrains Mono', monospace;
-      background-color: var(--bg);
+      background-color: var(--bg) !important;
       color: var(--text);
       background-image: 
         linear-gradient(var(--grid-line) 1px, transparent 1px),
@@ -77,7 +85,7 @@
       border: 1px solid var(--border);
       background-color: var(--panel);
       position: relative;
-      transition: border-color 0.2s ease, background-color 0.25s ease;
+      transition: border-color 0.2s ease, background-color 0.25s ease, transform 0.15s ease;
     }
     .tech-border::before {
       content: '';
@@ -97,24 +105,9 @@
       border-right: 2px solid var(--tech-orange);
       pointer-events: none;
     }
-
-    /* Легкая текстура ЭЛТ-монитора для темной темы */
-    [data-theme="dark"] .crt-overlay {
-      background: linear-gradient(
-        to bottom,
-        rgba(255,255,255,0),
-        rgba(255,255,255,0) 50%,
-        rgba(0, 0, 0, 0.22) 50%,
-        rgba(0, 0, 0, 0.22)
-      );
-      background-size: 100% 4px;
-    }
-    [data-theme="light"] .crt-overlay {
-      background: none;
-    }
   </style>
 </head>
-<body class="min-h-screen flex flex-col p-3 sm:p-6 md:p-8 crt-overlay">
+<body class="min-h-screen flex flex-col p-3 sm:p-6 md:p-8">
 
   <!-- ГЛАВНЫЙ КОНТЕЙНЕР (С ФИКСИРОВАННЫМ ПОДВАЛОМ ВНИЗУ) -->
   <div class="max-w-6xl w-full mx-auto flex-grow flex flex-col space-y-6">
@@ -136,11 +129,11 @@
             AD LAB <span class="text-[var(--tech-orange)] text-base sm:text-xl font-normal">// adlab.su</span>
           </h1>
 
-          <!-- Описание и конструктор с новой строки -->
+          <!-- Описание и конструктор с отдельной строки -->
           <p class="text-xs sm:text-sm text-[var(--text-muted)] mt-2 font-sans-ui max-w-2xl leading-relaxed" id="txt-header-desc">
             Инженерные разработки, электроника и программные комплексы.
           </p>
-          <div class="mt-2 text-xs font-mono font-semibold text-[var(--tech-orange)] flex items-center gap-2" id="txt-engineer-line">
+          <div class="mt-2 text-xs font-mono font-semibold text-[var(--tech-orange)] flex items-center gap-2">
             <span class="w-1.5 h-1.5 bg-[var(--tech-orange)] rounded-full inline-block"></span>
             <span id="txt-engineer-name">Гл. Конструктор: Штыков А.Д.</span>
           </div>
@@ -158,7 +151,7 @@
             <div class="w-px h-4 bg-[var(--border)] mx-1"></div>
             
             <!-- Тема -->
-            <button id="theme-toggle-btn" onclick="toggleTheme()" class="px-2 py-1 text-[var(--text-heading)] hover:text-[var(--tech-orange)] font-bold transition flex items-center gap-1" title="Сменить тему оформления">
+            <button id="theme-toggle-btn" onclick="toggleTheme()" class="px-2 py-1 text-[var(--text-heading)] hover:text-[var(--tech-orange)] font-bold transition flex items-center gap-1.5" title="Сменить тему оформления">
               <span id="theme-icon">🌙</span>
               <span class="text-[10px] hidden sm:inline" id="theme-text">ТЕМНАЯ</span>
             </button>
@@ -193,14 +186,14 @@
       </div>
     </header>
 
-    <!-- КАТАЛОГ ПРОЕКТОВ (PROJECT 0001, PROJECT 0002...) -->
+    <!-- КАТАЛОГ ПРОЕКТОВ (ЕДИНЫЙ СТРОГИЙ ДИЗАЙН КАРТОЧЕК) -->
     <main class="grid grid-cols-1 md:grid-cols-2 gap-6 flex-grow" id="projects-grid">
 
-      <!-- PROJECT 0001: ТЕПЕРЬ ЭТО TABLO TAB (ГЛАВНЫЙ РЕЛИЗ ЛАБОРАТОРИИ) -->
-      <article class="project-card tech-border p-5 flex flex-col justify-between hover:border-[var(--tech-orange)] transition-all duration-200 group" data-category="software">
+      <!-- КАРТОЧКА 1: TABLO TAB (PROJECT 0001) -->
+      <article onclick="openModal('0001')" class="project-card tech-border p-5 flex flex-col justify-between hover:border-[var(--tech-orange)] cursor-pointer transition-all duration-200 group" data-category="software">
         <div>
-          <!-- Индекс и статус -->
-          <div class="flex items-center justify-between border-b border-[var(--border)] pb-3 text-xs">
+          <!-- Верхний ряд: Индекс + Статус -->
+          <div class="flex items-center justify-between border-b border-[var(--border)] pb-3 text-xs font-mono">
             <span class="font-extrabold text-[var(--tech-orange)] tracking-widest text-sm bg-[var(--stamp-bg)] px-2.5 py-0.5 border border-[var(--tech-orange)]/30">
               PROJECT 0001
             </span>
@@ -209,44 +202,39 @@
             </span>
           </div>
 
-          <!-- Заголовок -->
+          <!-- Заголовок и описание -->
           <div class="mt-4">
-            <div class="text-[11px] text-[var(--text-muted)] uppercase tracking-wider font-mono" id="p1-card-tag">CHROME EXTENSION // SOFTWARE</div>
+            <div class="text-[11px] text-[var(--text-muted)] uppercase tracking-wider font-mono" id="p1-card-tag">ПРОГРАММНЫЙ КОМПЛЕКС // SOFTWARE</div>
             <h2 class="text-lg sm:text-xl font-bold text-[var(--text-heading)] group-hover:text-[var(--tech-orange)] transition mt-1" id="p1-card-title">
               Tablo Tab — Экспресс-панель
             </h2>
-            <p class="text-xs text-[var(--text-muted)] mt-2 font-sans-ui leading-relaxed" id="p1-card-desc">
-              Эстетичная экспресс-панель для новой вкладки со стилями Windows 11 и 10. Виртуальные рабочие столы, живые смарт-виджеты (часы, погода, курсы валют), быстрые заметки и облачная синхронизация через Google Диск.
+            <p class="text-xs text-[var(--text-muted)] mt-2 font-sans-ui leading-relaxed line-clamp-2" id="p1-card-desc">
+              Эстетичная экспресс-панель для новой вкладки со стилями Windows 11 и 10. Рабочие столы, живые смарт-виджеты (часы, погода, курсы), заметки и облако.
             </p>
           </div>
 
-          <!-- Превью промо-карточки -->
-          <div class="mt-4 bg-[var(--panel-inner)] p-2.5 border border-[var(--border)] overflow-hidden rounded-sm relative">
-            <img src="assets/img/promo_tile_440x280.png" alt="Tablo Tab Preview" class="w-full h-36 object-cover rounded-sm border border-[var(--border-subtle)]">
-            <div class="mt-2 flex flex-wrap gap-1.5 text-[10px] font-mono">
-              <span class="px-2 py-0.5 bg-[var(--panel)] text-blue-500 border border-blue-500/30">Win 11 Mica</span>
-              <span class="px-2 py-0.5 bg-[var(--panel)] text-cyan-600 border border-cyan-500/30">Win 10 Metro</span>
-              <span class="px-2 py-0.5 bg-[var(--panel)] text-amber-500 border border-amber-500/30">Google Drive</span>
-              <span class="px-2 py-0.5 bg-[var(--panel)] text-emerald-500 border border-emerald-500/30">Offline 100%</span>
-            </div>
+          <!-- Единая техническая панель параметров (ТТХ) -->
+          <div class="mt-4 bg-[var(--panel-inner)] p-3 border border-[var(--border)] space-y-1.5 font-mono text-[11px]" id="p1-card-specs">
+            <div class="flex justify-between"><span class="text-[var(--text-muted)]">Платформа:</span><span class="text-[var(--text-heading)] font-semibold">Chromium (MV3)</span></div>
+            <div class="flex justify-between"><span class="text-[var(--text-muted)]">Оформление:</span><span class="text-[var(--text-heading)] font-semibold">Windows 11 Mica & Win 10</span></div>
+            <div class="flex justify-between"><span class="text-[var(--text-muted)]">Синхронизация:</span><span class="text-emerald-500 font-semibold">Google Диск OAuth2</span></div>
           </div>
         </div>
 
-        <div class="mt-5 pt-3 border-t border-[var(--border)] flex items-center justify-between text-xs">
-          <button onclick="openModal('0001')" class="text-[var(--text-muted)] hover:text-[var(--text-heading)] flex items-center gap-1 font-bold font-mono" id="p1-card-btn">
+        <!-- Нижняя планка карточки: ТИП слева | ТЕХПАСПОРТ справа -->
+        <div class="mt-5 pt-3 border-t border-[var(--border)] flex items-center justify-between text-xs font-mono">
+          <span class="text-[var(--text-muted)]" id="p1-card-type">ТИП: СОФТ</span>
+          <span class="text-[var(--tech-orange)] group-hover:underline flex items-center gap-1 font-bold" id="p1-card-btn">
             ТЕХПАСПОРТ ➔
-          </button>
-          <a href="https://chromewebstore.google.com/detail/tablo-tab/gdhohiimfeogdjiccmldkegamfedkgco" target="_blank" class="px-3 py-1.5 bg-[var(--tech-orange)] text-black font-extrabold hover:bg-[var(--tech-orange-hover)] transition flex items-center gap-1.5" id="p1-card-install">
-            <span>В CHROME STORE</span> ➔
-          </a>
+          </span>
         </div>
       </article>
 
-      <!-- PROJECT 0002: СЛЕДУЮЩИЙ ПРОЕКТ (R&D / В РАЗРАБОТКЕ) -->
-      <article class="project-card tech-border p-5 flex flex-col justify-between hover:border-[var(--tech-orange)] transition-all duration-200 group" data-category="hardware">
+      <!-- КАРТОЧКА 2: АППАРАТНЫЙ КОМПЛЕКС (PROJECT 0002) -->
+      <article onclick="openModal('0002')" class="project-card tech-border p-5 flex flex-col justify-between hover:border-[var(--tech-orange)] cursor-pointer transition-all duration-200 group" data-category="hardware">
         <div>
-          <!-- Индекс и статус -->
-          <div class="flex items-center justify-between border-b border-[var(--border)] pb-3 text-xs">
+          <!-- Верхний ряд: Индекс + Статус -->
+          <div class="flex items-center justify-between border-b border-[var(--border)] pb-3 text-xs font-mono">
             <span class="font-extrabold text-[var(--tech-orange)] tracking-widest text-sm bg-[var(--stamp-bg)] px-2.5 py-0.5 border border-[var(--tech-orange)]/30">
               PROJECT 0002
             </span>
@@ -255,36 +243,37 @@
             </span>
           </div>
 
-          <!-- Заголовок -->
+          <!-- Заголовок и описание -->
           <div class="mt-4">
-            <div class="text-[11px] text-[var(--text-muted)] uppercase tracking-wider font-mono" id="p2-card-tag">HARDWARE & EMBEDDED // R&D</div>
+            <div class="text-[11px] text-[var(--text-muted)] uppercase tracking-wider font-mono" id="p2-card-tag">АППАРАТНЫЙ МОДУЛЬ // HARDWARE</div>
             <h2 class="text-lg sm:text-xl font-bold text-[var(--text-heading)] group-hover:text-[var(--tech-orange)] transition mt-1" id="p2-card-title">
               Аппаратно-приборный комплекс
             </h2>
-            <p class="text-xs text-[var(--text-muted)] mt-2 font-sans-ui leading-relaxed" id="p2-card-desc">
-              Проектирование авторских аппаратных модулей, схемотехники и микроконтроллерных устройств. Создание кастомных физических устройств с открытой архитектурой.
+            <p class="text-xs text-[var(--text-muted)] mt-2 font-sans-ui leading-relaxed line-clamp-2" id="p2-card-desc">
+              Проектирование авторских аппаратных модулей, схемотехники и микроконтроллерных устройств. Создание кастомных физических приборов.
             </p>
           </div>
 
-          <!-- ТТХ / Паспорт -->
-          <div class="mt-4 bg-[var(--panel-inner)] p-3 text-[11px] border border-[var(--border)] space-y-1.5 font-mono" id="p2-card-specs">
+          <!-- Единая техническая панель параметров (ТТХ) -->
+          <div class="mt-4 bg-[var(--panel-inner)] p-3 border border-[var(--border)] space-y-1.5 font-mono text-[11px]" id="p2-card-specs">
             <div class="flex justify-between"><span class="text-[var(--text-muted)]">Направление:</span><span class="text-[var(--text-heading)] font-semibold">Embedded & IoT</span></div>
             <div class="flex justify-between"><span class="text-[var(--text-muted)]">Архитектура:</span><span class="text-[var(--text-heading)] font-semibold">Custom PCB / ARM</span></div>
             <div class="flex justify-between"><span class="text-[var(--text-muted)]">Стадия:</span><span class="text-amber-500 font-semibold">Опытные образцы</span></div>
           </div>
         </div>
 
-        <div class="mt-5 pt-3 border-t border-[var(--border)] flex items-center justify-between text-xs">
-          <span class="text-[var(--text-muted)] font-mono" id="p2-card-type">ТИП: ЖЕЛЕЗО</span>
-          <button onclick="openModal('0002')" class="text-[var(--tech-orange)] hover:underline flex items-center gap-1 font-bold" id="p2-card-btn">
+        <!-- Нижняя планка карточки: ТИП слева | ТЕХПАСПОРТ справа -->
+        <div class="mt-5 pt-3 border-t border-[var(--border)] flex items-center justify-between text-xs font-mono">
+          <span class="text-[var(--text-muted)]" id="p2-card-type">ТИП: ЖЕЛЕЗО</span>
+          <span class="text-[var(--tech-orange)] group-hover:underline flex items-center gap-1 font-bold" id="p2-card-btn">
             ТЕХПАСПОРТ ➔
-          </button>
+          </span>
         </div>
       </article>
 
     </main>
 
-    <!-- ПОДВАЛ / ПРИКРЕПЛЕН К НИЗУ ЭКРАНА (mt-auto) -->
+    <!-- ПОДВАЛ / ВСЕГДА ВНИЗУ ЭКРАНА (mt-auto) -->
     <footer class="tech-border p-5 sm:p-6 text-xs text-[var(--text-muted)] mt-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
       <div>
         <div class="text-[var(--text-heading)] font-bold tracking-wider uppercase font-mono" id="txt-footer-title">
@@ -308,148 +297,275 @@
 
   </div>
 
-  <!-- МОДАЛЬНОЕ ОКНО ПАСПОРТА -->
-  <div id="modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="tech-border max-w-lg w-full p-5 sm:p-6 text-xs space-y-4 shadow-2xl relative">
-      <div class="flex justify-between items-start border-b border-[var(--border)] pb-3">
+  <!-- ПОЛНОЕ ОКНО ТЕХНИЧЕСКОГО ПАСПОРТА (МОДАЛ С ВКЛАДКАМИ, СКРИНШОТАМИ И СКАЧИВАНИЕМ) -->
+  <div id="modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-6" style="background-color: var(--modal-bg); backdrop-filter: blur(8px);">
+    <div class="tech-border max-w-3xl w-full max-h-[92vh] flex flex-col p-4 sm:p-6 shadow-2xl relative overflow-hidden rounded-sm">
+      
+      <!-- Шапка модального окна -->
+      <div class="flex justify-between items-start border-b border-[var(--border)] pb-4">
         <div>
-          <span class="text-[var(--tech-orange)] font-bold tracking-widest text-sm" id="modal-project-id">PROJECT 0001</span>
-          <h3 class="text-base sm:text-lg font-bold text-[var(--text-heading)] mt-1" id="modal-project-title">Паспорт изделия</h3>
+          <div class="flex items-center gap-2">
+            <span class="text-[var(--tech-orange)] font-bold tracking-widest text-xs font-mono bg-[var(--stamp-bg)] px-2 py-0.5 border border-[var(--tech-orange)]/30" id="modal-project-id">PROJECT 0001</span>
+            <span class="text-emerald-500 font-mono text-xs font-semibold" id="modal-project-badge">В СТРОЮ</span>
+          </div>
+          <h3 class="text-lg sm:text-2xl font-bold text-[var(--text-heading)] mt-1.5" id="modal-project-title">Паспорт изделия</h3>
         </div>
-        <button onclick="closeModal()" class="text-[var(--text-muted)] hover:text-[var(--text-heading)] text-base font-mono px-2 py-1 bg-[var(--btn-secondary-bg)]">✕ <span id="modal-close-txt">ЗАКРЫТЬ</span></button>
+        <button onclick="closeModal()" class="text-[var(--text-muted)] hover:text-[var(--text-heading)] text-sm font-mono px-2.5 py-1.5 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-hover)] rounded-xs transition">
+          ✕ <span id="modal-close-txt">ЗАКРЫТЬ [ESC]</span>
+        </button>
       </div>
 
-      <div class="space-y-3 font-sans-ui text-[var(--text)] leading-relaxed" id="modal-project-desc"></div>
-
-      <div class="bg-[var(--panel-inner)] p-3 border border-[var(--border)] space-y-1.5 font-mono text-[11px]" id="modal-project-specs"></div>
-
-      <div class="flex justify-between items-center pt-3 border-t border-[var(--border)] font-mono text-[var(--text-muted)]">
-        <span id="modal-otk-txt">ОТК: ГОСТ ПРОВЕРЕН</span>
-        <span class="text-[var(--tech-orange)] font-bold">AD LAB // 2026</span>
+      <!-- Навигационные вкладки внутри техпаспорта -->
+      <div class="flex border-b border-[var(--border)] text-xs font-mono mt-3 gap-2 overflow-x-auto pb-1" id="modal-tabs-bar">
+        <button onclick="setModalTab('overview')" id="mtab-btn-overview" class="px-3 py-1.5 bg-[var(--tech-orange)] text-black font-extrabold uppercase transition">Обзор & Скриншоты</button>
+        <button onclick="setModalTab('specs')" id="mtab-btn-specs" class="px-3 py-1.5 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-hover)] text-[var(--text)] uppercase transition">ТТХ и Параметры</button>
+        <button onclick="setModalTab('versions')" id="mtab-btn-versions" class="px-3 py-1.5 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-hover)] text-[var(--text)] uppercase transition">История версий</button>
       </div>
+
+      <!-- Скроллируемая центральная часть статьи -->
+      <div class="overflow-y-auto flex-grow my-4 pr-1 space-y-4 font-sans-ui text-sm text-[var(--text)] leading-relaxed" id="modal-body-container">
+        
+        <!-- Вкладка 1: Обзор и скриншоты -->
+        <div id="tab-content-overview" class="space-y-4">
+          <div id="modal-article-text" class="text-xs sm:text-sm text-[var(--text)] space-y-2.5"></div>
+
+          <!-- Галерея скриншотов с переключателем стилей (Windows 11 vs Windows 10) -->
+          <div id="modal-gallery-wrap" class="bg-[var(--panel-inner)] p-3 border border-[var(--border)] rounded-sm space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold text-[var(--text-muted)] uppercase" id="gallery-label">Стили интерфейса:</span>
+              <div class="flex gap-1.5 text-xs font-mono" id="gallery-style-toggles">
+                <button onclick="setScreenshot('win11')" id="btn-scr-win11" class="px-2.5 py-1 bg-[var(--tech-orange)] text-black font-bold text-[11px] rounded-xs">Windows 11 Mica</button>
+                <button onclick="setScreenshot('win10')" id="btn-scr-win10" class="px-2.5 py-1 bg-[var(--btn-secondary-bg)] text-[var(--text)] font-bold text-[11px] rounded-xs">Windows 10 Metro</button>
+              </div>
+            </div>
+            <div class="border border-[var(--border-subtle)] rounded-sm overflow-hidden bg-black/40">
+              <img id="modal-screenshot-img" src="assets/img/screenshot_1_ru_win11_1280x800.png" alt="Скриншот интерфейса" class="w-full h-auto max-h-[360px] object-contain mx-auto">
+            </div>
+          </div>
+        </div>
+
+        <!-- Вкладка 2: ТТХ (Таблица характеристик) -->
+        <div id="tab-content-specs" class="hidden space-y-3">
+          <div class="text-xs text-[var(--text-muted)] font-mono uppercase font-semibold" id="specs-table-title">Формуляр технических параметров:</div>
+          <div class="bg-[var(--panel-inner)] p-3 border border-[var(--border)] space-y-2 font-mono text-xs" id="modal-project-specs-list"></div>
+        </div>
+
+        <!-- Вкладка 3: История версий (Changelog) -->
+        <div id="tab-content-versions" class="hidden space-y-3 font-mono text-xs">
+          <div class="text-xs text-[var(--text-muted)] uppercase font-semibold" id="versions-title">Журнал изменений и релизов:</div>
+          <div class="space-y-3" id="modal-versions-list"></div>
+        </div>
+
+      </div>
+
+      <!-- Нижняя панель действий (Кнопки скачать / Chrome Store) -->
+      <div class="pt-3 border-t border-[var(--border)] flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+        <div class="flex items-center gap-3 text-[11px] text-[var(--text-muted)]">
+          <span id="modal-otk-txt">ОТК: ГОСТ ПРОВЕРЕН</span>
+          <span>|</span>
+          <a href="privacy.html" class="text-[var(--tech-orange)] hover:underline" id="modal-privacy-link">Конфиденциальность</a>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2" id="modal-action-buttons">
+          <a id="btn-modal-download" href="assets/downloads/TabloTab_v6.4.0.zip" download class="px-3 py-1.5 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-hover)] text-[var(--text-heading)] font-bold flex items-center gap-1.5 border border-[var(--border)] transition">
+            <span>⬇ СКАЧАТЬ ZIP (.ZIP)</span>
+          </a>
+          <a id="btn-modal-store" href="https://chromewebstore.google.com/detail/tablo-tab/gdhohiimfeogdjiccmldkegamfedkgco" target="_blank" class="px-4 py-1.5 bg-[var(--tech-orange)] hover:bg-[var(--tech-orange-hover)] text-black font-extrabold flex items-center gap-1.5 transition">
+            <span>В CHROME WEB STORE</span> ➔
+          </a>
+        </div>
+      </div>
+
     </div>
   </div>
 
   <script>
     let currentLang = 'ru';
     let currentTheme = 'dark';
+    let activeModalId = '0001';
+    let currentModalTab = 'overview';
+    let currentScreenshotStyle = 'win11';
 
-    const i18n = {
-      ru: {
-        headerBadge: 'ОПЫТНАЯ ЛАБОРАТОРИЯ // HARD & SOFT',
-        headerDesc: 'Инженерные разработки, электроника и программные комплексы.',
-        engineerName: 'Гл. Конструктор: Штыков А.Д.',
-        gostStamp: 'ПАСПОРТНЫЙ УЧЕТ<br><span class="text-[9px] sm:text-[10px] opacity-80 font-normal">ГОСТ-2026.SU</span>',
-        statusActive: 'В СТРОЮ',
-        filterLabel: 'ФОРМУЛЯРЫ:',
-        btnAll: 'Все проекты [2]',
-        btnSw: 'Софт / Расширения',
-        btnHw: 'Железо / R&D',
-        footerTitle: 'AD LAB // АВТОРСКАЯ ЛАБОРАТОРИЯ ШТЫКОВА А.Д.',
-        footerDesc: 'Физические устройства и программные комплексы. Разработка с открытым исходным кодом.',
-        footerPrivacy: 'Политика конфиденциальности (Privacy Policy)',
-        footerOtk: 'ПРИНЯТО',
-        modalClose: 'ЗАКРЫТЬ',
-        modalOtk: 'ОТК: ГОСТ ПРОВЕРЕН',
-
-        p1: {
-          tag: 'CHROME EXTENSION // SOFTWARE',
-          title: 'Tablo Tab — Экспресс-панель',
-          desc: 'Эстетичная экспресс-панель для новой вкладки со стилями Windows 11 и 10. Виртуальные рабочие столы, живые смарт-виджеты (часы, погода, курсы валют), быстрые заметки и облачная синхронизация через Google Диск.',
-          status: 'v6.4.0 // WEB STORE',
-          type: 'ТИП: РАСШИРЕНИЕ',
-          btn: 'ТЕХПАСПОРТ ➔',
-          install: 'В CHROME STORE ➔',
-          modalDesc: 'Tablo Tab превращает страницу новой вкладки в персонализированный дашборд со стилями Windows 11 Fluent Mica и Windows 10 Metro Classic. Поддерживает неограниченные рабочие столы, интерактивные смарт-виджеты (Часы, Погода, Курсы валют и криптовалют, Блокнот To-Do), визуальные плитки с автоподбором логотипов и надежную синхронизацию с личным Google Диском.',
-          modalSpecs: [
-            ['ID расширения:', 'gdhohiimfeogdjiccmldkegamfedkgco'],
-            ['Версия:', 'v6.4.0 (Manifest V3)'],
-            ['Стили оформления:', 'Windows 11 Mica & Windows 10 Metro'],
-            ['Смарт-виджеты:', 'Часы, Погода, Финансы, Заметки To-Do'],
-            ['Конфиденциальность:', '100% Локальное хранение (без трекеров)'],
-            ['Облако:', 'Google Диск OAuth2 (опционально)']
-          ]
-        },
-
-        p2: {
-          tag: 'HARDWARE & EMBEDDED // R&D',
-          title: 'Аппаратно-приборный комплекс',
-          desc: 'Проектирование авторских аппаратных модулей, схемотехники и микроконтроллерных устройств. Создание кастомных физических приборов с открытой архитектурой.',
-          status: 'В РАЗРАБОТКЕ // R&D',
-          type: 'ТИП: ЖЕЛЕЗО',
-          btn: 'ТЕХПАСПОРТ ➔',
-          specsHtml: `
-            <div class="flex justify-between"><span class="text-[var(--text-muted)]">Направление:</span><span class="text-[var(--text-heading)] font-semibold">Embedded & IoT</span></div>
-            <div class="flex justify-between"><span class="text-[var(--text-muted)]">Архитектура:</span><span class="text-[var(--text-heading)] font-semibold">Custom PCB / ARM</span></div>
-            <div class="flex justify-between"><span class="text-[var(--text-muted)]">Стадия:</span><span class="text-amber-500 font-semibold">Опытные образцы</span></div>
+    const projectDatabase = {
+      '0001': {
+        ru: {
+          badge: 'РЕЛИЗ // v6.4.0',
+          title: 'Tablo Tab — Экспресс-панель для Chrome',
+          tag: 'ПРОГРАММНЫЙ КОМПЛЕКС // SOFTWARE',
+          shortDesc: 'Эстетичная экспресс-панель для новой вкладки со стилями Windows 11 и 10. Рабочие столы, живые смарт-виджеты (часы, погода, курсы), заметки и облако.',
+          article: `
+            <p><strong>Tablo Tab</strong> — авторское браузерное расширение нового поколения, превращающее стандартную новую вкладку Chromium в эстетичную, молниеносную персональную приборную панель.</p>
+            <p>Интерфейс спроектирован с поддержкой двух знаковых визуальных стилей:</p>
+            <ul class="list-disc pl-5 space-y-1 text-[var(--text-muted)]">
+              <li><strong>Windows 11 Fluent Mica:</strong> мягкие размытия, скругленные углы и объемная глубина подсистемы Fluent Design.</li>
+              <li><strong>Windows 10 Metro Classic:</strong> строгие геометрические плитки, насыщенные акцентные цвета и сверхбыстрый отклик.</li>
+            </ul>
+            <p><strong>Ключевой функционал:</strong> неограниченные виртуальные рабочие столы (Workspaces) для разделения закладок по задачам, 4 интерактивных виджета (точное время, погода с автоопределением города, курсы валют и криптовалют, блокнот To-Do) и автономная синхронизация через Google Диск без использования сторонних серверов.</p>
           `,
-          modalDesc: 'Научно-техническое направление лаборатории AD LAB по разработке физических устройств: от микроэлектроники и IoT-датчиков до кастомных приборов управления и аудиосистем.',
-          modalSpecs: [
-            ['Шифр проекта:', 'AD-0002-LAB'],
-            ['Базовая платформа:', 'ARM Cortex / ESP32 Architecture'],
-            ['Интерфейсы:', 'USB Type-C, Wi-Fi, BLE, I2C / SPI'],
-            ['Корпусирование:', 'CNC фрезеровка / 3D-моделирование'],
-            ['Статус разработки:', 'R&D / Прототипирование']
-          ]
+          specs: [
+            ['Идентификатор в Store:', 'gdhohiimfeogdjiccmldkegamfedkgco'],
+            ['Архитектура / Стандарт:', 'Google Chrome Manifest V3 (Service Worker)'],
+            ['Стили интерфейса:', 'Windows 11 Fluent Mica & Windows 10 Metro'],
+            ['Смарт-виджеты:', 'Часы, Погода (Open-Meteo), Курсы (USD, EUR, BTC), To-Do Заметки'],
+            ['Хранение данных:', '100% Локально (chrome.storage.local)'],
+            ['Облачный бэкап:', 'Google Диск OAuth2 (опционально)'],
+            ['Лицензия:', 'Открытый исходный код / Бесплатно']
+          ],
+          versions: [
+            {
+              ver: 'v6.4.0 (19 октября 2026)',
+              status: 'Текущий релиз',
+              changes: [
+                'Официальная сборка и публикация в Chrome Web Store',
+                'Реализованы два полных стиля оформления: Windows 11 Mica и Windows 10 Metro',
+                'Добавлены 4 живых виджета: Часы, Погода, Курсы валют и криптовалют, Блокнот',
+                'Встроена бесшовная OAuth2 синхронизация с личным Google Диском',
+                'Полноценная локализация на русский и английский языки'
+              ]
+            },
+            {
+              ver: 'v6.0.0 (Сентябрь 2026)',
+              status: 'Архитектурный апгрейд',
+              changes: [
+                'Полный перевод проекта на Manifest V3',
+                'Создана система виртуальных рабочих столов (Workspaces)',
+                'Добавлено контекстное меню для сохранения вкладок в 1 клик'
+              ]
+            }
+          ],
+          downloadText: '⬇ СКАЧАТЬ ZIP (.ZIP)',
+          storeText: 'В CHROME WEB STORE ➔'
+        },
+        en: {
+          badge: 'RELEASE // v6.4.0',
+          title: 'Tablo Tab — Speed Dial & Widgets',
+          tag: 'CHROME EXTENSION // SOFTWARE',
+          shortDesc: 'Aesthetic new tab dashboard featuring Windows 11 & 10 visual styles. Virtual workspaces, live smart widgets, sticky notes, and Google Drive backup.',
+          article: `
+            <p><strong>Tablo Tab</strong> transforms your browser's default New Tab into a lightning-fast, beautiful, and highly functional productivity dashboard.</p>
+            <p>Engineered with seamless support for two iconic aesthetics:</p>
+            <ul class="list-disc pl-5 space-y-1 text-[var(--text-muted)]">
+              <li><strong>Windows 11 Fluent Mica:</strong> frosted glass acrylic reflections, smooth curves, and genuine Fluent Design depth.</li>
+              <li><strong>Windows 10 Metro Classic:</strong> crisp geometric tiles, bold colors, and zero-latency layout rendering.</li>
+            </ul>
+            <p><strong>Core capabilities:</strong> infinite virtual workspaces for bookmark organization, 4 smart widgets (Live Clock, Weather, Currencies & Crypto tickers, Sticky Notes), and private Google Drive cloud sync with zero external telemetry.</p>
+          `,
+          specs: [
+            ['Web Store ID:', 'gdhohiimfeogdjiccmldkegamfedkgco'],
+            ['Architecture:', 'Google Chrome Manifest V3 (Service Worker)'],
+            ['Visual Styles:', 'Windows 11 Fluent Mica & Windows 10 Metro'],
+            ['Smart Widgets:', 'Clock, Weather (Open-Meteo), Currencies (USD, EUR, BTC), To-Do Notes'],
+            ['Data Storage:', '100% Local (chrome.storage.local)'],
+            ['Cloud Sync:', 'Personal Google Drive OAuth2 (Optional)'],
+            ['License:', 'Open Source / Free']
+          ],
+          versions: [
+            {
+              ver: 'v6.4.0 (October 19, 2026)',
+              status: 'Current Release',
+              changes: [
+                'Official release package submitted to Chrome Web Store',
+                'Full dual-style support: Windows 11 Mica & Windows 10 Metro',
+                'Added 4 live smart widgets: Clock, Weather, Currency/Crypto rates, To-Do notes',
+                'Native OAuth2 cloud backup integration with personal Google Drive',
+                'Complete international localization in Russian & English'
+              ]
+            },
+            {
+              ver: 'v6.0.0 (September 2026)',
+              status: 'Core Architecture',
+              changes: [
+                'Migrated fully to Chrome Manifest V3 standard',
+                'Engineered virtual workspaces system with drag & drop',
+                'Implemented right-click context menu bookmarking engine'
+              ]
+            }
+          ],
+          downloadText: '⬇ DOWNLOAD ZIP (.ZIP)',
+          storeText: 'CHROME WEB STORE ➔'
         }
       },
 
-      en: {
-        headerBadge: 'EXPERIMENTAL LAB // HARD & SOFT',
-        headerDesc: 'Engineering solutions, custom electronics, and software systems.',
-        engineerName: 'Chief Designer: Shtykov A.D.',
-        gostStamp: 'OFFICIAL REGISTRY<br><span class="text-[9px] sm:text-[10px] opacity-80 font-normal">SPEC-2026.SU</span>',
-        statusActive: 'ACTIVE',
-        filterLabel: 'LOGS:',
-        btnAll: 'All Projects [2]',
-        btnSw: 'Software / Extensions',
-        btnHw: 'Hardware / R&D',
-        footerTitle: 'AD LAB // SHTYKOV A.D. LABORATORY',
-        footerDesc: 'Hardware devices and software systems. Built with open-source principles.',
-        footerPrivacy: 'Privacy Policy',
-        footerOtk: 'PASSED',
-        modalClose: 'CLOSE',
-        modalOtk: 'QC: SPEC VERIFIED',
-
-        p1: {
-          tag: 'CHROME EXTENSION // SOFTWARE',
-          title: 'Tablo Tab — Speed Dial',
-          desc: 'Aesthetic new tab dashboard featuring Windows 11 & 10 visual styles. Virtual workspaces, live smart widgets (Clock, Weather, Crypto & Currencies), sticky notes, and Google Drive backup.',
-          status: 'v6.4.0 // WEB STORE',
-          type: 'TYPE: EXTENSION',
-          btn: 'DATASHEET ➔',
-          install: 'CHROME STORE ➔',
-          modalDesc: 'Tablo Tab upgrades your default browser New Tab into a productivity speed dial dashboard with Windows 11 Fluent Mica and Windows 10 Metro Classic styles. Features unlimited workspaces, live widgets (Clock, Weather, Rates, Notes), auto-generated website tiles, and secure Google Drive cloud backup.',
-          modalSpecs: [
-            ['Extension ID:', 'gdhohiimfeogdjiccmldkegamfedkgco'],
-            ['Version:', 'v6.4.0 (Manifest V3)'],
-            ['Visual Styles:', 'Windows 11 Mica & Windows 10 Metro'],
-            ['Smart Widgets:', 'Clock, Weather, Currencies, Sticky Notes'],
-            ['Privacy:', '100% Local Storage (Zero Trackers)'],
-            ['Cloud Sync:', 'Google Drive OAuth2 (Optional)']
-          ]
-        },
-
-        p2: {
-          tag: 'HARDWARE & EMBEDDED // R&D',
-          title: 'Hardware & Embedded System',
-          desc: 'Engineering of proprietary hardware modules, custom circuitry, and microcontroller devices with open architecture and precision physical design.',
-          status: 'IN DEVELOPMENT // R&D',
-          type: 'TYPE: HARDWARE',
-          btn: 'DATASHEET ➔',
-          specsHtml: `
-            <div class="flex justify-between"><span class="text-[var(--text-muted)]">Field:</span><span class="text-[var(--text-heading)] font-semibold">Embedded & IoT</span></div>
-            <div class="flex justify-between"><span class="text-[var(--text-muted)]">Architecture:</span><span class="text-[var(--text-heading)] font-semibold">Custom PCB / ARM</span></div>
-            <div class="flex justify-between"><span class="text-[var(--text-muted)]">Phase:</span><span class="text-amber-500 font-semibold">Prototyping</span></div>
+      '0002': {
+        ru: {
+          badge: 'В РАЗРАБОТКЕ // R&D',
+          title: 'Аппаратно-приборный комплекс AD LAB',
+          tag: 'АППАРАТНЫЙ МОДУЛЬ // HARDWARE',
+          shortDesc: 'Проектирование авторских аппаратных модулей, схемотехники и микроконтроллерных устройств. Создание кастомных физических приборов.',
+          article: `
+            <p><strong>PROJECT 0002</strong> — приборное научно-исследовательское направление лаборатории AD LAB по разработке физических электронных устройств.</p>
+            <p>Проект включает в себя полный цикл инженерного проектирования: от разводки многослойных печатных плат (PCB) до программирования микроконтроллеров и изготовления прецизионных корпусов из металла и композитов на ЧПУ-оборудовании.</p>
+            <p><strong>Ключевые направления разработки:</strong> автономные сенсорные контроллеры, аппаратные аудио-модули Hi-Fi класса с цифро-аналоговым преобразованием и интерфейсные приборы прямого управления.</p>
           `,
-          modalDesc: 'AD LAB technical hardware research division dedicated to developing physical devices: from microelectronics and IoT telemetry sensors to custom control units and audio hardware.',
-          modalSpecs: [
+          specs: [
+            ['Шифр разработки:', 'AD-0002-LAB'],
+            ['Микроконтроллерная база:', 'ARM Cortex-M4 / Espressif ESP32 Architecture'],
+            ['Интерфейсы связи:', 'USB Type-C (PD), Wi-Fi 802.11 b/g/n, Bluetooth 5.2 Low Energy'],
+            ['Схемотехника:', 'Многослойная кастомная PCB, экранированные тракты'],
+            ['Корпусирование:', 'CNC фрезеровка, анодированный алюминий, латунь'],
+            ['Статус проекта:', 'НИОКР / Сборка опытного прототипа']
+          ],
+          versions: [
+            {
+              ver: 'v0.2.0 (Октябрь 2026)',
+              status: 'Прототипирование',
+              changes: [
+                'Трассировка опытной ревизии платы (PCB Rev B)',
+                'Интеграция протоколов телеметрии и низковольтного питания',
+                'Проектирование корпусных элементов в САПР'
+              ]
+            },
+            {
+              ver: 'v0.1.0 (Август 2026)',
+              status: 'Концепт',
+              changes: [
+                'Формирование технического задания (ТЗ)',
+                'Схемотехническое моделирование и подбор элементной базы'
+              ]
+            }
+          ],
+          downloadText: '📄 ТЕХЗАДАНИЕ (.PDF)',
+          storeText: 'СВЯЗЬ С КОНСТРУКТОРОМ ➔'
+        },
+        en: {
+          badge: 'IN DEVELOPMENT // R&D',
+          title: 'AD LAB Hardware & Embedded System',
+          tag: 'HARDWARE & EMBEDDED // R&D',
+          shortDesc: 'Engineering of proprietary hardware modules, custom circuitry, and microcontroller devices with open architecture and physical design.',
+          article: `
+            <p><strong>PROJECT 0002</strong> is AD LAB's dedicated engineering division focusing on custom hardware, embedded electronics, and physical computing devices.</p>
+            <p>The project covers the entire hardware engineering lifecycle: from multi-layer PCB routing and firmware development to precision CNC machining and custom enclosure design.</p>
+            <p><strong>Key development focus:</strong> autonomous sensor telemetry units, Hi-Fi digital-to-analog audio apparatuses, and specialized physical control interfaces.</p>
+          `,
+          specs: [
             ['Project Code:', 'AD-0002-LAB'],
-            ['Core Platform:', 'ARM Cortex / ESP32 Architecture'],
-            ['Interfaces:', 'USB Type-C, Wi-Fi, BLE, I2C / SPI'],
-            ['Fabrication:', 'CNC Machining / 3D Enclosures'],
-            ['Status:', 'Active R&D / Engineering Samples']
-          ]
+            ['Core Architecture:', 'ARM Cortex-M4 / Espressif ESP32 SoC'],
+            ['Connectivity:', 'USB Type-C (PD), Wi-Fi, BLE 5.2, I2C/SPI buses'],
+            ['PCB Engineering:', 'Multi-layer proprietary layout with RF shielding'],
+            ['Enclosure:', 'CNC Machined Anodized Aluminum & Brass'],
+            ['Development Phase:', 'Active R&D / Prototype Assembly']
+          ],
+          versions: [
+            {
+              ver: 'v0.2.0 (October 2026)',
+              status: 'Prototyping',
+              changes: [
+                'PCB Rev B schematic routing and component verification',
+                'Low-noise power circuit integration',
+                'CAD mechanical modeling for enclosure'
+              ]
+            },
+            {
+              ver: 'v0.1.0 (August 2026)',
+              status: 'Concept Phase',
+              changes: [
+                'Technical specification drafting',
+                'Component selection and architecture design'
+              ]
+            }
+          ],
+          downloadText: '📄 SPECIFICATION (.PDF)',
+          storeText: 'CONTACT ENGINEER ➔'
         }
       }
     };
@@ -477,7 +593,6 @@
       applyTheme(nextTheme);
     }
 
-    // Инициализация темы с учетом системной темы ПК
     function initTheme() {
       const savedTheme = localStorage.getItem('adlab_theme');
       if (savedTheme) {
@@ -487,7 +602,6 @@
         applyTheme(prefersLight ? 'light' : 'dark');
       }
 
-      // Отслеживание смены темы в самой ОС
       if (window.matchMedia) {
         window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
           if (!localStorage.getItem('adlab_theme')) {
@@ -500,43 +614,53 @@
     // ПЕРЕКЛЮЧЕНИЕ ЯЗЫКА
     function switchLanguage(lang) {
       currentLang = lang;
-      const t = i18n[lang];
-
+      
       // Update Header
-      document.getElementById('txt-header-badge').innerHTML = t.headerBadge;
-      document.getElementById('txt-header-desc').innerHTML = t.headerDesc;
-      document.getElementById('txt-engineer-name').innerHTML = t.engineerName;
-      document.getElementById('txt-gost-stamp').innerHTML = t.gostStamp;
-      document.getElementById('txt-status-active').innerText = t.statusActive;
-      document.getElementById('txt-filter-label').innerText = t.filterLabel;
-      document.getElementById('btn-all').innerText = t.btnAll;
-      document.getElementById('btn-sw').innerText = t.btnSw;
-      document.getElementById('btn-hw').innerText = t.btnHw;
+      const isRu = lang === 'ru';
+      document.getElementById('txt-header-badge').innerHTML = isRu ? 'ОПЫТНАЯ ЛАБОРАТОРИЯ // HARD & SOFT' : 'EXPERIMENTAL LAB // HARD & SOFT';
+      document.getElementById('txt-header-desc').innerHTML = isRu ? 'Инженерные разработки, электроника и программные комплексы.' : 'Engineering solutions, custom electronics, and software systems.';
+      document.getElementById('txt-engineer-name').innerHTML = isRu ? 'Гл. Конструктор: Штыков А.Д.' : 'Chief Designer: Shtykov A.D.';
+      document.getElementById('txt-gost-stamp').innerHTML = isRu ? 'ПАСПОРТНЫЙ УЧЕТ<br><span class="text-[9px] sm:text-[10px] opacity-80 font-normal">ГОСТ-2026.SU</span>' : 'OFFICIAL REGISTRY<br><span class="text-[9px] sm:text-[10px] opacity-80 font-normal">SPEC-2026.SU</span>';
+      document.getElementById('txt-status-active').innerText = isRu ? 'В СТРОЮ' : 'ACTIVE';
+      document.getElementById('txt-filter-label').innerText = isRu ? 'ФОРМУЛЯРЫ:' : 'LOGS:';
+      document.getElementById('btn-all').innerText = isRu ? 'Все проекты [2]' : 'All Projects [2]';
+      document.getElementById('btn-software').innerText = isRu ? 'Софт / Расширения' : 'Software / Extensions';
+      document.getElementById('btn-hardware').innerText = isRu ? 'Железо / R&D' : 'Hardware / R&D';
 
-      // Update P1 (Tablo Tab)
-      document.getElementById('p1-card-tag').innerText = t.p1.tag;
-      document.getElementById('p1-card-title').innerText = t.p1.title;
-      document.getElementById('p1-card-desc').innerText = t.p1.desc;
-      document.getElementById('p1-card-status').innerText = t.p1.status;
-      document.getElementById('p1-card-btn').innerText = t.p1.btn;
-      document.getElementById('p1-card-install').innerHTML = `<span>${t.p1.install}</span>`;
+      // Update Card 1 (P1)
+      const p1 = projectDatabase['0001'][lang];
+      document.getElementById('p1-card-status').innerText = p1.badge;
+      document.getElementById('p1-card-tag').innerText = p1.tag;
+      document.getElementById('p1-card-title').innerText = isRu ? 'Tablo Tab — Экспресс-панель' : 'Tablo Tab — Speed Dial';
+      document.getElementById('p1-card-desc').innerText = p1.shortDesc;
+      document.getElementById('p1-card-type').innerText = isRu ? 'ТИП: СОФТ' : 'TYPE: SOFTWARE';
+      document.getElementById('p1-card-btn').innerText = isRu ? 'ТЕХПАСПОРТ ➔' : 'DATASHEET ➔';
 
-      // Update P2 (Hardware R&D)
-      document.getElementById('p2-card-tag').innerText = t.p2.tag;
-      document.getElementById('p2-card-title').innerText = t.p2.title;
-      document.getElementById('p2-card-desc').innerText = t.p2.desc;
-      document.getElementById('p2-card-status').innerText = t.p2.status;
-      document.getElementById('p2-card-type').innerText = t.p2.type;
-      document.getElementById('p2-card-btn').innerText = t.p2.btn;
-      document.getElementById('p2-card-specs').innerHTML = t.p2.specsHtml;
+      // Update Card 2 (P2)
+      const p2 = projectDatabase['0002'][lang];
+      document.getElementById('p2-card-status').innerText = p2.badge;
+      document.getElementById('p2-card-tag').innerText = p2.tag;
+      document.getElementById('p2-card-title').innerText = isRu ? 'Аппаратно-приборный комплекс' : 'Hardware & Embedded System';
+      document.getElementById('p2-card-desc').innerText = p2.shortDesc;
+      document.getElementById('p2-card-type').innerText = isRu ? 'ТИП: ЖЕЛЕЗО' : 'TYPE: HARDWARE';
+      document.getElementById('p2-card-btn').innerText = isRu ? 'ТЕХПАСПОРТ ➔' : 'DATASHEET ➔';
 
       // Update Footer
-      document.getElementById('txt-footer-title').innerText = t.footerTitle;
-      document.getElementById('txt-footer-desc').innerText = t.footerDesc;
-      document.getElementById('txt-footer-privacy').innerText = t.footerPrivacy;
-      document.getElementById('txt-footer-otk').innerText = t.footerOtk;
-      document.getElementById('modal-close-txt').innerText = t.modalClose;
-      document.getElementById('modal-otk-txt').innerText = t.modalOtk;
+      document.getElementById('txt-footer-title').innerText = isRu ? 'AD LAB // АВТОРСКАЯ ЛАБОРАТОРИЯ ШТЫКОВА А.Д.' : 'AD LAB // SHTYKOV A.D. LABORATORY';
+      document.getElementById('txt-footer-desc').innerText = isRu ? 'Физические устройства и программные комплексы. Разработка с открытым исходным кодом.' : 'Hardware devices and software systems. Built with open-source principles.';
+      document.getElementById('txt-footer-privacy').innerText = isRu ? 'Политика конфиденциальности (Privacy Policy)' : 'Privacy Policy';
+      document.getElementById('txt-footer-otk').innerText = isRu ? 'ПРИНЯТО' : 'PASSED';
+
+      // Modal Static Elements
+      document.getElementById('modal-close-txt').innerText = isRu ? 'ЗАКРЫТЬ [ESC]' : 'CLOSE [ESC]';
+      document.getElementById('modal-otk-txt').innerText = isRu ? 'ОТК: ГОСТ ПРОВЕРЕН' : 'QC: SPEC VERIFIED';
+      document.getElementById('modal-privacy-link').innerText = isRu ? 'Конфиденциальность' : 'Privacy';
+      document.getElementById('mtab-btn-overview').innerText = isRu ? 'Обзор & Скриншоты' : 'Overview & Screens';
+      document.getElementById('mtab-btn-specs').innerText = isRu ? 'ТТХ и Параметры' : 'Tech Specs';
+      document.getElementById('mtab-btn-versions').innerText = isRu ? 'История версий' : 'Changelog';
+      document.getElementById('gallery-label').innerText = isRu ? 'Стили интерфейса:' : 'Visual Styles:';
+      document.getElementById('specs-table-title').innerText = isRu ? 'Формуляр технических параметров:' : 'Technical Specifications Registry:';
+      document.getElementById('versions-title').innerText = isRu ? 'Журнал изменений и релизов:' : 'Release & Changelog History:';
 
       // Language Buttons Style
       const btnRu = document.getElementById('lang-btn-ru');
@@ -549,10 +673,16 @@
         btnRu.className = 'px-2 py-1 text-[var(--text-muted)] hover:text-[var(--text-heading)] font-bold transition';
       }
 
-      // Update Theme button text language
+      // Update Theme Button Text Language
       const themeText = document.getElementById('theme-text');
       if (themeText) {
-        themeText.textContent = (currentTheme === 'light') ? (lang === 'ru' ? 'СВЕТЛАЯ' : 'LIGHT') : (lang === 'ru' ? 'ТЕМНАЯ' : 'DARK');
+        themeText.textContent = (currentTheme === 'light') ? (isRu ? 'СВЕТЛАЯ' : 'LIGHT') : (isRu ? 'ТЕМНАЯ' : 'DARK');
+      }
+
+      // If modal is open, refresh modal text
+      const modal = document.getElementById('modal');
+      if (!modal.classList.contains('hidden')) {
+        renderModalContent(activeModalId);
       }
 
       localStorage.setItem('adlab_lang', lang);
@@ -580,26 +710,131 @@
       });
     }
 
+    // МОДАЛЬНЫЙ ТЕХПАСПОРТ (ПОЛНАЯ СТАТЬЯ С ВКЛАДКАМИ, СКРИНАМИ И СКАЧИВАНИЕМ)
     function openModal(id) {
-      const p = i18n[currentLang]['p' + (id === '0001' ? '1' : '2')];
-      if (!p) return;
-      document.getElementById('modal-project-id').innerText = 'PROJECT ' + id;
-      document.getElementById('modal-project-title').innerText = p.title;
-      document.getElementById('modal-project-desc').innerHTML = `<p>${p.modalDesc}</p>`;
-      
-      let specsHtml = '';
-      p.modalSpecs.forEach(s => {
-        specsHtml += `<div class="flex justify-between py-0.5"><span class="text-[var(--text-muted)]">${s[0]}</span><span class="text-[var(--text-heading)] font-semibold">${s[1]}</span></div>`;
-      });
-      document.getElementById('modal-project-specs').innerHTML = specsHtml;
+      activeModalId = id;
+      renderModalContent(id);
+      setModalTab('overview');
+      setScreenshot('win11');
       document.getElementById('modal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
     }
 
     function closeModal() {
       document.getElementById('modal').classList.add('hidden');
+      document.body.style.overflow = 'auto';
     }
 
-    // Инициализация темы и языка при старте
+    function renderModalContent(id) {
+      const data = projectDatabase[id][currentLang];
+      if (!data) return;
+
+      document.getElementById('modal-project-id').innerText = 'PROJECT ' + id;
+      document.getElementById('modal-project-badge').innerText = data.badge;
+      document.getElementById('modal-project-title').innerText = data.title;
+      document.getElementById('modal-article-text').innerHTML = data.article;
+
+      // Gallery visibility (Only for Project 0001)
+      const galleryWrap = document.getElementById('modal-gallery-wrap');
+      if (id === '0001') {
+        galleryWrap.style.display = 'block';
+      } else {
+        galleryWrap.style.display = 'none';
+      }
+
+      // Specs Tab
+      let specsHtml = '';
+      data.specs.forEach(s => {
+        specsHtml += `
+          <div class="flex flex-col sm:flex-row sm:justify-between py-1 border-b border-[var(--border-subtle)] gap-1">
+            <span class="text-[var(--text-muted)]">${s[0]}</span>
+            <span class="text-[var(--text-heading)] font-semibold sm:text-right">${s[1]}</span>
+          </div>`;
+      });
+      document.getElementById('modal-project-specs-list').innerHTML = specsHtml;
+
+      // Versions Tab (Changelog)
+      let versionsHtml = '';
+      data.versions.forEach(v => {
+        let changesList = v.changes.map(c => `<li class="flex items-start gap-2"><span class="text-[var(--tech-orange)]">›</span><span>${c}</span></li>`).join('');
+        versionsHtml += `
+          <div class="bg-[var(--panel-inner)] p-3 border border-[var(--border)] rounded-sm space-y-1.5">
+            <div class="flex justify-between items-center border-b border-[var(--border-subtle)] pb-1.5">
+              <span class="text-[var(--text-heading)] font-bold">${v.ver}</span>
+              <span class="text-[10px] px-2 py-0.5 bg-[var(--stamp-bg)] text-[var(--tech-orange)] border border-[var(--tech-orange)]/30 font-semibold">${v.status}</span>
+            </div>
+            <ul class="space-y-1 text-[var(--text-muted)] text-[11px] pt-1">
+              ${changesList}
+            </ul>
+          </div>`;
+      });
+      document.getElementById('modal-versions-list').innerHTML = versionsHtml;
+
+      // Action Buttons
+      const btnDownload = document.getElementById('btn-modal-download');
+      const btnStore = document.getElementById('btn-modal-store');
+
+      if (id === '0001') {
+        btnDownload.style.display = 'inline-flex';
+        btnDownload.href = 'assets/downloads/TabloTab_v6.4.0.zip';
+        btnDownload.querySelector('span').innerText = data.downloadText;
+        
+        btnStore.style.display = 'inline-flex';
+        btnStore.href = 'https://chromewebstore.google.com/detail/tablo-tab/gdhohiimfeogdjiccmldkegamfedkgco';
+        btnStore.querySelector('span').innerText = data.storeText;
+      } else {
+        btnDownload.style.display = 'none';
+        btnStore.style.display = 'inline-flex';
+        btnStore.href = 'mailto:support@adlab.su?subject=Project%200002%20Inquiry';
+        btnStore.querySelector('span').innerText = data.storeText;
+      }
+    }
+
+    function setModalTab(tab) {
+      currentModalTab = tab;
+      const tabs = ['overview', 'specs', 'versions'];
+      
+      tabs.forEach(t => {
+        const btn = document.getElementById('mtab-btn-' + t);
+        const content = document.getElementById('tab-content-' + t);
+        if (t === tab) {
+          btn.className = 'px-3 py-1.5 bg-[var(--tech-orange)] text-black font-extrabold uppercase transition';
+          content.classList.remove('hidden');
+        } else {
+          btn.className = 'px-3 py-1.5 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-hover)] text-[var(--text)] uppercase transition';
+          content.classList.add('hidden');
+        }
+      });
+    }
+
+    function setScreenshot(style) {
+      currentScreenshotStyle = style;
+      const btnWin11 = document.getElementById('btn-scr-win11');
+      const btnWin10 = document.getElementById('btn-scr-win10');
+      const img = document.getElementById('modal-screenshot-img');
+
+      if (style === 'win11') {
+        btnWin11.className = 'px-2.5 py-1 bg-[var(--tech-orange)] text-black font-bold text-[11px] rounded-xs';
+        btnWin10.className = 'px-2.5 py-1 bg-[var(--btn-secondary-bg)] text-[var(--text)] font-bold text-[11px] rounded-xs';
+        img.src = 'assets/img/screenshot_1_ru_win11_1280x800.png';
+      } else {
+        btnWin10.className = 'px-2.5 py-1 bg-[var(--tech-orange)] text-black font-bold text-[11px] rounded-xs';
+        btnWin11.className = 'px-2.5 py-1 bg-[var(--btn-secondary-bg)] text-[var(--text)] font-bold text-[11px] rounded-xs';
+        img.src = 'assets/img/screenshot_2_ru_win10_1280x800.png';
+      }
+    }
+
+    // Keyboard navigation (ESC to close)
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // Close on click outside modal window
+    document.getElementById('modal')?.addEventListener('click', (e) => {
+      if (e.target.id === 'modal') closeModal();
+    });
+
+    // Инициализация при старте
     initTheme();
     const savedLang = localStorage.getItem('adlab_lang') || (navigator.language.startsWith('ru') ? 'ru' : 'en');
     switchLanguage(savedLang);
