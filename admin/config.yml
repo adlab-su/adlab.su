@@ -1,0 +1,37 @@
+backend:
+  name: github
+  repo: adlab-su/adlab.su # Имя репозитория на GitHub
+  branch: main
+
+media_folder: "assets/uploads" # Папка, куда будут сохраняться фото проектов
+public_folder: "/assets/uploads"
+
+collections:
+  - name: "projects"
+    label: "Формуляры изделий"
+    folder: "content/projects"
+    create: true
+    slug: "{{id}}-{{slug}}"
+    fields:
+      - { label: "Индекс проекта (например: Project 0001)", name: "id", widget: "string", default: "Project 0001" }
+      - { label: "Название изделия", name: "title", widget: "string" }
+      - { 
+          label: "Категория", 
+          name: "category", 
+          widget: "select", 
+          options: [
+            { label: "Железо / DIY / Акустика", value: "hardware" },
+            { label: "Софт / Приложения / Расширения", value: "software" }
+          ],
+          default: "hardware"
+        }
+      - { label: "Статус изделия", name: "status", widget: "string", default: "В строю" }
+      - { label: "Главное фото / Скриншот", name: "cover", widget: "image", required: false }
+      - { label: "Краткое описание для витрины", name: "summary", widget: "text" }
+      - { label: "Полный техпаспорт / Описание", name: "body", widget: "markdown" }
+      - label: "Технические характеристики (ТТХ)"
+        name: "specs"
+        widget: "list"
+        fields:
+          - { label: "Параметр (например: Питание)", name: "key", widget: "string" }
+          - { label: "Значение (например: Type-C 220V)", name: "value", widget: "string" }

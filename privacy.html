@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Политика конфиденциальности // AD LAB [adlab.su]</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap');
+    
+    :root {
+      --tech-orange: #ff5e1a;
+      --bg-dark: #0c0e12;
+      --panel-dark: #13171d;
+      --grid-line: rgba(255, 94, 26, 0.07);
+    }
+    
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background-color: var(--bg-dark);
+      color: #d1d5db;
+      background-image: 
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+      background-size: 32px 32px;
+      min-height: 100vh;
+    }
+
+    .font-sans-ui { font-family: 'Inter', sans-serif; }
+
+    .tech-border {
+      border: 1px solid #262c36;
+      position: relative;
+    }
+    .tech-border::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: -1px;
+      width: 8px; height: 8px;
+      border-top: 2px solid #ff5e1a;
+      border-left: 2px solid #ff5e1a;
+    }
+    .tech-border::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; right: -1px;
+      width: 8px; height: 8px;
+      border-bottom: 2px solid #ff5e1a;
+      border-right: 2px solid #ff5e1a;
+    }
+  </style>
+</head>
+<body class="p-4 sm:p-8">
+  <div class="max-w-4xl mx-auto space-y-6">
+
+    <!-- Header -->
+    <header class="tech-border bg-[#13171d] p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div>
+        <div class="flex items-center gap-3">
+          <span class="inline-block w-2.5 h-2.5 bg-[#ff5e1a] animate-ping"></span>
+          <span class="text-xs tracking-[0.2em] text-[#ff5e1a] uppercase font-bold">РЕГЛАМЕНТ БЕЗОПАСНОСТИ // AD LAB</span>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">
+          Политика конфиденциальности
+        </h1>
+        <div class="text-xs text-gray-500 font-mono mt-1">
+          PRODUCT: Tablo Tab (gdhohiimfeogdjiccmldkegamfedkgco) & adlab.su
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button id="lang-btn-ru" onclick="setLang('ru')" class="px-3 py-1 bg-[#ff5e1a] text-black font-extrabold text-xs uppercase">RU</button>
+        <button id="lang-btn-en" onclick="setLang('en')" class="px-3 py-1 bg-[#1a1f26] hover:bg-[#252c36] text-gray-300 font-bold text-xs uppercase">EN</button>
+        <a href="index.html" class="ml-2 px-3 py-1 bg-[#1a1f26] hover:bg-[#252c36] text-[#ff5e1a] font-bold text-xs uppercase border border-[#ff5e1a]/30">← НА САЙТ</a>
+      </div>
+    </header>
+
+    <!-- RU Content -->
+    <main id="content-ru" class="tech-border bg-[#13171d] p-6 sm:p-8 space-y-6 font-sans-ui text-sm leading-relaxed text-gray-300">
+      <div class="border-b border-[#222832] pb-4">
+        <div class="text-xs text-gray-500 font-mono">ПОСЛЕДНЕЕ ОБНОВЛЕНИЕ: 19 ОКТЯБРЯ 2026 Г.</div>
+        <div class="text-xs text-emerald-400 font-mono mt-1">СТАТУС: ДЕЙСТВИТЕЛЬНО ДЛЯ CHROME WEB STORE</div>
+      </div>
+
+      <section class="space-y-2">
+        <h2 class="text-lg font-bold text-white font-mono flex items-center gap-2">
+          <span class="text-[#ff5e1a]">01 //</span> Общие положения
+        </h2>
+        <p>
+          Лаборатория <strong>AD LAB</strong> (adlab.su) и авторские программные продукты (включая расширение для браузера <strong>Tablo Tab</strong>) строятся на принципах уважения частной жизни. Мы не собираем, не храним и не продаем персональные данные пользователей.
+        </p>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-lg font-bold text-white font-mono flex items-center gap-2">
+          <span class="text-[#ff5e1a]">02 //</span> Локальное хранение данных
+        </h2>
+        <p>
+          Все ваши закладки, конфигурации рабочих столов, смарт-виджеты (часы, погода, курсы), заметки To-Do и пользовательские настройки сохраняются исключительно в локальном хранилище вашего браузера (<code>chrome.storage.local</code>) на вашем персональном компьютере.
+        </p>
+        <p>
+          У разработчика нет внешних баз данных, трекеров или серверов сбора телеметрии.
+        </p>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-lg font-bold text-white font-mono flex items-center gap-2">
+          <span class="text-[#ff5e1a]">03 //</span> Синхронизация через Google Диск (опционально)
+        </h2>
+        <p>
+          Если вы используете облачную синхронизацию, обмен данными происходит строго и напрямую между вашим браузером и вашим личным аккаунтом Google Диск по официальному протоколу Google OAuth2. Никакие промежуточные серверы не используются, и разработчик не имеет доступа к вашему диску или резервным копиям.
+        </p>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-lg font-bold text-white font-mono flex items-center gap-2">
+          <span class="text-[#ff5e1a]">04 //</span> Использование разрешений браузера
+        </h2>
+        <ul class="list-disc pl-5 space-y-1.5 text-gray-300">
+          <li><code>activeTab</code> и <code>tabs</code> — получение адреса, заголовка и фавиконки текущего сайта при добавлении в закладки и создание превью страниц;</li>
+          <li><code>contextMenus</code> — быстрое добавление страниц в Tablo Tab через меню правой кнопки мыши;</li>
+          <li><code>storage</code> и <code>unlimitedStorage</code> — сохранение ваших закладок и кэша обоев/логотипов на диске без ошибок переполнения квоты;</li>
+          <li>Доступ к хостам (<code>&lt;all_urls&gt;</code>) — загрузка официальных логотипов сайтов и публичных данных для виджетов (прогноз погоды Open-Meteo, котировки валют).</li>
+        </ul>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-lg font-bold text-white font-mono flex items-center gap-2">
+          <span class="text-[#ff5e1a]">05 //</span> Партнерские ссылки (Affiliate Links)
+        </h2>
+        <p>
+          Некоторые предустановленные плитки маркетплейсов или популярных сервисов могут содержать стандартные партнерские/реферальные метки. Переход по ним является обычным веб-переходом, не собирает персональных сведений и не передает разработчику никаких данных о вашей активности.
+        </p>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-lg font-bold text-white font-mono flex items-center gap-2">
+          <span class="text-[#ff5e1a]">06 //</span> Правила программы Chrome Web Store
+        </h2>
+        <p>
+          Мы строго соблюдаем Правила программы для разработчиков Chrome: пользовательские данные не продаются третьим лицам, не монетизируются и не используются для оценки кредитоспособности.
+        </p>
+      </section>
+
+      <section class="space-y-2 pt-4 border-t border-[#222832]">
+        <h2 class="text-lg font-bold text-white font-mono flex items-center gap-2">
+          <span class="text-[#ff5e1a]">07 //</span> Обратная связь
+        </h2>
+        <p>
+          Вопросы и предложения можно направлять разработчику: <br>
+          Сайт: <a href="https://adlab.su" class="text-[#ff5e1a] hover:underline">https://adlab.su</a> | Email: <a href="mailto:support@adlab.su" class="text-[#ff5e1a] hover:underline">support@adlab.su</a>
+        </p>
+      </section>
+    </main>
+
+    <!-- EN Content -->
+    <main id="content-en" class="tech-border bg-[#13171d] p-6 sm:p-8 space-y-6 font-sans-ui text-sm leading-relaxed text-gray-300 hidden">
+      <div class="border-b border-[#222832] pb-4">
+        <div class="text-xs text-gray-500 font-mono">LAST UPDATED: OCTOBER 19, 2026</div>
+        <div class="text-xs text-emerald-400 font-mono mt-1">STATUS: COMPLIANT WITH CHROME WEB STORE POLICIES</div>
+      </div>
+
+      <section class="space-y-2">
+        <h2 class="text-lg font-bold text-white font-mono flex items-center gap-2">
+          <span class="text-[#ff5e1a]">01 //</span> General Overview
+        </h2>
+        <p>
+          <strong>AD LAB</strong> (adlab.su) and our software products (including the browser extension <strong>Tablo Tab</strong>) are built with privacy-first principles. We do not collect, monitor, store, or sell any personal information.
+        </p>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-lg font-bold text-white font-mono flex items-center gap-2">
+          <span class="text-[#ff5e1a]">02 //</span> Local Data Storage
+        </h2>
+        <p>
+          All your bookmarks, virtual workspace layouts, smart widgets (Clock, Weather, Rates), sticky To-Do notes, and custom preferences are stored strictly in your browser's local memory (<code>chrome.storage.local</code>) on your own device.
+        </p>
+        <p>
+          We do not operate any external tracking servers, telemetry databases, or analytics services.
+        </p>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-lg font-bold text-white font-mono flex items-center gap-2">
+          <span class="text-[#ff5e1a]">03 //</span> Google Drive Backup (Optional)
+        </h2>
+        <p>
+          If you choose to use the cloud backup feature, data synchronization occurs directly between your browser and your private Google Drive account via Google's official OAuth2 API. The developer never has access to your Google account or your files.
+        </p>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-lg font-bold text-white font-mono flex items-center gap-2">
+          <span class="text-[#ff5e1a]">04 //</span> Permissions Usage
+        </h2>
+        <ul class="list-disc pl-5 space-y-1.5 text-gray-300">
+          <li><code>activeTab</code> & <code>tabs</code> — capture active page title, URL, and favicon when saving a bookmark, and generate local snapshot previews;</li>
+          <li><code>contextMenus</code> — enables 1-click page saving to Tablo Tab via the right-click context menu;</li>
+          <li><code>storage</code> & <code>unlimitedStorage</code> — prevents quota errors when storing website thumbnail previews, cached icons, and custom desktop wallpapers;</li>
+          <li>Host Permissions (<code>&lt;all_urls&gt;</code>) — fetch official website favicons/logos and retrieve live public data for widgets (Open-Meteo weather forecasts and currency rates).</li>
+        </ul>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-lg font-bold text-white font-mono flex items-center gap-2">
+          <span class="text-[#ff5e1a]">05 //</span> Affiliate & Referral Links
+        </h2>
+        <p>
+          Certain pre-configured tiles for popular online marketplaces or web tools may contain standard affiliate/referral parameters. Clicking these links does not collect or transmit any personal data to the developer.
+        </p>
+      </section>
+
+      <section class="space-y-2">
+        <h2 class="text-lg font-bold text-white font-mono flex items-center gap-2">
+          <span class="text-[#ff5e1a]">06 //</span> Chrome Web Store Policy Compliance
+        </h2>
+        <p>
+          We strictly adhere to the Google Chrome Web Store Developer Program Policies: no user data is sold, transferred for unrelated purposes, or used to evaluate creditworthiness.
+        </p>
+      </section>
+
+      <section class="space-y-2 pt-4 border-t border-[#222832]">
+        <h2 class="text-lg font-bold text-white font-mono flex items-center gap-2">
+          <span class="text-[#ff5e1a]">07 //</span> Contact
+        </h2>
+        <p>
+          Questions or inquiries: <br>
+          Website: <a href="https://adlab.su" class="text-[#ff5e1a] hover:underline">https://adlab.su</a> | Email: <a href="mailto:support@adlab.su" class="text-[#ff5e1a] hover:underline">support@adlab.su</a>
+        </p>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="tech-border bg-[#13171d] p-4 text-xs font-mono text-gray-500 flex justify-between">
+      <span>AD LAB // ГОСТ-2026.SU</span>
+      <span>adlab.su</span>
+    </footer>
+
+  </div>
+
+  <script>
+    function setLang(lang) {
+      const isRu = lang === 'ru';
+      document.getElementById('content-ru').classList.toggle('hidden', !isRu);
+      document.getElementById('content-en').classList.toggle('hidden', isRu);
+      
+      const btnRu = document.getElementById('lang-btn-ru');
+      const btnEn = document.getElementById('lang-btn-en');
+      
+      if (isRu) {
+        btnRu.className = 'px-3 py-1 bg-[#ff5e1a] text-black font-extrabold text-xs uppercase';
+        btnEn.className = 'px-3 py-1 bg-[#1a1f26] hover:bg-[#252c36] text-gray-300 font-bold text-xs uppercase';
+      } else {
+        btnEn.className = 'px-3 py-1 bg-[#ff5e1a] text-black font-extrabold text-xs uppercase';
+        btnRu.className = 'px-3 py-1 bg-[#1a1f26] hover:bg-[#252c36] text-gray-300 font-bold text-xs uppercase';
+      }
+      localStorage.setItem('adlab_lang', lang);
+    }
+
+    const saved = localStorage.getItem('adlab_lang') || (navigator.language.startsWith('ru') ? 'ru' : 'en');
+    setLang(saved);
+  </script>
+</body>
+</html>
