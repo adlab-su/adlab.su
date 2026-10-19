@@ -1,30 +1,60 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AD LAB // Лаборатория Штыкова А.Д. [adlab.su]</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
     
     :root {
       --tech-orange: #ff5e1a;
+      --tech-orange-hover: #ff7538;
       --tech-amber: #ffaa00;
-      --bg-dark: #0c0e12;
-      --panel-dark: #13171d;
+      
+      /* Dark Theme (Default) */
+      --bg: #0c0e12;
+      --panel: #13171d;
+      --panel-inner: #0a0c0f;
+      --text: #d1d5db;
+      --text-muted: #9ca3af;
+      --text-heading: #ffffff;
+      --border: #262c36;
+      --border-subtle: #1c222b;
       --grid-line: rgba(255, 94, 26, 0.07);
+      --stamp-border: #ff5e1a;
+      --stamp-bg: rgba(255, 94, 26, 0.05);
+      --btn-secondary-bg: #1a1f26;
+      --btn-secondary-hover: #252c36;
+    }
+    
+    [data-theme="light"] {
+      /* Light Theme (Clean Technical Paper) */
+      --bg: #f3f5f8;
+      --panel: #ffffff;
+      --panel-inner: #f8fafc;
+      --text: #334155;
+      --text-muted: #64748b;
+      --text-heading: #0f172a;
+      --border: #d8e0ea;
+      --border-subtle: #e2e8f0;
+      --grid-line: rgba(255, 94, 26, 0.06);
+      --stamp-border: #ea580c;
+      --stamp-bg: rgba(234, 88, 12, 0.05);
+      --btn-secondary-bg: #e2e8f0;
+      --btn-secondary-hover: #cbd5e1;
     }
     
     body {
       font-family: 'JetBrains Mono', monospace;
-      background-color: var(--bg-dark);
-      color: #d1d5db;
+      background-color: var(--bg);
+      color: var(--text);
       background-image: 
         linear-gradient(var(--grid-line) 1px, transparent 1px),
         linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
       background-size: 32px 32px;
-      min-height: 100vh;
+      transition: background-color 0.25s ease, color 0.25s ease;
     }
 
     .font-sans-ui {
@@ -33,9 +63,10 @@
 
     /* Советский чертежный штамп ГОСТ */
     .gost-stamp {
-      border: 2px dashed #ff5e1a;
-      color: #ff5e1a;
-      transform: rotate(-2deg);
+      border: 2px dashed var(--stamp-border);
+      background-color: var(--stamp-bg);
+      color: var(--stamp-border);
+      transform: rotate(-1.5deg);
       text-transform: uppercase;
       font-weight: 800;
       letter-spacing: 0.12em;
@@ -43,206 +74,235 @@
 
     /* Инженерная рамка с засечками по углам */
     .tech-border {
-      border: 1px solid #262c36;
+      border: 1px solid var(--border);
+      background-color: var(--panel);
       position: relative;
+      transition: border-color 0.2s ease, background-color 0.25s ease;
     }
     .tech-border::before {
       content: '';
       position: absolute;
       top: -1px; left: -1px;
       width: 8px; height: 8px;
-      border-top: 2px solid #ff5e1a;
-      border-left: 2px solid #ff5e1a;
+      border-top: 2px solid var(--tech-orange);
+      border-left: 2px solid var(--tech-orange);
+      pointer-events: none;
     }
     .tech-border::after {
       content: '';
       position: absolute;
       bottom: -1px; right: -1px;
       width: 8px; height: 8px;
-      border-bottom: 2px solid #ff5e1a;
-      border-right: 2px solid #ff5e1a;
+      border-bottom: 2px solid var(--tech-orange);
+      border-right: 2px solid var(--tech-orange);
+      pointer-events: none;
     }
 
-    /* Легкая текстура ЭЛТ-монитора */
-    .crt-overlay {
+    /* Легкая текстура ЭЛТ-монитора для темной темы */
+    [data-theme="dark"] .crt-overlay {
       background: linear-gradient(
         to bottom,
         rgba(255,255,255,0),
         rgba(255,255,255,0) 50%,
-        rgba(0, 0, 0, 0.25) 50%,
-        rgba(0, 0, 0, 0.25)
+        rgba(0, 0, 0, 0.22) 50%,
+        rgba(0, 0, 0, 0.22)
       );
       background-size: 100% 4px;
     }
+    [data-theme="light"] .crt-overlay {
+      background: none;
+    }
   </style>
 </head>
-<body class="p-4 sm:p-8 crt-overlay">
+<body class="min-h-screen flex flex-col p-3 sm:p-6 md:p-8 crt-overlay">
 
-  <div class="max-w-6xl mx-auto space-y-6">
+  <!-- ГЛАВНЫЙ КОНТЕЙНЕР (С ФИКСИРОВАННЫМ ПОДВАЛОМ ВНИЗУ) -->
+  <div class="max-w-6xl w-full mx-auto flex-grow flex flex-col space-y-6">
 
     <!-- ШАПКА / ПАСПОРТ ЛАБОРАТОРИИ -->
-    <header class="tech-border bg-[#13171d]/95 p-6 rounded-sm backdrop-blur shadow-xl">
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-5 border-b border-[#232933] pb-6">
+    <header class="tech-border p-4 sm:p-6 rounded-sm shadow-xl">
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5 border-b border-[var(--border)] pb-5">
         <div>
-          <div class="flex items-center gap-3">
-            <span class="inline-block w-2.5 h-2.5 bg-[#ff5e1a] animate-ping"></span>
-            <span class="text-xs tracking-[0.25em] text-[#ff5e1a] uppercase font-bold" id="txt-header-badge">
-              Опытная Лаборатория // Наука & Ремесло
+          <!-- Статусный бейдж -->
+          <div class="flex items-center gap-2.5">
+            <span class="inline-block w-2.5 h-2.5 bg-[var(--tech-orange)] rounded-full animate-ping"></span>
+            <span class="text-[11px] sm:text-xs tracking-[0.2em] text-[var(--tech-orange)] uppercase font-bold" id="txt-header-badge">
+              ОПЫТНАЯ ЛАБОРАТОРИЯ // HARD & SOFT
             </span>
           </div>
-          <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-wider mt-1.5 flex items-center gap-3">
-            AD LAB <span class="text-[#ff5e1a] text-lg sm:text-xl font-normal">// adlab.su</span>
+
+          <!-- Название -->
+          <h1 class="text-2xl sm:text-4xl md:text-5xl font-extrabold text-[var(--text-heading)] tracking-wider mt-2 flex items-center gap-3">
+            AD LAB <span class="text-[var(--tech-orange)] text-base sm:text-xl font-normal">// adlab.su</span>
           </h1>
-          <p class="text-xs sm:text-sm text-gray-400 mt-2 font-sans-ui max-w-2xl leading-relaxed" id="txt-header-desc">
-            Разработка аппаратных комплексов, кастомной акустики и программных систем. 
-            <span class="text-gray-200 font-mono block sm:inline mt-1 sm:mt-0 font-semibold">Гл. Инженер: Штыков А.Д.</span>
+
+          <!-- Описание и конструктор с новой строки -->
+          <p class="text-xs sm:text-sm text-[var(--text-muted)] mt-2 font-sans-ui max-w-2xl leading-relaxed" id="txt-header-desc">
+            Инженерные разработки, электроника и программные комплексы.
           </p>
+          <div class="mt-2 text-xs font-mono font-semibold text-[var(--tech-orange)] flex items-center gap-2" id="txt-engineer-line">
+            <span class="w-1.5 h-1.5 bg-[var(--tech-orange)] rounded-full inline-block"></span>
+            <span id="txt-engineer-name">Гл. Конструктор: Штыков А.Д.</span>
+          </div>
         </div>
 
-        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 self-start md:self-auto">
-          <!-- Переключатель языка -->
-          <div class="flex items-center border border-[#2a313d] bg-[#0c0e12] p-1 rounded-sm text-xs font-mono">
-            <button id="lang-btn-ru" onclick="switchLanguage('ru')" class="px-2.5 py-1 bg-[#ff5e1a] text-black font-extrabold transition">RU</button>
-            <button id="lang-btn-en" onclick="switchLanguage('en')" class="px-2.5 py-1 text-gray-400 hover:text-white font-bold transition">EN</button>
+        <!-- Правый блок: тулбар (язык + тема) + штамп + учетные данные -->
+        <div class="flex flex-wrap sm:flex-nowrap items-center gap-3 sm:gap-4 self-start lg:self-auto">
+          
+          <!-- Пульт переключателей (Язык + Тема) -->
+          <div class="flex items-center border border-[var(--border)] bg-[var(--panel-inner)] p-1 rounded-sm text-xs font-mono gap-1">
+            <!-- Языки -->
+            <button id="lang-btn-ru" onclick="switchLanguage('ru')" class="px-2 py-1 bg-[var(--tech-orange)] text-black font-extrabold rounded-xs transition">RU</button>
+            <button id="lang-btn-en" onclick="switchLanguage('en')" class="px-2 py-1 text-[var(--text-muted)] hover:text-[var(--text-heading)] font-bold transition">EN</button>
+            
+            <div class="w-px h-4 bg-[var(--border)] mx-1"></div>
+            
+            <!-- Тема -->
+            <button id="theme-toggle-btn" onclick="toggleTheme()" class="px-2 py-1 text-[var(--text-heading)] hover:text-[var(--tech-orange)] font-bold transition flex items-center gap-1" title="Сменить тему оформления">
+              <span id="theme-icon">🌙</span>
+              <span class="text-[10px] hidden sm:inline" id="theme-text">ТЕМНАЯ</span>
+            </button>
           </div>
 
-          <div class="gost-stamp px-3.5 py-2 text-xs text-center" id="txt-gost-stamp">
+          <!-- Советский штамп ГОСТ -->
+          <div class="gost-stamp px-3 py-1.5 sm:px-3.5 sm:py-2 text-[11px] sm:text-xs text-center select-none" id="txt-gost-stamp">
             ПАСПОРТНЫЙ УЧЕТ<br>
-            <span class="text-[10px] text-gray-400 font-normal">ГОСТ-2026.SU</span>
+            <span class="text-[9px] sm:text-[10px] opacity-80 font-normal">ГОСТ-2026.SU</span>
           </div>
           
-          <div class="hidden sm:block text-right text-xs text-gray-400 border-l border-[#262c36] pl-4 space-y-1">
-            <div>ИНДЕКС: <span class="text-white font-bold">AD-LAB-01</span></div>
-            <div>СТАТУС: <span class="text-emerald-400 font-bold" id="txt-status-active">В СТРОЮ</span></div>
-            <div>ОБЪЕКТ: <span class="text-white">HARD & SOFT</span></div>
+          <!-- Технические параметры учета (без переноса строк!) -->
+          <div class="hidden md:block text-right text-xs font-mono text-[var(--text-muted)] border-l border-[var(--border)] pl-4 space-y-1 whitespace-nowrap">
+            <div>ИНДЕКС: <span class="text-[var(--text-heading)] font-bold">AD-LAB-01</span></div>
+            <div>СТАТУС: <span class="text-emerald-500 font-bold" id="txt-status-active">В СТРОЮ</span></div>
+            <div>ОБЪЕКТ: <span class="text-[var(--text-heading)] font-bold whitespace-nowrap">HARD & SOFT</span></div>
           </div>
         </div>
       </div>
 
       <!-- ФИЛЬТРЫ КАРТОТЕКИ -->
-      <div class="flex flex-wrap items-center justify-between gap-3 pt-5 text-xs">
-        <div class="flex items-center gap-2">
-          <span class="text-gray-500 uppercase tracking-wider font-semibold" id="txt-filter-label">ФОРМУЛЯРЫ:</span>
-          <button onclick="filterCategory('all')" id="btn-all" class="px-3 py-1.5 bg-[#ff5e1a] text-black font-extrabold uppercase transition">Все проекты [2]</button>
-          <button onclick="filterCategory('hardware')" id="btn-hardware" class="px-3 py-1.5 bg-[#1a1f26] hover:bg-[#252c36] text-gray-300 uppercase transition">Железо / DIY</button>
-          <button onclick="filterCategory('software')" id="btn-software" class="px-3 py-1.5 bg-[#1a1f26] hover:bg-[#252c36] text-gray-300 uppercase transition">Софт / Расширения</button>
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-4 text-xs font-mono">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-[var(--text-muted)] uppercase tracking-wider font-semibold" id="txt-filter-label">ФОРМУЛЯРЫ:</span>
+          <button onclick="filterCategory('all')" id="btn-all" class="px-3 py-1 bg-[var(--tech-orange)] text-black font-extrabold uppercase transition">Все проекты [2]</button>
+          <button onclick="filterCategory('software')" id="btn-software" class="px-3 py-1 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-hover)] text-[var(--text)] uppercase transition">Софт / Расширения</button>
+          <button onclick="filterCategory('hardware')" id="btn-hardware" class="px-3 py-1 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-hover)] text-[var(--text)] uppercase transition">Железо / R&D</button>
         </div>
-        <div class="text-gray-500 font-mono text-[11px] hidden sm:block">
+        <div class="text-[var(--text-muted)] text-[11px] hidden sm:block">
           СИСТЕМНЫЙ АРХИВ // ADLAB.SU
         </div>
       </div>
     </header>
 
     <!-- КАТАЛОГ ПРОЕКТОВ (PROJECT 0001, PROJECT 0002...) -->
-    <main class="grid grid-cols-1 md:grid-cols-2 gap-6" id="projects-grid">
+    <main class="grid grid-cols-1 md:grid-cols-2 gap-6 flex-grow" id="projects-grid">
 
-      <!-- PROJECT 0001: РЕТРО-КОЛОНКА -->
-      <article class="project-card tech-border bg-[#13171d] p-5 flex flex-col justify-between hover:border-[#ff5e1a] transition-all duration-200 group" data-category="hardware">
+      <!-- PROJECT 0001: ТЕПЕРЬ ЭТО TABLO TAB (ГЛАВНЫЙ РЕЛИЗ ЛАБОРАТОРИИ) -->
+      <article class="project-card tech-border p-5 flex flex-col justify-between hover:border-[var(--tech-orange)] transition-all duration-200 group" data-category="software">
         <div>
           <!-- Индекс и статус -->
-          <div class="flex items-center justify-between border-b border-[#222832] pb-3 text-xs">
-            <span class="font-extrabold text-[#ff5e1a] tracking-widest text-sm bg-[#ff5e1a]/10 px-2.5 py-0.5 border border-[#ff5e1a]/30">
+          <div class="flex items-center justify-between border-b border-[var(--border)] pb-3 text-xs">
+            <span class="font-extrabold text-[var(--tech-orange)] tracking-widest text-sm bg-[var(--stamp-bg)] px-2.5 py-0.5 border border-[var(--tech-orange)]/30">
               PROJECT 0001
             </span>
-            <span class="text-emerald-400 text-[11px] flex items-center gap-1.5 font-bold">
-              <span class="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-ping"></span> <span id="p1-card-status">В СТРОЮ</span>
+            <span class="text-emerald-500 text-[11px] flex items-center gap-1.5 font-bold">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-ping"></span> <span id="p1-card-status">v6.4.0 // WEB STORE</span>
             </span>
           </div>
 
           <!-- Заголовок -->
           <div class="mt-4">
-            <div class="text-[11px] text-gray-500 uppercase tracking-wider" id="p1-card-tag">АКУСТИЧЕСКИЙ ПРИБОР // HARDWARE</div>
-            <h2 class="text-lg sm:text-xl font-bold text-white group-hover:text-[#ff5e1a] transition mt-1" id="p1-card-title">
-              Ретро-Акустика «Маяк-01»
-            </h2>
-            <p class="text-xs text-gray-400 mt-2 font-sans-ui leading-relaxed" id="p1-card-desc">
-              Умная колонка в винтажном стиле. Корпус из массива дерева и карболита, аналоговая шкала настройки, встроенный голосовой ассистент и Hi-Fi ЦАП.
-            </p>
-          </div>
-
-          <!-- ТТХ / Паспорт -->
-          <div class="mt-4 bg-[#0a0c0f] p-3 text-[11px] border border-[#1f242c] space-y-1.5 font-mono" id="p1-card-specs">
-            <div class="flex justify-between"><span class="text-gray-500">Питание:</span><span class="text-gray-300">Type-C PD / 220V</span></div>
-            <div class="flex justify-between"><span class="text-gray-500">Усилитель:</span><span class="text-gray-300">Class D 30W Hi-Fi</span></div>
-            <div class="flex justify-between"><span class="text-gray-500">Оболочка:</span><span class="text-gray-300">v2.4 Embedded Linux</span></div>
-          </div>
-        </div>
-
-        <div class="mt-5 pt-3 border-t border-[#222832] flex items-center justify-between text-xs">
-          <span class="text-gray-500 font-mono" id="p1-card-type">ТИП: ЖЕЛЕЗО</span>
-          <button onclick="openModal('0001')" class="text-[#ff5e1a] hover:underline flex items-center gap-1 font-bold" id="p1-card-btn">
-            ТЕХПАСПОРТ ➔
-          </button>
-        </div>
-      </article>
-
-      <!-- PROJECT 0002: TABLO TAB — ЭКСПРЕСС-ПАНЕЛЬ -->
-      <article class="project-card tech-border bg-[#13171d] p-5 flex flex-col justify-between hover:border-[#ff5e1a] transition-all duration-200 group" data-category="software">
-        <div>
-          <!-- Индекс и статус -->
-          <div class="flex items-center justify-between border-b border-[#222832] pb-3 text-xs">
-            <span class="font-extrabold text-[#ff5e1a] tracking-widest text-sm bg-[#ff5e1a]/10 px-2.5 py-0.5 border border-[#ff5e1a]/30">
-              PROJECT 0002
-            </span>
-            <span class="text-emerald-400 text-[11px] flex items-center gap-1.5 font-bold">
-              <span class="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-ping"></span> <span id="p2-card-status">v6.4.0 // WEB STORE</span>
-            </span>
-          </div>
-
-          <!-- Заголовок -->
-          <div class="mt-4">
-            <div class="text-[11px] text-gray-500 uppercase tracking-wider" id="p2-card-tag">CHROME EXTENSION // SOFTWARE</div>
-            <h2 class="text-lg sm:text-xl font-bold text-white group-hover:text-[#ff5e1a] transition mt-1" id="p2-card-title">
+            <div class="text-[11px] text-[var(--text-muted)] uppercase tracking-wider font-mono" id="p1-card-tag">CHROME EXTENSION // SOFTWARE</div>
+            <h2 class="text-lg sm:text-xl font-bold text-[var(--text-heading)] group-hover:text-[var(--tech-orange)] transition mt-1" id="p1-card-title">
               Tablo Tab — Экспресс-панель
             </h2>
-            <p class="text-xs text-gray-400 mt-2 font-sans-ui leading-relaxed" id="p2-card-desc">
+            <p class="text-xs text-[var(--text-muted)] mt-2 font-sans-ui leading-relaxed" id="p1-card-desc">
               Эстетичная экспресс-панель для новой вкладки со стилями Windows 11 и 10. Виртуальные рабочие столы, живые смарт-виджеты (часы, погода, курсы валют), быстрые заметки и облачная синхронизация через Google Диск.
             </p>
           </div>
 
           <!-- Превью промо-карточки -->
-          <div class="mt-4 bg-[#0a0c0f] p-2.5 border border-[#1f242c] overflow-hidden rounded-sm relative">
-            <img src="assets/img/promo_tile_440x280.png" alt="Tablo Tab Preview" class="w-full h-36 object-cover rounded-sm border border-[#232933]">
+          <div class="mt-4 bg-[var(--panel-inner)] p-2.5 border border-[var(--border)] overflow-hidden rounded-sm relative">
+            <img src="assets/img/promo_tile_440x280.png" alt="Tablo Tab Preview" class="w-full h-36 object-cover rounded-sm border border-[var(--border-subtle)]">
             <div class="mt-2 flex flex-wrap gap-1.5 text-[10px] font-mono">
-              <span class="px-2 py-0.5 bg-[#171c24] text-blue-400 border border-blue-500/30">Win 11 Mica</span>
-              <span class="px-2 py-0.5 bg-[#171c24] text-cyan-400 border border-cyan-500/30">Win 10 Metro</span>
-              <span class="px-2 py-0.5 bg-[#171c24] text-amber-400 border border-amber-500/30">Google Drive</span>
-              <span class="px-2 py-0.5 bg-[#171c24] text-emerald-400 border border-emerald-500/30">Offline 100%</span>
+              <span class="px-2 py-0.5 bg-[var(--panel)] text-blue-500 border border-blue-500/30">Win 11 Mica</span>
+              <span class="px-2 py-0.5 bg-[var(--panel)] text-cyan-600 border border-cyan-500/30">Win 10 Metro</span>
+              <span class="px-2 py-0.5 bg-[var(--panel)] text-amber-500 border border-amber-500/30">Google Drive</span>
+              <span class="px-2 py-0.5 bg-[var(--panel)] text-emerald-500 border border-emerald-500/30">Offline 100%</span>
             </div>
           </div>
         </div>
 
-        <div class="mt-5 pt-3 border-t border-[#222832] flex items-center justify-between text-xs">
-          <button onclick="openModal('0002')" class="text-gray-400 hover:text-white flex items-center gap-1 font-bold font-mono" id="p2-card-btn">
+        <div class="mt-5 pt-3 border-t border-[var(--border)] flex items-center justify-between text-xs">
+          <button onclick="openModal('0001')" class="text-[var(--text-muted)] hover:text-[var(--text-heading)] flex items-center gap-1 font-bold font-mono" id="p1-card-btn">
             ТЕХПАСПОРТ ➔
           </button>
-          <a href="https://chromewebstore.google.com/detail/tablo-tab/gdhohiimfeogdjiccmldkegamfedkgco" target="_blank" class="px-3 py-1.5 bg-[#ff5e1a] text-black font-extrabold hover:bg-[#ff7538] transition flex items-center gap-1.5" id="p2-card-install">
+          <a href="https://chromewebstore.google.com/detail/tablo-tab/gdhohiimfeogdjiccmldkegamfedkgco" target="_blank" class="px-3 py-1.5 bg-[var(--tech-orange)] text-black font-extrabold hover:bg-[var(--tech-orange-hover)] transition flex items-center gap-1.5" id="p1-card-install">
             <span>В CHROME STORE</span> ➔
           </a>
         </div>
       </article>
 
+      <!-- PROJECT 0002: СЛЕДУЮЩИЙ ПРОЕКТ (R&D / В РАЗРАБОТКЕ) -->
+      <article class="project-card tech-border p-5 flex flex-col justify-between hover:border-[var(--tech-orange)] transition-all duration-200 group" data-category="hardware">
+        <div>
+          <!-- Индекс и статус -->
+          <div class="flex items-center justify-between border-b border-[var(--border)] pb-3 text-xs">
+            <span class="font-extrabold text-[var(--tech-orange)] tracking-widest text-sm bg-[var(--stamp-bg)] px-2.5 py-0.5 border border-[var(--tech-orange)]/30">
+              PROJECT 0002
+            </span>
+            <span class="text-amber-500 text-[11px] flex items-center gap-1.5 font-bold">
+              <span class="w-2 h-2 rounded-full bg-amber-500 inline-block animate-pulse"></span> <span id="p2-card-status">В РАЗРАБОТКЕ // R&D</span>
+            </span>
+          </div>
+
+          <!-- Заголовок -->
+          <div class="mt-4">
+            <div class="text-[11px] text-[var(--text-muted)] uppercase tracking-wider font-mono" id="p2-card-tag">HARDWARE & EMBEDDED // R&D</div>
+            <h2 class="text-lg sm:text-xl font-bold text-[var(--text-heading)] group-hover:text-[var(--tech-orange)] transition mt-1" id="p2-card-title">
+              Аппаратно-приборный комплекс
+            </h2>
+            <p class="text-xs text-[var(--text-muted)] mt-2 font-sans-ui leading-relaxed" id="p2-card-desc">
+              Проектирование авторских аппаратных модулей, схемотехники и микроконтроллерных устройств. Создание кастомных физических устройств с открытой архитектурой.
+            </p>
+          </div>
+
+          <!-- ТТХ / Паспорт -->
+          <div class="mt-4 bg-[var(--panel-inner)] p-3 text-[11px] border border-[var(--border)] space-y-1.5 font-mono" id="p2-card-specs">
+            <div class="flex justify-between"><span class="text-[var(--text-muted)]">Направление:</span><span class="text-[var(--text-heading)] font-semibold">Embedded & IoT</span></div>
+            <div class="flex justify-between"><span class="text-[var(--text-muted)]">Архитектура:</span><span class="text-[var(--text-heading)] font-semibold">Custom PCB / ARM</span></div>
+            <div class="flex justify-between"><span class="text-[var(--text-muted)]">Стадия:</span><span class="text-amber-500 font-semibold">Опытные образцы</span></div>
+          </div>
+        </div>
+
+        <div class="mt-5 pt-3 border-t border-[var(--border)] flex items-center justify-between text-xs">
+          <span class="text-[var(--text-muted)] font-mono" id="p2-card-type">ТИП: ЖЕЛЕЗО</span>
+          <button onclick="openModal('0002')" class="text-[var(--tech-orange)] hover:underline flex items-center gap-1 font-bold" id="p2-card-btn">
+            ТЕХПАСПОРТ ➔
+          </button>
+        </div>
+      </article>
+
     </main>
 
-    <!-- ПОДВАЛ / СВЯЗЬ С ИНЖЕНЕРОМ -->
-    <footer class="tech-border bg-[#13171d] p-6 text-xs text-gray-400 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+    <!-- ПОДВАЛ / ПРИКРЕПЛЕН К НИЗУ ЭКРАНА (mt-auto) -->
+    <footer class="tech-border p-5 sm:p-6 text-xs text-[var(--text-muted)] mt-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
       <div>
-        <div class="text-white font-bold tracking-wider uppercase" id="txt-footer-title">
+        <div class="text-[var(--text-heading)] font-bold tracking-wider uppercase font-mono" id="txt-footer-title">
           AD LAB // АВТОРСКАЯ ЛАБОРАТОРИЯ ШТЫКОВА А.Д.
         </div>
-        <p class="mt-1 text-gray-500 text-[11px] font-sans-ui" id="txt-footer-desc">
-          Все физические изделия изготовлены вручную. Программное обеспечение разработано с открытым исходным кодом.
+        <p class="mt-1 text-[11px] font-sans-ui leading-relaxed" id="txt-footer-desc">
+          Физические устройства и программные комплексы. Разработка с открытым исходным кодом.
         </p>
-        <div class="mt-2 flex items-center gap-4 text-[11px] font-mono">
-          <a href="privacy.html" class="text-[#ff5e1a] hover:underline" id="txt-footer-privacy">Политика конфиденциальности (Privacy Policy)</a>
-          <span class="text-gray-600">|</span>
-          <a href="https://github.com/adlab-su/adlab.su" target="_blank" class="text-gray-400 hover:text-white">GitHub: adlab-su/adlab.su</a>
+        <div class="mt-2.5 flex flex-wrap items-center gap-3 text-[11px] font-mono">
+          <a href="privacy.html" class="text-[var(--tech-orange)] hover:underline font-semibold" id="txt-footer-privacy">Политика конфиденциальности (Privacy Policy)</a>
+          <span class="text-[var(--border)]">|</span>
+          <a href="https://github.com/adlab-su/adlab.su" target="_blank" class="text-[var(--text-muted)] hover:text-[var(--text-heading)]">GitHub: adlab-su/adlab.su</a>
         </div>
       </div>
 
-      <div class="flex items-center gap-6 font-mono text-xs">
-        <div>ДОМЕН: <span class="text-[#ff5e1a] font-bold">ADLAB.SU</span></div>
-        <div>ОТК: <span class="text-emerald-400 font-bold" id="txt-footer-otk">ПРИНЯТО</span></div>
+      <div class="flex items-center gap-6 font-mono text-xs whitespace-nowrap self-start md:self-auto">
+        <div>ДОМЕН: <span class="text-[var(--tech-orange)] font-bold">ADLAB.SU</span></div>
+        <div>ОТК: <span class="text-emerald-500 font-bold" id="txt-footer-otk">ПРИНЯТО</span></div>
       </div>
     </footer>
 
@@ -250,69 +310,49 @@
 
   <!-- МОДАЛЬНОЕ ОКНО ПАСПОРТА -->
   <div id="modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="tech-border bg-[#111419] max-w-lg w-full p-6 text-xs space-y-4 shadow-2xl relative">
-      <div class="flex justify-between items-start border-b border-[#232933] pb-3">
+    <div class="tech-border max-w-lg w-full p-5 sm:p-6 text-xs space-y-4 shadow-2xl relative">
+      <div class="flex justify-between items-start border-b border-[var(--border)] pb-3">
         <div>
-          <span class="text-[#ff5e1a] font-bold tracking-widest text-sm" id="modal-project-id">PROJECT 0001</span>
-          <h3 class="text-lg font-bold text-white mt-1" id="modal-project-title">Паспорт изделия</h3>
+          <span class="text-[var(--tech-orange)] font-bold tracking-widest text-sm" id="modal-project-id">PROJECT 0001</span>
+          <h3 class="text-base sm:text-lg font-bold text-[var(--text-heading)] mt-1" id="modal-project-title">Паспорт изделия</h3>
         </div>
-        <button onclick="closeModal()" class="text-gray-400 hover:text-white text-base font-mono px-2 py-1 bg-[#1a1f26]">✕ <span id="modal-close-txt">ЗАКРЫТЬ</span></button>
+        <button onclick="closeModal()" class="text-[var(--text-muted)] hover:text-[var(--text-heading)] text-base font-mono px-2 py-1 bg-[var(--btn-secondary-bg)]">✕ <span id="modal-close-txt">ЗАКРЫТЬ</span></button>
       </div>
 
-      <div class="space-y-3 font-sans-ui text-gray-300" id="modal-project-desc"></div>
+      <div class="space-y-3 font-sans-ui text-[var(--text)] leading-relaxed" id="modal-project-desc"></div>
 
-      <div class="bg-[#0a0c0f] p-3 border border-[#1f242c] space-y-1.5 font-mono text-[11px]" id="modal-project-specs"></div>
+      <div class="bg-[var(--panel-inner)] p-3 border border-[var(--border)] space-y-1.5 font-mono text-[11px]" id="modal-project-specs"></div>
 
-      <div class="flex justify-between items-center pt-3 border-t border-[#232933] font-mono text-gray-500">
+      <div class="flex justify-between items-center pt-3 border-t border-[var(--border)] font-mono text-[var(--text-muted)]">
         <span id="modal-otk-txt">ОТК: ГОСТ ПРОВЕРЕН</span>
-        <span class="text-[#ff5e1a] font-bold">AD LAB // 2026</span>
+        <span class="text-[var(--tech-orange)] font-bold">AD LAB // 2026</span>
       </div>
     </div>
   </div>
 
   <script>
     let currentLang = 'ru';
+    let currentTheme = 'dark';
 
     const i18n = {
       ru: {
-        headerBadge: 'Опытная Лаборатория // Наука & Ремесло',
-        headerDesc: 'Разработка аппаратных комплексов, кастомной акустики и программных систем. <span class="text-gray-200 font-mono block sm:inline mt-1 sm:mt-0 font-semibold">Гл. Инженер: Штыков А.Д.</span>',
-        gostStamp: 'ПАСПОРТНЫЙ УЧЕТ<br><span class="text-[10px] text-gray-400 font-normal">ГОСТ-2026.SU</span>',
+        headerBadge: 'ОПЫТНАЯ ЛАБОРАТОРИЯ // HARD & SOFT',
+        headerDesc: 'Инженерные разработки, электроника и программные комплексы.',
+        engineerName: 'Гл. Конструктор: Штыков А.Д.',
+        gostStamp: 'ПАСПОРТНЫЙ УЧЕТ<br><span class="text-[9px] sm:text-[10px] opacity-80 font-normal">ГОСТ-2026.SU</span>',
         statusActive: 'В СТРОЮ',
         filterLabel: 'ФОРМУЛЯРЫ:',
         btnAll: 'Все проекты [2]',
-        btnHw: 'Железо / DIY',
         btnSw: 'Софт / Расширения',
+        btnHw: 'Железо / R&D',
         footerTitle: 'AD LAB // АВТОРСКАЯ ЛАБОРАТОРИЯ ШТЫКОВА А.Д.',
-        footerDesc: 'Все физические изделия изготовлены вручную. Программное обеспечение разработано с открытым исходным кодом.',
+        footerDesc: 'Физические устройства и программные комплексы. Разработка с открытым исходным кодом.',
         footerPrivacy: 'Политика конфиденциальности (Privacy Policy)',
         footerOtk: 'ПРИНЯТО',
         modalClose: 'ЗАКРЫТЬ',
         modalOtk: 'ОТК: ГОСТ ПРОВЕРЕН',
 
         p1: {
-          tag: 'АКУСТИЧЕСКИЙ ПРИБОР // HARDWARE',
-          title: 'Ретро-Акустика «Маяк-01»',
-          desc: 'Умная колонка в винтажном стиле. Корпус из массива дерева и карболита, аналоговая шкала настройки, встроенный голосовой ассистент и Hi-Fi ЦАП.',
-          status: 'В СТРОЮ',
-          type: 'ТИП: ЖЕЛЕЗО',
-          btn: 'ТЕХПАСПОРТ ➔',
-          specsHtml: `
-            <div class="flex justify-between"><span class="text-gray-500">Питание:</span><span class="text-gray-300">Type-C PD / 220V</span></div>
-            <div class="flex justify-between"><span class="text-gray-500">Усилитель:</span><span class="text-gray-300">Class D 30W Hi-Fi</span></div>
-            <div class="flex justify-between"><span class="text-gray-500">Оболочка:</span><span class="text-gray-300">v2.4 Embedded Linux</span></div>
-          `,
-          modalDesc: 'Кастомная умная колонка в стиле советской радиоаппаратуры 60-х годов. Корпус из массива ореха, фрезерованные латунные ручки, встроенный ЦАП Texas Instruments и поддержка стриминга.',
-          modalSpecs: [
-            ['Серийный номер:', 'AD-0001-2026'],
-            ['ЦАП / Усилитель:', 'TI PCM5102A + Class D 30W'],
-            ['Диффузоры:', 'Широкополосные 2.5" бумажные'],
-            ['Интерфейсы:', 'Wi-Fi, Bluetooth 5.2, AUX'],
-            ['Статус:', 'В строю / Готово к эксплуатации']
-          ]
-        },
-
-        p2: {
           tag: 'CHROME EXTENSION // SOFTWARE',
           title: 'Tablo Tab — Экспресс-панель',
           desc: 'Эстетичная экспресс-панель для новой вкладки со стилями Windows 11 и 10. Виртуальные рабочие столы, живые смарт-виджеты (часы, погода, курсы валют), быстрые заметки и облачная синхронизация через Google Диск.',
@@ -320,7 +360,7 @@
           type: 'ТИП: РАСШИРЕНИЕ',
           btn: 'ТЕХПАСПОРТ ➔',
           install: 'В CHROME STORE ➔',
-          modalDesc: 'Tablo Tab превращает страницу новой вкладки в персонализированный дашборд со стилями Windows 11 Fluent Mica и Windows 10 Metro Classic. Поддерживает неограниченные рабочие столы, интерактивные смарт-виджеты (Часы, Погода, Курсы валют и криптовалют, Блокнот), визуальные плитки с автоподбором логотипов и надежную синхронизацию с личным Google Диском.',
+          modalDesc: 'Tablo Tab превращает страницу новой вкладки в персонализированный дашборд со стилями Windows 11 Fluent Mica и Windows 10 Metro Classic. Поддерживает неограниченные рабочие столы, интерактивные смарт-виджеты (Часы, Погода, Курсы валют и криптовалют, Блокнот To-Do), визуальные плитки с автоподбором логотипов и надежную синхронизацию с личным Google Диском.',
           modalSpecs: [
             ['ID расширения:', 'gdhohiimfeogdjiccmldkegamfedkgco'],
             ['Версия:', 'v6.4.0 (Manifest V3)'],
@@ -329,48 +369,49 @@
             ['Конфиденциальность:', '100% Локальное хранение (без трекеров)'],
             ['Облако:', 'Google Диск OAuth2 (опционально)']
           ]
+        },
+
+        p2: {
+          tag: 'HARDWARE & EMBEDDED // R&D',
+          title: 'Аппаратно-приборный комплекс',
+          desc: 'Проектирование авторских аппаратных модулей, схемотехники и микроконтроллерных устройств. Создание кастомных физических приборов с открытой архитектурой.',
+          status: 'В РАЗРАБОТКЕ // R&D',
+          type: 'ТИП: ЖЕЛЕЗО',
+          btn: 'ТЕХПАСПОРТ ➔',
+          specsHtml: `
+            <div class="flex justify-between"><span class="text-[var(--text-muted)]">Направление:</span><span class="text-[var(--text-heading)] font-semibold">Embedded & IoT</span></div>
+            <div class="flex justify-between"><span class="text-[var(--text-muted)]">Архитектура:</span><span class="text-[var(--text-heading)] font-semibold">Custom PCB / ARM</span></div>
+            <div class="flex justify-between"><span class="text-[var(--text-muted)]">Стадия:</span><span class="text-amber-500 font-semibold">Опытные образцы</span></div>
+          `,
+          modalDesc: 'Научно-техническое направление лаборатории AD LAB по разработке физических устройств: от микроэлектроники и IoT-датчиков до кастомных приборов управления и аудиосистем.',
+          modalSpecs: [
+            ['Шифр проекта:', 'AD-0002-LAB'],
+            ['Базовая платформа:', 'ARM Cortex / ESP32 Architecture'],
+            ['Интерфейсы:', 'USB Type-C, Wi-Fi, BLE, I2C / SPI'],
+            ['Корпусирование:', 'CNC фрезеровка / 3D-моделирование'],
+            ['Статус разработки:', 'R&D / Прототипирование']
+          ]
         }
       },
 
       en: {
-        headerBadge: 'Experimental Laboratory // Science & Craft',
-        headerDesc: 'Development of hardware complexes, custom acoustics, and software solutions. <span class="text-gray-200 font-mono block sm:inline mt-1 sm:mt-0 font-semibold">Chief Engineer: Shtykov A.D.</span>',
-        gostStamp: 'OFFICIAL REGISTRY<br><span class="text-[10px] text-gray-400 font-normal">SPEC-2026.SU</span>',
+        headerBadge: 'EXPERIMENTAL LAB // HARD & SOFT',
+        headerDesc: 'Engineering solutions, custom electronics, and software systems.',
+        engineerName: 'Chief Designer: Shtykov A.D.',
+        gostStamp: 'OFFICIAL REGISTRY<br><span class="text-[9px] sm:text-[10px] opacity-80 font-normal">SPEC-2026.SU</span>',
         statusActive: 'ACTIVE',
         filterLabel: 'LOGS:',
         btnAll: 'All Projects [2]',
-        btnHw: 'Hardware / DIY',
         btnSw: 'Software / Extensions',
+        btnHw: 'Hardware / R&D',
         footerTitle: 'AD LAB // SHTYKOV A.D. LABORATORY',
-        footerDesc: 'All physical artifacts are handcrafted. All software is engineered with open-source principles.',
+        footerDesc: 'Hardware devices and software systems. Built with open-source principles.',
         footerPrivacy: 'Privacy Policy',
         footerOtk: 'PASSED',
         modalClose: 'CLOSE',
         modalOtk: 'QC: SPEC VERIFIED',
 
         p1: {
-          tag: 'ACOUSTIC APPARATUS // HARDWARE',
-          title: 'Retro-Acoustics "Mayak-01"',
-          desc: 'Vintage-styled smart audio system. Solid walnut and bakelite enclosure, analog dial tuning scale, built-in voice assistant, and Hi-Fi DAC.',
-          status: 'ACTIVE',
-          type: 'TYPE: HARDWARE',
-          btn: 'DATASHEET ➔',
-          specsHtml: `
-            <div class="flex justify-between"><span class="text-gray-500">Power:</span><span class="text-gray-300">Type-C PD / 220V</span></div>
-            <div class="flex justify-between"><span class="text-gray-500">Amplifier:</span><span class="text-gray-300">Class D 30W Hi-Fi</span></div>
-            <div class="flex justify-between"><span class="text-gray-500">System:</span><span class="text-gray-300">v2.4 Embedded Linux</span></div>
-          `,
-          modalDesc: 'Custom smart speaker inspired by 1960s laboratory and radio equipment. Solid walnut body, CNC-machined brass knobs, Texas Instruments DAC, and lossless streaming support.',
-          modalSpecs: [
-            ['Serial Number:', 'AD-0001-2026'],
-            ['DAC / Amp:', 'TI PCM5102A + Class D 30W'],
-            ['Drivers:', 'Full-range 2.5" paper cones'],
-            ['Interfaces:', 'Wi-Fi, Bluetooth 5.2, AUX'],
-            ['Status:', 'Operational / Ready for deployment']
-          ]
-        },
-
-        p2: {
           tag: 'CHROME EXTENSION // SOFTWARE',
           title: 'Tablo Tab — Speed Dial',
           desc: 'Aesthetic new tab dashboard featuring Windows 11 & 10 visual styles. Virtual workspaces, live smart widgets (Clock, Weather, Crypto & Currencies), sticky notes, and Google Drive backup.',
@@ -387,10 +428,76 @@
             ['Privacy:', '100% Local Storage (Zero Trackers)'],
             ['Cloud Sync:', 'Google Drive OAuth2 (Optional)']
           ]
+        },
+
+        p2: {
+          tag: 'HARDWARE & EMBEDDED // R&D',
+          title: 'Hardware & Embedded System',
+          desc: 'Engineering of proprietary hardware modules, custom circuitry, and microcontroller devices with open architecture and precision physical design.',
+          status: 'IN DEVELOPMENT // R&D',
+          type: 'TYPE: HARDWARE',
+          btn: 'DATASHEET ➔',
+          specsHtml: `
+            <div class="flex justify-between"><span class="text-[var(--text-muted)]">Field:</span><span class="text-[var(--text-heading)] font-semibold">Embedded & IoT</span></div>
+            <div class="flex justify-between"><span class="text-[var(--text-muted)]">Architecture:</span><span class="text-[var(--text-heading)] font-semibold">Custom PCB / ARM</span></div>
+            <div class="flex justify-between"><span class="text-[var(--text-muted)]">Phase:</span><span class="text-amber-500 font-semibold">Prototyping</span></div>
+          `,
+          modalDesc: 'AD LAB technical hardware research division dedicated to developing physical devices: from microelectronics and IoT telemetry sensors to custom control units and audio hardware.',
+          modalSpecs: [
+            ['Project Code:', 'AD-0002-LAB'],
+            ['Core Platform:', 'ARM Cortex / ESP32 Architecture'],
+            ['Interfaces:', 'USB Type-C, Wi-Fi, BLE, I2C / SPI'],
+            ['Fabrication:', 'CNC Machining / 3D Enclosures'],
+            ['Status:', 'Active R&D / Engineering Samples']
+          ]
         }
       }
     };
 
+    // ПЕРЕКЛЮЧЕНИЕ ТЕМЫ (СВЕТЛАЯ / ТЕМНАЯ)
+    function applyTheme(theme) {
+      currentTheme = theme;
+      document.documentElement.setAttribute('data-theme', theme);
+      
+      const icon = document.getElementById('theme-icon');
+      const text = document.getElementById('theme-text');
+      
+      if (theme === 'light') {
+        icon.textContent = '☀️';
+        text.textContent = (currentLang === 'ru') ? 'СВЕТЛАЯ' : 'LIGHT';
+      } else {
+        icon.textContent = '🌙';
+        text.textContent = (currentLang === 'ru') ? 'ТЕМНАЯ' : 'DARK';
+      }
+      localStorage.setItem('adlab_theme', theme);
+    }
+
+    function toggleTheme() {
+      const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      applyTheme(nextTheme);
+    }
+
+    // Инициализация темы с учетом системной темы ПК
+    function initTheme() {
+      const savedTheme = localStorage.getItem('adlab_theme');
+      if (savedTheme) {
+        applyTheme(savedTheme);
+      } else {
+        const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+        applyTheme(prefersLight ? 'light' : 'dark');
+      }
+
+      // Отслеживание смены темы в самой ОС
+      if (window.matchMedia) {
+        window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+          if (!localStorage.getItem('adlab_theme')) {
+            applyTheme(e.matches ? 'light' : 'dark');
+          }
+        });
+      }
+    }
+
+    // ПЕРЕКЛЮЧЕНИЕ ЯЗЫКА
     function switchLanguage(lang) {
       currentLang = lang;
       const t = i18n[lang];
@@ -398,29 +505,30 @@
       // Update Header
       document.getElementById('txt-header-badge').innerHTML = t.headerBadge;
       document.getElementById('txt-header-desc').innerHTML = t.headerDesc;
+      document.getElementById('txt-engineer-name').innerHTML = t.engineerName;
       document.getElementById('txt-gost-stamp').innerHTML = t.gostStamp;
       document.getElementById('txt-status-active').innerText = t.statusActive;
       document.getElementById('txt-filter-label').innerText = t.filterLabel;
       document.getElementById('btn-all').innerText = t.btnAll;
-      document.getElementById('btn-hardware').innerText = t.btnHw;
-      document.getElementById('btn-software').innerText = t.btnSw;
+      document.getElementById('btn-sw').innerText = t.btnSw;
+      document.getElementById('btn-hw').innerText = t.btnHw;
 
-      // Update P1
+      // Update P1 (Tablo Tab)
       document.getElementById('p1-card-tag').innerText = t.p1.tag;
       document.getElementById('p1-card-title').innerText = t.p1.title;
       document.getElementById('p1-card-desc').innerText = t.p1.desc;
       document.getElementById('p1-card-status').innerText = t.p1.status;
-      document.getElementById('p1-card-type').innerText = t.p1.type;
       document.getElementById('p1-card-btn').innerText = t.p1.btn;
-      document.getElementById('p1-card-specs').innerHTML = t.p1.specsHtml;
+      document.getElementById('p1-card-install').innerHTML = `<span>${t.p1.install}</span>`;
 
-      // Update P2
+      // Update P2 (Hardware R&D)
       document.getElementById('p2-card-tag').innerText = t.p2.tag;
       document.getElementById('p2-card-title').innerText = t.p2.title;
       document.getElementById('p2-card-desc').innerText = t.p2.desc;
       document.getElementById('p2-card-status').innerText = t.p2.status;
+      document.getElementById('p2-card-type').innerText = t.p2.type;
       document.getElementById('p2-card-btn').innerText = t.p2.btn;
-      document.getElementById('p2-card-install').innerHTML = `<span>${t.p2.install}</span>`;
+      document.getElementById('p2-card-specs').innerHTML = t.p2.specsHtml;
 
       // Update Footer
       document.getElementById('txt-footer-title').innerText = t.footerTitle;
@@ -430,15 +538,21 @@
       document.getElementById('modal-close-txt').innerText = t.modalClose;
       document.getElementById('modal-otk-txt').innerText = t.modalOtk;
 
-      // Toggle Button States
+      // Language Buttons Style
       const btnRu = document.getElementById('lang-btn-ru');
       const btnEn = document.getElementById('lang-btn-en');
       if (lang === 'ru') {
-        btnRu.className = 'px-2.5 py-1 bg-[#ff5e1a] text-black font-extrabold transition';
-        btnEn.className = 'px-2.5 py-1 text-gray-400 hover:text-white font-bold transition';
+        btnRu.className = 'px-2 py-1 bg-[var(--tech-orange)] text-black font-extrabold rounded-xs transition';
+        btnEn.className = 'px-2 py-1 text-[var(--text-muted)] hover:text-[var(--text-heading)] font-bold transition';
       } else {
-        btnEn.className = 'px-2.5 py-1 bg-[#ff5e1a] text-black font-extrabold transition';
-        btnRu.className = 'px-2.5 py-1 text-gray-400 hover:text-white font-bold transition';
+        btnEn.className = 'px-2 py-1 bg-[var(--tech-orange)] text-black font-extrabold rounded-xs transition';
+        btnRu.className = 'px-2 py-1 text-[var(--text-muted)] hover:text-[var(--text-heading)] font-bold transition';
+      }
+
+      // Update Theme button text language
+      const themeText = document.getElementById('theme-text');
+      if (themeText) {
+        themeText.textContent = (currentTheme === 'light') ? (lang === 'ru' ? 'СВЕТЛАЯ' : 'LIGHT') : (lang === 'ru' ? 'ТЕМНАЯ' : 'DARK');
       }
 
       localStorage.setItem('adlab_lang', lang);
@@ -446,14 +560,14 @@
 
     function filterCategory(cat) {
       const cards = document.querySelectorAll('.project-card');
-      const buttons = ['all', 'hardware', 'software'];
+      const buttons = ['all', 'software', 'hardware'];
       
       buttons.forEach(b => {
         const btn = document.getElementById('btn-' + b);
         if (b === cat) {
-          btn.className = 'px-3 py-1.5 bg-[#ff5e1a] text-black font-extrabold uppercase transition';
+          btn.className = 'px-3 py-1 bg-[var(--tech-orange)] text-black font-extrabold uppercase transition';
         } else {
-          btn.className = 'px-3 py-1.5 bg-[#1a1f26] hover:bg-[#252c36] text-gray-300 uppercase transition';
+          btn.className = 'px-3 py-1 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-hover)] text-[var(--text)] uppercase transition';
         }
       });
 
@@ -475,7 +589,7 @@
       
       let specsHtml = '';
       p.modalSpecs.forEach(s => {
-        specsHtml += `<div class="flex justify-between"><span class="text-gray-500">${s[0]}</span><span class="text-gray-200">${s[1]}</span></div>`;
+        specsHtml += `<div class="flex justify-between py-0.5"><span class="text-[var(--text-muted)]">${s[0]}</span><span class="text-[var(--text-heading)] font-semibold">${s[1]}</span></div>`;
       });
       document.getElementById('modal-project-specs').innerHTML = specsHtml;
       document.getElementById('modal').classList.remove('hidden');
@@ -485,7 +599,8 @@
       document.getElementById('modal').classList.add('hidden');
     }
 
-    // Initialize Language
+    // Инициализация темы и языка при старте
+    initTheme();
     const savedLang = localStorage.getItem('adlab_lang') || (navigator.language.startsWith('ru') ? 'ru' : 'en');
     switchLanguage(savedLang);
   </script>
