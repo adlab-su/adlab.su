@@ -1,4 +1,4 @@
-Set-Location "C:\Users\ADLAB\Projects\Project 0001"
+Set-Location (if ($PSScriptRoot) { $PSScriptRoot } else { "C:\Users\ADLAB\Projects\Project 0001" })
 Write-Host "========================================================" -ForegroundColor Cyan
 Write-Host "  AD LAB // ОТПРАВКА НА GITHUB (adlab.su)" -ForegroundColor Cyan
 Write-Host "========================================================" -ForegroundColor Cyan
