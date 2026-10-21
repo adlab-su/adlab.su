@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AD LAB // Политика конфиденциальности Tablo Tab [Chrome Web Store]</title>
+  <meta name="description" content="Официальная политика конфиденциальности расширения Tablo Tab для каталога Google Chrome Web Store. Полная прозрачность, нулевой трекинг.">
+  <link rel="canonical" href="https://adlab.su/privacy-tablotab/">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+    
+    :root {
+      --tech-orange: #ff5e1a;
+      --tech-orange-hover: #ff7538;
+      --tech-amber: #ffaa00;
+      
+      /* Dark Theme */
+      --bg: #090b0e;
+      --panel: #12161d;
+      --panel-inner: #090c10;
+      --text: #d1d5db;
+      --text-muted: #9ca3af;
+      --text-heading: #ffffff;
+      --border: #232a35;
+      --border-subtle: #191f27;
+      --grid-line: rgba(255, 94, 26, 0.05);
+      --stamp-border: #ff5e1a;
+      --stamp-bg: rgba(255, 94, 26, 0.05);
+      --btn-secondary-bg: #1a2028;
+      --btn-secondary-hover: #262e3a;
+    }
+    
+    [data-theme="light"] {
+      /* Light Theme */
+      --bg: #f4f6f9;
+      --panel: #ffffff;
+      --panel-inner: #f8fafc;
+      --text: #334155;
+      --text-muted: #64748b;
+      --text-heading: #0f172a;
+      --border: #d4dde8;
+      --border-subtle: #e2e8f0;
+      --grid-line: rgba(255, 94, 26, 0.06);
+      --stamp-border: #ea580c;
+      --stamp-bg: rgba(234, 88, 12, 0.05);
+      --btn-secondary-bg: #e2e8f0;
+      --btn-secondary-hover: #cbd5e1;
+    }
+    
+    html {
+      height: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+      padding: 0;
+      font-family: 'JetBrains Mono', monospace;
+      background-color: var(--bg) !important;
+      color: var(--text);
+      background-image: 
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+      background-size: 32px 32px;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    .page-container {
+      flex: 1 0 auto;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .page-footer {
+      margin-top: auto !important;
+    }
+
+    .font-sans-ui {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .gost-stamp {
+      border: 2px dashed var(--stamp-border);
+      background-color: var(--stamp-bg);
+      color: var(--stamp-border);
+      transform: rotate(-1.5deg);
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+    }
+
+    .tech-border {
+      border: 1px solid var(--border);
+      background-color: var(--panel);
+      position: relative;
+      transition: border-color 0.2s ease, background-color 0.25s ease;
+    }
+    .tech-border::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: -1px;
+      width: 8px; height: 8px;
+      border-top: 2px solid var(--tech-orange);
+      border-left: 2px solid var(--tech-orange);
+      pointer-events: none;
+    }
+    .tech-border::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; right: -1px;
+      width: 8px; height: 8px;
+      border-bottom: 2px solid var(--tech-orange);
+      border-right: 2px solid var(--tech-orange);
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="p-3 sm:p-6 md:p-8">
+
+  <!-- ГЛАВНЫЙ КОНТЕЙНЕР (ЕДИНЫЙ СТАНДАРТ max-w-6xl) -->
+  <div class="max-w-6xl w-full mx-auto page-container gap-6">
+
+    <!-- ЕДИНАЯ ШАПКА ЛАБОРАТОРИИ -->
+    <header class="tech-border p-4 sm:p-6 rounded-sm shadow-xl">
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5 border-b border-[var(--border)] pb-5">
+        <div>
+          <!-- Статусный бейдж -->
+          <div class="flex items-center gap-2.5">
+            <span class="inline-block w-2.5 h-2.5 bg-[var(--tech-orange)] rounded-full animate-ping"></span>
+            <span class="text-[11px] sm:text-xs tracking-[0.2em] text-[var(--tech-orange)] uppercase font-bold" id="txt-header-badge">
+              ОПЫТНАЯ ЛАБОРАТОРИЯ // HARD & SOFT
+            </span>
+          </div>
+
+          <!-- Название с переходом на главную -->
+          <a href="../" class="inline-block group" title="На главную // AD LAB">
+            <h1 class="text-2xl sm:text-4xl md:text-5xl font-extrabold text-[var(--text-heading)] group-hover:text-[var(--tech-orange)] tracking-wider mt-2 flex items-center gap-3 transition">
+              AD LAB <span class="text-[var(--tech-orange)] text-base sm:text-xl font-normal">// adlab.su</span>
+            </h1>
+          </a>
+
+          <!-- Описание и конструктор с отдельной строки -->
+          <p class="text-xs sm:text-sm text-[var(--text-muted)] mt-2 font-sans-ui max-w-2xl leading-relaxed" id="txt-header-desc">
+            Инженерные разработки, электроника и программные комплексы.
+          </p>
+          <div class="mt-2 text-xs font-mono font-semibold text-[var(--tech-orange)] flex items-center gap-2">
+            <span class="w-1.5 h-1.5 bg-[var(--tech-orange)] rounded-full inline-block"></span>
+            <span id="txt-engineer-name">Гл. Конструктор: Штыков А.Д.</span>
+          </div>
+        </div>
+
+        <!-- Правый блок: тулбар (язык + тема) + штамп + параметры -->
+        <div class="flex flex-wrap sm:flex-nowrap items-center gap-3 sm:gap-4 self-start lg:self-auto">
+          
+          <div class="flex items-center border border-[var(--border)] bg-[var(--panel-inner)] p-1 rounded-sm text-xs font-mono gap-1">
+            <button id="lang-btn-ru" onclick="switchLanguage('ru')" class="px-2 py-1 bg-[var(--tech-orange)] text-black font-extrabold rounded-xs transition">RU</button>
+            <button id="lang-btn-en" onclick="switchLanguage('en')" class="px-2 py-1 text-[var(--text-muted)] hover:text-[var(--text-heading)] font-bold transition">EN</button>
+            <div class="w-px h-4 bg-[var(--border)] mx-1"></div>
+            <button id="theme-toggle-btn" onclick="toggleTheme()" class="px-2 py-1 text-[var(--text-heading)] hover:text-[var(--tech-orange)] font-bold transition flex items-center gap-1.5">
+              <span id="theme-icon">🌙</span>
+              <span class="text-[10px] hidden sm:inline" id="theme-text">ТЕМНАЯ</span>
+            </button>
+          </div>
+
+          <div class="gost-stamp px-3 py-1.5 sm:px-3.5 sm:py-2 text-[11px] sm:text-xs text-center select-none" id="txt-gost-stamp">
+            ПРАВИЛА STORE<br>
+            <span class="text-[9px] sm:text-[10px] opacity-80 font-normal">CHROME EXT</span>
+          </div>
+          
+          <div class="hidden md:block text-right text-xs font-mono text-[var(--text-muted)] border-l border-[var(--border)] pl-4 space-y-1 whitespace-nowrap">
+            <div>ПРОДУКТ: <span class="text-[var(--text-heading)] font-bold">TABLO TAB</span></div>
+            <div>СТАТУС: <span class="text-emerald-500 font-bold" id="txt-status-active">ПРОВЕРЕНО</span></div>
+            <div>МАНИФЕСТ: <span class="text-[var(--text-heading)] font-bold whitespace-nowrap">MV3 SERVICE WORKER</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Полоса навигации с кнопками возврата на главную и в техпаспорт -->
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-4 text-xs font-mono">
+        <div class="flex flex-wrap items-center gap-3">
+          <a href="../" class="px-3.5 py-1.5 bg-[var(--tech-orange)] hover:bg-[var(--tech-orange-hover)] text-black font-extrabold uppercase flex items-center gap-2 transition rounded-xs shadow-md">
+            <span>◄</span> <span id="txt-nav-back">ВЕРНУТЬСЯ НА ГЛАВНУЮ</span>
+          </a>
+          <a href="../project-0001/" class="px-3 py-1.5 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-hover)] text-[var(--text)] font-semibold transition rounded-xs border border-[var(--border)]" id="txt-nav-dossier">
+            ТЕХПАСПОРТ TABLO TAB ➔
+          </a>
+        </div>
+        <div class="text-[var(--text-muted)] text-[11px] hidden sm:block">
+          STORE ID: <span class="text-emerald-500 font-bold">gdhohiimfeogdjiccmldkegamfedkgco</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ ПОЛИТИКИ РАСШИРЕНИЯ -->
+    <main class="tech-border p-6 sm:p-8 space-y-6 font-sans-ui text-sm text-[var(--text)] leading-relaxed rounded-sm shadow-xl">
+      
+      <!-- Заголовок документа -->
+      <div class="border-b border-[var(--border)] pb-4">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="font-mono text-xs font-bold text-[var(--tech-orange)] bg-[var(--stamp-bg)] px-2.5 py-0.5 border border-[var(--tech-orange)]/30">PROJECT 0001</span>
+          <span class="font-mono text-xs text-[var(--text-muted)]">РЕВИЗИЯ v6.4.0</span>
+        </div>
+        <h2 class="text-xl sm:text-2xl font-extrabold text-[var(--text-heading)] font-mono" id="txt-doc-title">
+          Политика конфиденциальности расширения Tablo Tab
+        </h2>
+        <p class="text-xs text-[var(--text-muted)] font-mono mt-1" id="txt-doc-subtitle">
+          Официальный регламент использования пользовательских данных для Google Chrome Web Store
+        </p>
+      </div>
+
+      <!-- RU Content -->
+      <div id="content-ru" class="space-y-6">
+        <section class="space-y-2">
+          <h3 class="text-base font-bold text-[var(--text-heading)] font-mono flex items-center gap-2">
+            <span class="text-[var(--tech-orange)]">01 //</span> Общие принципы конфиденциальности
+          </h3>
+          <p>
+            Браузерное расширение <strong>Tablo Tab — Экспресс-панель</strong> (ID в Chrome Web Store: <code>gdhohiimfeogdjiccmldkegamfedkgco</code>) создано авторской лабораторией <strong>AD LAB</strong>. Наш основополагающий принцип — <strong>полная автономность</strong>. Расширение <strong>не собирает, не анализирует, не продает и не передает третьим лицам личные данные пользователя</strong>.
+          </p>
+        </section>
+
+        <section class="space-y-2">
+          <h3 class="text-base font-bold text-[var(--text-heading)] font-mono flex items-center gap-2">
+            <span class="text-[var(--tech-orange)]">02 //</span> Локальное хранение данных (chrome.storage.local)
+          </h3>
+          <p>
+            Все пользовательские данные, включая закладки, рабочие столы (Workspaces), заметки блокнота To-Do, историю пользовательских настроек и кэшированные иконки сайтов, сохраняются <strong>исключительно в изолированном локальном хранилище вашего браузера</strong>.
+          </p>
+          <p class="text-xs text-[var(--text-muted)] font-mono bg-[var(--panel-inner)] p-3 border border-[var(--border)] rounded-sm">
+            ✓ У разработчика отсутствует серверная база данных.<br>
+            ✓ У нас нет доступа к списку ваших сайтов или содержимому заметок.
+          </p>
+        </section>
+
+        <section class="space-y-2">
+          <h3 class="text-base font-bold text-[var(--text-heading)] font-mono flex items-center gap-2">
+            <span class="text-[var(--tech-orange)]">03 //</span> Облачное резервное копирование Google Диск (Опционально)
+          </h3>
+          <p>
+            Функция облачного резервного копирования является добровольной. При её активации подключение осуществляется напрямую между вашим браузером и серверами Google по протоколу OAuth2. Токен авторизации и архив бэкапа сохраняются в защищенную изолированную папку приложения на вашем личном Google Диске. Никакие промежуточные сервера AD LAB в этом процессе не участвуют.
+          </p>
+        </section>
+
+        <section class="space-y-2">
+          <h3 class="text-base font-bold text-[var(--text-heading)] font-mono flex items-center gap-2">
+            <span class="text-[var(--tech-orange)]">04 //</span> Обоснование разрешений Manifest V3
+          </h3>
+          <div class="space-y-2 font-mono text-xs">
+            <div class="p-3 bg-[var(--panel-inner)] border border-[var(--border)] rounded-sm">
+              <span class="text-[var(--tech-orange)] font-bold">activeTab & tabs:</span>
+              <p class="font-sans-ui text-xs text-[var(--text-muted)] mt-1">
+                Используются исключительно в момент, когда пользователь нажимает «Добавить текущую страницу в Tablo Tab», для считывания заголовка и URL активной вкладки. Фонового мониторинга посещаемых сайтов нет.
+              </p>
+            </div>
+            <div class="p-3 bg-[var(--panel-inner)] border border-[var(--border)] rounded-sm">
+              <span class="text-[var(--tech-orange)] font-bold">contextMenus:</span>
+              <p class="font-sans-ui text-xs text-[var(--text-muted)] mt-1">
+                Используется для интеграции пункта «Сохранить в Tablo Tab» в контекстное меню правой кнопки мыши для быстрого сохранения страниц.
+              </p>
+            </div>
+            <div class="p-3 bg-[var(--panel-inner)] border border-[var(--border)] rounded-sm">
+              <span class="text-[var(--tech-orange)] font-bold">storage & unlimitedStorage:</span>
+              <p class="font-sans-ui text-xs text-[var(--text-muted)] mt-1">
+                Необходимы для надежного локального хранения плиток, пользовательских обоев и настроек оформления без риска переполнения лимитов браузера.
+              </p>
+            </div>
+            <div class="p-3 bg-[var(--panel-inner)] border border-[var(--border)] rounded-sm">
+              <span class="text-[var(--tech-orange)] font-bold">Доступ к сетевым хостам (&lt;all_urls&gt;):</span>
+              <p class="font-sans-ui text-xs text-[var(--text-muted)] mt-1">
+                Используется исключительно для прямого скачивания официальных фавиконок (логотипов) добавляемых сайтов и получения публичных котировок/погоды от открытых поставщиков (Open-Meteo).
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="space-y-2">
+          <h3 class="text-base font-bold text-[var(--text-heading)] font-mono flex items-center gap-2">
+            <span class="text-[var(--tech-orange)]">05 //</span> Отсутствие трекеров и аналитики
+          </h3>
+          <p>
+            Tablo Tab не содержит Google Analytics, Яндекс.Метрики, рекламных баннеров или систем сбора телеметрии.
+          </p>
+        </section>
+
+        <section class="pt-4 border-t border-[var(--border)] font-mono text-xs text-[var(--text-muted)] flex flex-wrap justify-between gap-2">
+          <div>КОНТАКТЫ ДЛЯ СВЯЗИ: <a href="mailto:support@adlab.su" class="text-[var(--tech-orange)] hover:underline">support@adlab.su</a></div>
+          <div>ОТВЕТСТВЕННЫЙ РАЗРАБОТЧИК: ШТЫКОВ А.Д.</div>
+        </section>
+      </div>
+
+      <!-- EN Content -->
+      <div id="content-en" class="space-y-6 hidden">
+        <section class="space-y-2">
+          <h3 class="text-base font-bold text-[var(--text-heading)] font-mono flex items-center gap-2">
+            <span class="text-[var(--tech-orange)]">01 //</span> Privacy Architecture & Principles
+          </h3>
+          <p>
+            The <strong>Tablo Tab — Speed Dial & Widgets</strong> extension (Chrome Web Store ID: <code>gdhohiimfeogdjiccmldkegamfedkgco</code>) is developed by <strong>AD LAB</strong>. We enforce zero telemetry: the extension <strong>does not monitor, collect, or share personal user data</strong> with developers or third parties.
+          </p>
+        </section>
+
+        <section class="space-y-2">
+          <h3 class="text-base font-bold text-[var(--text-heading)] font-mono flex items-center gap-2">
+            <span class="text-[var(--tech-orange)]">02 //</span> Client-Side Storage (chrome.storage.local)
+          </h3>
+          <p>
+            All user data — including workspaces, bookmarks, notes, and appearance settings — is saved <strong>strictly inside your browser's private local sandbox</strong>.
+          </p>
+          <p class="text-xs text-[var(--text-muted)] font-mono bg-[var(--panel-inner)] p-3 border border-[var(--border)] rounded-sm">
+            ✓ The developer maintains no database servers.<br>
+            ✓ We have zero visibility into your bookmarks, notes, or browsing behavior.
+          </p>
+        </section>
+
+        <section class="space-y-2">
+          <h3 class="text-base font-bold text-[var(--text-heading)] font-mono flex items-center gap-2">
+            <span class="text-[var(--tech-orange)]">03 //</span> Google Drive Cloud Backup (Optional)
+          </h3>
+          <p>
+            Cloud synchronization is entirely optional. When activated, communication runs directly between your browser and Google's official OAuth2 endpoints. Backups are stored in an isolated private app folder on your personal Google Drive account.
+          </p>
+        </section>
+
+        <section class="space-y-2">
+          <h3 class="text-base font-bold text-[var(--text-heading)] font-mono flex items-center gap-2">
+            <span class="text-[var(--tech-orange)]">04 //</span> Manifest V3 Permissions Justification
+          </h3>
+          <div class="space-y-2 font-mono text-xs">
+            <div class="p-3 bg-[var(--panel-inner)] border border-[var(--border)] rounded-sm">
+              <span class="text-[var(--tech-orange)] font-bold">activeTab & tabs:</span>
+              <p class="font-sans-ui text-xs text-[var(--text-muted)] mt-1">
+                Used only when the user explicitly triggers "Add to Tablo Tab" to extract title, URL, and favicon of the active tab. No background browsing tracking.
+              </p>
+            </div>
+            <div class="p-3 bg-[var(--panel-inner)] border border-[var(--border)] rounded-sm">
+              <span class="text-[var(--tech-orange)] font-bold">contextMenus:</span>
+              <p class="font-sans-ui text-xs text-[var(--text-muted)] mt-1">
+                Adds a right-click "Save to Tablo Tab" shortcut for streamlined bookmarking.
+              </p>
+            </div>
+            <div class="p-3 bg-[var(--panel-inner)] border border-[var(--border)] rounded-sm">
+              <span class="text-[var(--tech-orange)] font-bold">storage & unlimitedStorage:</span>
+              <p class="font-sans-ui text-xs text-[var(--text-muted)] mt-1">
+                Allows robust offline persistence for tiles, custom wallpapers, and cached logos without browser quota exceptions.
+              </p>
+            </div>
+            <div class="p-3 bg-[var(--panel-inner)] border border-[var(--border)] rounded-sm">
+              <span class="text-[var(--tech-orange)] font-bold">Host Permissions (&lt;all_urls&gt;):</span>
+              <p class="font-sans-ui text-xs text-[var(--text-muted)] mt-1">
+                Required exclusively to fetch official high-resolution site favicons and pull open public weather/market feeds (Open-Meteo).
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="space-y-2">
+          <h3 class="text-base font-bold text-[var(--text-heading)] font-mono flex items-center gap-2">
+            <span class="text-[var(--tech-orange)]">05 //</span> Zero Telemetry Guarantee
+          </h3>
+          <p>
+            Tablo Tab contains no Google Analytics, trackers, advertising SDKs, or background telemetry agents.
+          </p>
+        </section>
+
+        <section class="pt-4 border-t border-[var(--border)] font-mono text-xs text-[var(--text-muted)] flex flex-wrap justify-between gap-2">
+          <div>DEVELOPER SUPPORT: <a href="mailto:support@adlab.su" class="text-[var(--tech-orange)] hover:underline">support@adlab.su</a></div>
+          <div>LEAD ENGINEER: SHTYKOV A.D.</div>
+        </section>
+      </div>
+
+    </main>
+
+    <!-- ПОДВАЛ / НАМЕРТВО ПРИКРЕПЛЕН К НИЗУ ЭКРАНА -->
+    <footer class="tech-border page-footer p-5 sm:p-6 text-xs text-[var(--text-muted)] flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div>
+        <div class="text-[var(--text-heading)] font-bold tracking-wider uppercase font-mono" id="txt-footer-title">
+          AD LAB // АВТОРСКАЯ ЛАБОРАТОРИЯ ШТЫКОВА А.Д.
+        </div>
+        <p class="mt-1 text-[11px] font-sans-ui leading-relaxed" id="txt-footer-desc">
+          Физические устройства и программные комплексы. Разработка с открытым исходным кодом.
+        </p>
+        <div class="mt-2.5 flex flex-wrap items-center gap-3 text-[11px] font-mono">
+          <a href="../privacy/" class="text-[var(--tech-orange)] hover:underline font-semibold" id="txt-footer-privacy">Политика конфиденциальности сайта (Privacy Policy)</a>
+          <span class="text-[var(--border)]">|</span>
+          <a href="../project-0001/" class="text-[var(--tech-orange)] hover:underline font-semibold" id="txt-footer-dossier">Техпаспорт Tablo Tab</a>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-6 font-mono text-xs whitespace-nowrap self-start md:self-auto">
+        <div>ДОМЕН: <span class="text-[var(--tech-orange)] font-bold">ADLAB.SU</span></div>
+        <div>ОТК: <span class="text-emerald-500 font-bold" id="txt-footer-otk">ПРИНЯТО</span></div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    let currentLang = 'ru';
+    let currentTheme = 'dark';
+
+    function applyTheme(theme) {
+      currentTheme = theme;
+      document.documentElement.setAttribute('data-theme', theme);
+      const icon = document.getElementById('theme-icon');
+      const text = document.getElementById('theme-text');
+      if (theme === 'light') {
+        icon.textContent = '☀️';
+        text.textContent = (currentLang === 'ru') ? 'СВЕТЛАЯ' : 'LIGHT';
+      } else {
+        icon.textContent = '🌙';
+        text.textContent = (currentLang === 'ru') ? 'ТЕМНАЯ' : 'DARK';
+      }
+      localStorage.setItem('adlab_theme', theme);
+    }
+
+    function toggleTheme() {
+      applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+    }
+
+    function switchLanguage(lang) {
+      currentLang = lang;
+      const isRu = lang === 'ru';
+      document.getElementById('content-ru').classList.toggle('hidden', !isRu);
+      document.getElementById('content-en').classList.toggle('hidden', isRu);
+
+      const btnRu = document.getElementById('lang-btn-ru');
+      const btnEn = document.getElementById('lang-btn-en');
+      if (isRu) {
+        btnRu.className = 'px-2 py-1 bg-[var(--tech-orange)] text-black font-extrabold rounded-xs transition';
+        btnEn.className = 'px-2 py-1 text-[var(--text-muted)] hover:text-[var(--text-heading)] font-bold transition';
+        document.getElementById('txt-header-badge').textContent = 'ОПЫТНАЯ ЛАБОРАТОРИЯ // HARD & SOFT';
+        document.getElementById('txt-header-desc').textContent = 'Инженерные разработки, электроника и программные комплексы.';
+        document.getElementById('txt-engineer-name').textContent = 'Гл. Конструктор: Штыков А.Д.';
+        document.getElementById('txt-gost-stamp').innerHTML = 'ПРАВИЛА STORE<br><span class="text-[9px] sm:text-[10px] opacity-80 font-normal">CHROME EXT</span>';
+        document.getElementById('txt-status-active').textContent = 'ПРОВЕРЕНО';
+        document.getElementById('txt-nav-back').textContent = 'ВЕРНУТЬСЯ НА ГЛАВНУЮ';
+        document.getElementById('txt-nav-dossier').textContent = 'ТЕХПАСПОРТ TABLO TAB ➔';
+        document.getElementById('txt-doc-title').textContent = 'Политика конфиденциальности расширения Tablo Tab';
+        document.getElementById('txt-doc-subtitle').textContent = 'Официальный регламент использования пользовательских данных для Google Chrome Web Store';
+        document.getElementById('txt-footer-title').textContent = 'AD LAB // АВТОРСКАЯ ЛАБОРАТОРИЯ ШТЫКОВА А.Д.';
+        document.getElementById('txt-footer-desc').textContent = 'Физические устройства и программные комплексы. Разработка с открытым исходным кодом.';
+        document.getElementById('txt-footer-privacy').textContent = 'Политика конфиденциальности сайта (Privacy Policy)';
+        document.getElementById('txt-footer-dossier').textContent = 'Техпаспорт Tablo Tab';
+        document.getElementById('txt-footer-otk').textContent = 'ПРИНЯТО';
+      } else {
+        btnEn.className = 'px-2 py-1 bg-[var(--tech-orange)] text-black font-extrabold rounded-xs transition';
+        btnRu.className = 'px-2 py-1 text-[var(--text-muted)] hover:text-[var(--text-heading)] font-bold transition';
+        document.getElementById('txt-header-badge').textContent = 'R&D EXPERIMENTAL LAB // HARD & SOFT';
+        document.getElementById('txt-header-desc').textContent = 'Hardware engineering, embedded electronics, and software systems.';
+        document.getElementById('txt-engineer-name').textContent = 'Chief Engineer: Shtykov A.D.';
+        document.getElementById('txt-gost-stamp').innerHTML = 'STORE POLICY<br><span class="text-[9px] sm:text-[10px] opacity-80 font-normal">CHROME EXT</span>';
+        document.getElementById('txt-status-active').textContent = 'VERIFIED';
+        document.getElementById('txt-nav-back').textContent = 'RETURN TO HOME';
+        document.getElementById('txt-nav-dossier').textContent = 'TABLO TAB DOSSIER ➔';
+        document.getElementById('txt-doc-title').textContent = 'Tablo Tab Extension Privacy Policy';
+        document.getElementById('txt-doc-subtitle').textContent = 'Official User Data Policy Document for Google Chrome Web Store Listing';
+        document.getElementById('txt-footer-title').textContent = 'AD LAB // SHTYKOV A.D. RESEARCH LABORATORY';
+        document.getElementById('txt-footer-desc').textContent = 'Hardware apparatuses and software systems. Open source development.';
+        document.getElementById('txt-footer-privacy').textContent = 'Website Privacy Policy';
+        document.getElementById('txt-footer-dossier').textContent = 'Tablo Tab Dossier';
+        document.getElementById('txt-footer-otk').textContent = 'PASSED';
+      }
+
+      applyTheme(currentTheme);
+      localStorage.setItem('adlab_lang', lang);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('adlab_theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      applyTheme(savedTheme);
+
+      const savedLang = localStorage.getItem('adlab_lang') || 'ru';
+      switchLanguage(savedLang);
+    });
+  </script>
+</body>
+</html>

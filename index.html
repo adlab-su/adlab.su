@@ -150,7 +150,7 @@
           </div>
 
           <!-- Название с переходом на главную -->
-          <a href="index.html" class="inline-block group" title="На главную // AD LAB">
+          <a href="./" class="inline-block group" title="На главную // AD LAB">
             <h1 class="text-2xl sm:text-4xl md:text-5xl font-extrabold text-[var(--text-heading)] group-hover:text-[var(--tech-orange)] tracking-wider mt-2 flex items-center gap-3 transition">
               AD LAB <span class="text-[var(--tech-orange)] text-base sm:text-xl font-normal">// adlab.su</span>
             </h1>
@@ -215,7 +215,7 @@
     <main class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch" id="projects-grid">
 
       <!-- КАРТОЧКА 1: TABLO TAB (PROJECT 0001) -->
-      <article onclick="window.location.href='project-0001.html'" class="project-card tech-border p-4 sm:p-5 flex flex-col justify-between hover:border-[var(--tech-orange)] cursor-pointer transition-all duration-200 group rounded-sm shadow-md" data-category="software" data-project-id="0001">
+      <article onclick="window.location.href='project-0001/'" class="project-card tech-border p-4 sm:p-5 flex flex-col justify-between hover:border-[var(--tech-orange)] cursor-pointer transition-all duration-200 group rounded-sm shadow-md" data-category="software" data-project-id="0001">
         <div>
           <div class="flex items-center justify-between border-b border-[var(--border)] pb-3 text-xs font-mono">
             <span class="font-extrabold text-[var(--tech-orange)] tracking-widest text-xs bg-[var(--stamp-bg)] px-2.5 py-0.5 border border-[var(--tech-orange)]/30">
@@ -254,7 +254,7 @@
 
         <div class="mt-4 pt-3 border-t border-[var(--border)] flex items-center justify-between text-xs font-mono">
           <span class="text-[var(--text-muted)]" id="p1-card-type">ТИП: СОФТ</span>
-          <a href="project-0001.html" class="text-[var(--tech-orange)] group-hover:underline flex items-center gap-1 font-bold" id="p1-card-btn">
+          <a href="project-0001/" class="text-[var(--tech-orange)] group-hover:underline flex items-center gap-1 font-bold" id="p1-card-btn">
             ТЕХПАСПОРТ ➔
           </a>
         </div>
@@ -333,7 +333,7 @@
             Физические устройства и программные комплексы. Разработка с открытым исходным кодом.
           </p>
           <div class="mt-2.5 flex flex-wrap items-center gap-3 text-[11px] font-mono">
-            <a href="privacy.html" class="text-[var(--tech-orange)] hover:underline font-semibold" id="txt-footer-privacy">Политика конфиденциальности сайта (Privacy Policy)</a>
+            <a href="privacy/" class="text-[var(--tech-orange)] hover:underline font-semibold" id="txt-footer-privacy">Политика конфиденциальности сайта (Privacy Policy)</a>
           </div>
         </div>
 
@@ -392,7 +392,7 @@
           Этот сайт использует локальное хранилище (localStorage) исключительно для сохранения выбранной темы и языка. Мы не используем рекламные трекеры и не собираем ваши персональные данные.
         </p>
         <div>
-          <a href="privacy.html" class="text-[var(--tech-orange)] underline font-mono text-[10px]" id="banner-more-link">Подробнее о политике сайта ➔</a>
+          <a href="privacy/" class="text-[var(--tech-orange)] underline font-mono text-[10px]" id="banner-more-link">Подробнее о политике сайта ➔</a>
         </div>
       </div>
 
@@ -731,15 +731,15 @@
       document.getElementById('p2-card-type').textContent = tCard.p2.type;
       document.getElementById('p2-card-btn').textContent = tCard.p2.btn;
 
-      // Перевод баннера cookie
+      // Cookie banner
       document.getElementById('banner-title').textContent = tCard.banner.title;
       document.getElementById('banner-text').textContent = tCard.banner.text;
       document.getElementById('banner-more-link').textContent = tCard.banner.more;
       document.getElementById('banner-accept-btn').textContent = tCard.banner.btn;
 
       applyTheme(currentTheme);
-      updatePagination();
       localStorage.setItem('adlab_lang', lang);
+      updatePagination();
     }
 
     // COOKIE CONSENT
