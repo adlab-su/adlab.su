@@ -1,10 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="12" fill="#090b0e" stroke="#232a35" stroke-width="2"/>
-  <!-- Corner technical notches -->
-  <path d="M 6 16 L 6 6 L 16 6" fill="none" stroke="#ff5e1a" stroke-width="3" stroke-linecap="square"/>
-  <path d="M 48 58 L 58 58 L 58 48" fill="none" stroke="#ff5e1a" stroke-width="3" stroke-linecap="square"/>
-  <!-- Centered AD Monogram -->
-  <text x="32" y="43" font-family="'JetBrains Mono', 'Segoe UI Mono', 'Consolas', monospace" font-size="28" font-weight="900" text-anchor="middle" letter-spacing="-1">
-    <tspan fill="#ffffff">A</tspan><tspan fill="#ff5e1a">D</tspan>
-  </text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <rect width="128" height="128" rx="28" fill="#141518"/>
+  <rect x="11" y="11" width="106" height="106" rx="20" fill="none" stroke="#ff5e1a" stroke-width="5" stroke-dasharray="8 5.5" stroke-linecap="round"/>
+  <path d="M 22 93 L 50 34 L 65 34 L 93 93 L 75 93 L 69 77 L 46 77 L 40 93 Z M 50 64 L 65 64 L 57.5 45 Z" fill="#ffffff"/>
+  <circle cx="102" cy="84" r="7.5" fill="#ff5e1a"/>
 </svg>
