@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AD LAB // ТЕХПАСПОРТ: PROJECT 0002 [OneBag Universal Cart]</title>
+  <meta name="description" content="Техпаспорт проекта OneBag (v1.8.1) — универсальная смарт-корзина покупок, 1-Click парсинг товаров и автономный радар цен для браузеров Chromium. Разработка AD LAB.">
+  <link rel="canonical" href="https://adlab.su/project-0002/">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg?v=2">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png?v=2">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon.png?v=2">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png?v=2">
+  <link rel="shortcut icon" href="../favicon.ico?v=2">
+  <meta property="og:title" content="AD LAB // ТЕХПАСПОРТ: PROJECT 0002 [OneBag Universal Cart]">
+  <meta property="og:description" content="Официальный технический формуляр и документация расширения OneBag для Chromium.">
+  <meta property="og:url" content="https://adlab.su/project-0002/">
+  <meta property="og:type" content="article">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+    
+    :root {
+      --tech-orange: #ff5e1a;
+      --tech-orange-hover: #ff7538;
+      --tech-amber: #ffaa00;
+      
+      /* Dark Theme */
+      --bg: #090b0e;
+      --panel: #12161d;
+      --panel-inner: #090c10;
+      --text: #d1d5db;
+      --text-muted: #9ca3af;
+      --text-heading: #ffffff;
+      --border: #232a35;
+      --border-subtle: #191f27;
+      --grid-line: rgba(255, 94, 26, 0.05);
+      --stamp-border: #ff5e1a;
+      --stamp-bg: rgba(255, 94, 26, 0.05);
+      --btn-secondary-bg: #1a2028;
+      --btn-secondary-hover: #262e3a;
+    }
+    
+    [data-theme="light"] {
+      /* Light Theme */
+      --bg: #f4f6f9;
+      --panel: #ffffff;
+      --panel-inner: #f8fafc;
+      --text: #334155;
+      --text-muted: #64748b;
+      --text-heading: #0f172a;
+      --border: #d4dde8;
+      --border-subtle: #e2e8f0;
+      --grid-line: rgba(255, 94, 26, 0.06);
+      --stamp-border: #ea580c;
+      --stamp-bg: rgba(234, 88, 12, 0.05);
+      --btn-secondary-bg: #e2e8f0;
+      --btn-secondary-hover: #cbd5e1;
+    }
+    
+    html {
+      height: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+      padding: 0;
+      font-family: 'JetBrains Mono', monospace;
+      background-color: var(--bg) !important;
+      color: var(--text);
+      background-image: 
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+      background-size: 32px 32px;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    .page-container {
+      flex: 1 0 auto;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .page-footer {
+      margin-top: auto !important;
+    }
+
+    .font-sans-ui {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .gost-stamp {
+      border: 2px dashed var(--stamp-border);
+      background-color: var(--stamp-bg);
+      color: var(--stamp-border);
+      transform: rotate(-1.5deg);
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+    }
+
+    .tech-border {
+      border: 1px solid var(--border);
+      background-color: var(--panel);
+      position: relative;
+      transition: border-color 0.2s ease, background-color 0.25s ease;
+    }
+    .tech-border::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: -1px;
+      width: 8px; height: 8px;
+      border-top: 2px solid var(--tech-orange);
+      border-left: 2px solid var(--tech-orange);
+      pointer-events: none;
+    }
+    .tech-border::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; right: -1px;
+      width: 8px; height: 8px;
+      border-bottom: 2px solid var(--tech-orange);
+      border-right: 2px solid var(--tech-orange);
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="p-3 sm:p-6 md:p-8">
+
+  <!-- ГЛАВНЫЙ КОНТЕЙНЕР (max-w-6xl) -->
+  <div class="max-w-6xl w-full mx-auto page-container gap-6">
+
+    <!-- ЕДИНАЯ ШАПКА ЛАБОРАТОРИИ -->
+    <header class="tech-border p-4 sm:p-6 rounded-sm shadow-xl">
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5 border-b border-[var(--border)] pb-5">
+        <div>
+          <!-- Статусный бейдж -->
+          <div class="flex items-center gap-2.5">
+            <span class="inline-block w-2.5 h-2.5 bg-[var(--tech-orange)] rounded-full animate-ping"></span>
+            <span class="text-[11px] sm:text-xs tracking-[0.2em] text-[var(--tech-orange)] uppercase font-bold" id="txt-header-badge">
+              ОПЫТНАЯ ЛАБОРАТОРИЯ // HARD & SOFT
+            </span>
+          </div>
+
+          <!-- Название с переходом на главную -->
+          <a href="../" class="inline-block group" title="На главную // AD LAB">
+            <h1 class="text-2xl sm:text-4xl md:text-5xl font-extrabold text-[var(--text-heading)] group-hover:text-[var(--tech-orange)] tracking-wider mt-2 flex items-center gap-3 transition">
+              AD LAB <span class="text-[var(--tech-orange)] text-base sm:text-xl font-normal">// adlab.su</span>
+            </h1>
+          </a>
+
+          <!-- Описание и конструктор с отдельной строки -->
+          <p class="text-xs sm:text-sm text-[var(--text-muted)] mt-2 font-sans-ui max-w-2xl leading-relaxed" id="txt-header-desc">
+            Инженерные разработки, электроника и программные комплексы.
+          </p>
+          <div class="mt-2 text-xs font-mono font-semibold text-[var(--tech-orange)] flex items-center gap-2">
+            <span class="w-1.5 h-1.5 bg-[var(--tech-orange)] rounded-full inline-block"></span>
+            <span id="txt-engineer-name">Гл. Конструктор: Штыков А.Д.</span>
+          </div>
+        </div>
+
+        <!-- Правый блок: тулбар (язык + тема) + штамп + параметры -->
+        <div class="flex flex-wrap sm:flex-nowrap items-center gap-3 sm:gap-4 self-start lg:self-auto">
+          
+          <div class="flex items-center border border-[var(--border)] bg-[var(--panel-inner)] p-1 rounded-sm text-xs font-mono gap-1">
+            <button id="lang-btn-ru" onclick="switchLanguage('ru')" class="px-2 py-1 bg-[var(--tech-orange)] text-black font-extrabold rounded-xs transition">RU</button>
+            <button id="lang-btn-en" onclick="switchLanguage('en')" class="px-2 py-1 text-[var(--text-muted)] hover:text-[var(--text-heading)] font-bold transition">EN</button>
+            <div class="w-px h-4 bg-[var(--border)] mx-1"></div>
+            <button id="theme-toggle-btn" onclick="toggleTheme()" class="px-2 py-1 text-[var(--text-heading)] hover:text-[var(--tech-orange)] font-bold transition flex items-center gap-1.5">
+              <span id="theme-icon">🌙</span>
+              <span class="text-[10px] hidden sm:inline" id="theme-text">ТЕМНАЯ</span>
+            </button>
+          </div>
+
+          <div class="gost-stamp px-3 py-1.5 sm:px-3.5 sm:py-2 text-[11px] sm:text-xs text-center select-none" id="txt-gost-stamp">
+            ТЕХПАСПОРТ<br>
+            <span class="text-[9px] sm:text-[10px] opacity-80 font-normal">ГОСТ-2026</span>
+          </div>
+          
+          <div class="hidden md:block text-right text-xs font-mono text-[var(--text-muted)] border-l border-[var(--border)] pl-4 space-y-1 whitespace-nowrap">
+            <div>ШИФР: <span class="text-[var(--text-heading)] font-bold">AD-0002-BAG</span></div>
+            <div>СТАТУС: <span class="text-amber-500 font-bold" id="txt-status-active">R&D // В РАБОТЕ</span></div>
+            <div>ОБЪЕКТ: <span class="text-[var(--text-heading)] font-bold whitespace-nowrap">SOFTWARE // MV3</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Полоса навигации -->
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-4 text-xs font-mono">
+        <div class="flex items-center gap-3">
+          <a href="../" class="px-3.5 py-1.5 bg-[var(--tech-orange)] hover:bg-[var(--tech-orange-hover)] text-black font-extrabold uppercase flex items-center gap-2 transition rounded-xs shadow-md" id="btn-back-home">
+            <span>◄</span> <span id="txt-nav-back">ВЕРНУТЬСЯ НА ГЛАВНУЮ</span>
+          </a>
+          <span class="text-[var(--text-muted)] text-[11px] hidden sm:inline" id="txt-subnav-section">
+            // ТЕХПАСПОРТ: PROJECT 0002 (ONEBAG)
+          </span>
+        </div>
+        <div class="text-[var(--text-muted)] text-[11px] hidden sm:block">
+          РЕЖИМ: <span class="text-amber-500 font-bold">ОПЫТНАЯ ЭКСПЛУАТАЦИЯ // ALPHA v1.8.1</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ТЕЛО ТЕХПАСПОРТА -->
+    <main class="space-y-6">
+
+      <!-- ГЛАВНАЯ КАРТОЧКА ИЗДЕЛИЯ (HERO) -->
+      <section class="tech-border p-5 sm:p-8 rounded-sm shadow-xl">
+        <div class="flex flex-col lg:flex-row gap-8 items-start">
+          
+          <!-- Левая часть: Название, статус, кнопки -->
+          <div class="flex-1 space-y-4">
+            <div class="flex flex-wrap items-center gap-3">
+              <span class="font-mono text-xs font-extrabold text-[var(--tech-orange)] bg-[var(--stamp-bg)] px-3 py-1 border border-[var(--tech-orange)]/40 tracking-wider">
+                PROJECT 0002
+              </span>
+              <span class="text-xs font-mono text-amber-500 font-bold flex items-center gap-1.5" id="hero-badge-status">
+                <span class="w-2 h-2 rounded-full bg-amber-500 inline-block animate-pulse"></span>
+                <span>v1.8.1 // В РАЗРАБОТКЕ (R&D)</span>
+              </span>
+              <span class="text-xs font-mono text-[var(--text-muted)]" id="hero-badge-manifest">
+                CHROME EXTENSION (MV3) • OFFLINE FIRST
+              </span>
+            </div>
+
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[var(--text-heading)] tracking-wide leading-tight" id="txt-hero-title">
+              OneBag — Умная корзина и радар цен
+            </h2>
+
+            <p class="text-sm sm:text-base text-[var(--text-muted)] font-sans-ui leading-relaxed" id="txt-hero-desc">
+              Универсальный вишлист покупок и автономный мониторинг цен маркетплейсов (Яндекс.Маркет, Ozon, Wildberries, AliExpress, Мегамаркет). 5-уровневый отказоустойчивый каскад парсинга, алгоритмическое выявление фальшивых скидок и 100% приватность без сбора персональных данных.
+            </p>
+
+            <!-- Кнопки действий -->
+            <div class="pt-2 flex flex-wrap items-center gap-3 font-mono text-xs">
+              <span class="px-5 py-3 bg-[var(--btn-secondary-bg)] text-[var(--tech-orange)] border border-[var(--tech-orange)]/40 font-extrabold flex items-center gap-2 rounded-xs select-none">
+                <span class="w-2 h-2 rounded-full bg-amber-500 inline-block animate-pulse"></span>
+                <span id="txt-btn-status">СТАДИЯ: ЗАКРЫТОЕ АЛЬФА-ТЕСТИРОВАНИЕ</span>
+              </span>
+              <a href="../privacy/" class="px-4 py-3 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-hover)] text-[var(--text)] font-semibold transition border border-[var(--border)] rounded-xs" id="txt-btn-privacy">
+                ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ ➔
+              </a>
+            </div>
+          </div>
+
+          <!-- Правая часть: Визуальная плитка проекта -->
+          <div class="w-full lg:w-96 rounded-sm border border-[var(--border)] overflow-hidden bg-black/40 shadow-lg">
+            <img src="../assets/img/onebag_promo_440x280.png" alt="OneBag Promo Preview" class="w-full h-auto object-cover">
+          </div>
+        </div>
+      </section>
+
+      <!-- ИНТЕРАКТИВНАЯ ГАЛЕРЕЯ СКРИНШОТОВ (ДВА РЕЖИМА) -->
+      <section class="tech-border p-5 sm:p-7 rounded-sm shadow-xl space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[var(--border)] pb-4">
+          <div>
+            <h3 class="text-lg font-bold text-[var(--text-heading)] font-mono" id="txt-gallery-title">ВНЕШНИЙ ВИД И ИНТЕРФЕЙСНЫЕ МОДУЛИ</h3>
+            <p class="text-xs text-[var(--text-muted)] font-sans-ui" id="txt-gallery-subtitle">Переключайте вкладки для просмотра модулей системы</p>
+          </div>
+          
+          <div class="flex items-center gap-2 font-mono text-xs">
+            <button onclick="setScreenshot('popup')" id="btn-scr-popup" class="px-3 py-1.5 bg-[var(--tech-orange)] text-black font-bold transition rounded-xs">
+              Интерфейс корзины (Popup MV3)
+            </button>
+            <button onclick="setScreenshot('radar')" id="btn-scr-radar" class="px-3 py-1.5 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-hover)] text-[var(--text)] font-bold transition rounded-xs">
+              Радар цен & White-Hat
+            </button>
+          </div>
+        </div>
+
+        <div class="border border-[var(--border-subtle)] rounded-sm overflow-hidden bg-black/50 p-2 sm:p-4">
+          <img id="screenshot-viewer" src="../assets/img/onebag_screen_popup_1280x800.png" alt="Скриншот интерфейса OneBag" class="w-full h-auto rounded-sm border border-[var(--border)] mx-auto shadow-2xl">
+        </div>
+      </section>
+
+      <!-- ТЕХНИЧЕСКИЙ ФОРМУЛЯР ГОСТ (СПЕЦИФИКАЦИЯ) -->
+      <section class="tech-border p-5 sm:p-7 rounded-sm shadow-xl space-y-4">
+        <h3 class="text-lg font-bold text-[var(--text-heading)] font-mono border-b border-[var(--border)] pb-3" id="txt-specs-title">
+          ИНЖЕНЕРНЫЙ ФОРМУЛЯР ПАРАМЕТРОВ (ТТХ)
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 font-mono text-xs" id="specs-grid">
+          <div class="p-3 bg-[var(--panel-inner)] border border-[var(--border)] flex justify-between items-center">
+            <span class="text-[var(--text-muted)]" id="spec-lbl-code">Шифр изделия:</span>
+            <span class="text-[var(--text-heading)] font-bold">AD-0002-BAG</span>
+          </div>
+          <div class="p-3 bg-[var(--panel-inner)] border border-[var(--border)] flex justify-between items-center">
+            <span class="text-[var(--text-muted)]" id="spec-lbl-arch">Платформа / Движок:</span>
+            <span class="text-[var(--text-heading)] font-bold">Chromium MV3 (Service Worker)</span>
+          </div>
+          <div class="p-3 bg-[var(--panel-inner)] border border-[var(--border)] flex justify-between items-center">
+            <span class="text-[var(--text-muted)]" id="spec-lbl-stores">Поддерживаемые маркетплейсы:</span>
+            <span class="text-[var(--text-heading)] font-bold" id="spec-val-stores">Маркет, WB, Ozon, Ali, Мегамаркет</span>
+          </div>
+          <div class="p-3 bg-[var(--panel-inner)] border border-[var(--border)] flex justify-between items-center">
+            <span class="text-[var(--text-muted)]" id="spec-lbl-cascade">Каскад автопарсинга:</span>
+            <span class="text-emerald-500 font-bold" id="spec-val-cascade">5 уровней (JSON-LD, OG, Селекторы)</span>
+          </div>
+          <div class="p-3 bg-[var(--panel-inner)] border border-[var(--border)] flex justify-between items-center">
+            <span class="text-[var(--text-muted)]" id="spec-lbl-storage">Архитектура хранения:</span>
+            <span class="text-emerald-500 font-bold" id="spec-val-storage">100% Offline First (IndexedDB + Storage)</span>
+          </div>
+          <div class="p-3 bg-[var(--panel-inner)] border border-[var(--border)] flex justify-between items-center">
+            <span class="text-[var(--text-muted)]" id="spec-lbl-radar">Анализ цен и скидок:</span>
+            <span class="text-emerald-500 font-bold" id="spec-val-radar">Детектор накруток цен и Sparklines</span>
+          </div>
+          <div class="p-3 bg-[var(--panel-inner)] border border-[var(--border)] flex justify-between items-center">
+            <span class="text-[var(--text-muted)]" id="spec-lbl-telemetry">Телеметрия и трекеры:</span>
+            <span class="text-emerald-500 font-bold" id="spec-val-telemetry">ОТСУТСТВУЮТ (Полная автономность)</span>
+          </div>
+          <div class="p-3 bg-[var(--panel-inner)] border border-[var(--border)] flex justify-between items-center">
+            <span class="text-[var(--text-muted)]" id="spec-lbl-whitehat">Стандарт монетизации:</span>
+            <span class="text-emerald-500 font-bold" id="spec-val-whitehat">100% White-Hat (Без cookie-stuffing)</span>
+          </div>
+          <div class="p-3 bg-[var(--panel-inner)] border border-[var(--border)] flex justify-between items-center">
+            <span class="text-[var(--text-muted)]" id="spec-lbl-gateway">Шлюз переадресации:</span>
+            <span class="text-[var(--text-heading)] font-bold">Cloudflare Gateway (go.adlab.su) + Fail-Safe</span>
+          </div>
+          <div class="p-3 bg-[var(--panel-inner)] border border-[var(--border)] flex justify-between items-center">
+            <span class="text-[var(--text-muted)]" id="spec-lbl-license">Лицензия:</span>
+            <span class="text-[var(--text-heading)] font-bold" id="spec-val-license">AD LAB Proprietary / Бесплатно</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ПОЛНОЕ ОПИСАНИЕ И ВОЗМОЖНОСТИ -->
+      <section class="tech-border p-5 sm:p-7 rounded-sm shadow-xl space-y-4">
+        <h3 class="text-lg font-bold text-[var(--text-heading)] font-mono border-b border-[var(--border)] pb-3" id="txt-desc-title">
+          ПОЛНОЕ ОПИСАНИЕ И ИНЖЕНЕРНЫЕ РЕШЕНИЯ
+        </h3>
+
+        <div class="space-y-4 text-sm font-sans-ui text-[var(--text)] leading-relaxed" id="txt-full-article">
+          <!-- Генерируется через JS для RU/EN -->
+        </div>
+      </section>
+
+      <!-- ИСТОРИЯ РЕЛИЗОВ И ВЕРСИЙ (CHANGELOG) -->
+      <section class="tech-border p-5 sm:p-7 rounded-sm shadow-xl space-y-4">
+        <h3 class="text-lg font-bold text-[var(--text-heading)] font-mono border-b border-[var(--border)] pb-3" id="txt-changelog-title">
+          ЖУРНАЛ РЕВИЗИЙ И РЕЛИЗОВ (CHANGELOG)
+        </h3>
+
+        <div class="space-y-4 font-mono text-xs" id="changelog-list">
+          <!-- Генерируется через JS для RU/EN -->
+        </div>
+      </section>
+
+      <!-- НИЖНЯЯ ПАНЕЛЬ ДЕЙСТВИЙ -->
+      <section class="tech-border p-4 sm:p-5 rounded-sm flex flex-wrap items-center justify-between gap-4 font-mono text-xs">
+        <a href="../" class="text-[var(--tech-orange)] hover:underline flex items-center gap-1.5 font-bold">
+          <span>◄</span> <span id="txt-bottom-back">ВЕРНУТЬСЯ НА ГЛАВНУЮ</span>
+        </a>
+        <div class="text-[var(--text-muted)]">
+          <span id="txt-bottom-info">СТАТУС: ПРОЕКТ НАХОДИТСЯ В АКТИВНОЙ ФАЗЕ R&D</span>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ПОДВАЛ / НАМЕРТВО ПРИКРЕПЛЕН К НИЗУ ЭКРАНА -->
+    <footer class="tech-border page-footer p-5 sm:p-6 text-xs text-[var(--text-muted)] flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div>
+        <div class="text-[var(--text-heading)] font-bold tracking-wider uppercase font-mono" id="txt-footer-title">
+          AD LAB // АВТОРСКАЯ ЛАБОРАТОРИЯ ШТЫКОВА А.Д.
+        </div>
+        <p class="mt-1 text-[11px] font-sans-ui leading-relaxed" id="txt-footer-desc">
+          Физические устройства и программные комплексы. Разработка с открытым исходным кодом.
+        </p>
+        <div class="mt-2.5 flex flex-wrap items-center gap-3 text-[11px] font-mono">
+          <a href="../privacy/" class="text-[var(--tech-orange)] hover:underline font-semibold" id="txt-footer-privacy">Политика конфиденциальности сайта (Privacy Policy)</a>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-6 font-mono text-xs whitespace-nowrap self-start md:self-auto">
+        <div>ДОМЕН: <span class="text-[var(--tech-orange)] font-bold">ADLAB.SU</span></div>
+        <div>ОТК: <span class="text-emerald-500 font-bold" id="txt-footer-otk">ПРИНЯТО</span></div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    let currentLang = 'ru';
+    let currentTheme = 'dark';
+    let currentScrMode = 'popup';
+
+    const screenshots = {
+      popup: '../assets/img/onebag_screen_popup_1280x800.png',
+      radar: '../assets/img/onebag_screen_radar_1280x800.png'
+    };
+
+    const translations = {
+      ru: {
+        navBack: 'ВЕРНУТЬСЯ НА ГЛАВНУЮ',
+        subnavSection: '// ТЕХПАСПОРТ: PROJECT 0002 (ONEBAG)',
+        engineer: 'Гл. Конструктор: Штыков А.Д.',
+        themeTextDark: 'ТЕМНАЯ',
+        themeTextLight: 'СВЕТЛАЯ',
+        gostStamp: 'ТЕХПАСПОРТ<br><span class="text-[9px] sm:text-[10px] opacity-80 font-normal">ГОСТ-2026</span>',
+        statusActive: 'R&D // В РАБОТЕ',
+        badgeStatus: 'v1.8.1 // В РАЗРАБОТКЕ (R&D)',
+        badgeManifest: 'CHROME EXTENSION (MV3) • OFFLINE FIRST',
+        heroTitle: 'OneBag — Умная корзина и радар цен',
+        heroDesc: 'Универсальный вишлист покупок и автономный мониторинг цен маркетплейсов (Яндекс.Маркет, Ozon, Wildberries, AliExpress, Мегамаркет). 5-уровневый отказоустойчивый каскад парсинга, алгоритмическое выявление фальшивых скидок и 100% приватность без сбора персональных данных.',
+        btnStatus: 'СТАДИЯ: ЗАКРЫТОЕ АЛЬФА-ТЕСТИРОВАНИЕ',
+        btnPrivacy: 'ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ ➔',
+        galleryTitle: 'ВНЕШНИЙ ВИД И ИНТЕРФЕЙСНЫЕ МОДУЛИ',
+        gallerySubtitle: 'Переключайте вкладки для просмотра модулей системы',
+        btnScrPopup: 'Интерфейс корзины (Popup MV3)',
+        btnScrRadar: 'Радар цен & White-Hat',
+        specsTitle: 'ИНЖЕНЕРНЫЙ ФОРМУЛЯР ПАРАМЕТРОВ (ТТХ)',
+        specs: {
+          code: 'Шифр изделия:',
+          arch: 'Платформа / Движок:',
+          storesLbl: 'Поддерживаемые маркетплейсы:',
+          storesVal: 'Маркет, WB, Ozon, Ali, Мегамаркет',
+          cascadeLbl: 'Каскад автопарсинга:',
+          cascadeVal: '5 уровней (JSON-LD, OG, Селекторы)',
+          storageLbl: 'Архитектура хранения:',
+          storageVal: '100% Offline First (IndexedDB + Storage)',
+          radarLbl: 'Анализ цен и скидок:',
+          radarVal: 'Детектор накруток цен и Sparklines',
+          telemetryLbl: 'Телеметрия и трекеры:',
+          telemetryVal: 'ОТСУТСТВУЮТ (Полная автономность)',
+          whitehatLbl: 'Стандарт монетизации:',
+          whitehatVal: '100% White-Hat (Без cookie-stuffing)',
+          gatewayLbl: 'Шлюз переадресации:',
+          licenseLbl: 'Лицензия:',
+          licenseVal: 'AD LAB Proprietary / Бесплатно'
+        },
+        descTitle: 'ПОЛНОЕ ОПИСАНИЕ И ИНЖЕНЕРНЫЕ РЕШЕНИЯ',
+        articleHtml: `
+          <p>
+            <strong>OneBag</strong> — авторское кроссплатформенное браузерное расширение для Chromium, решающее проблему разрозненных корзин и отслеживания реальных цен при покупках в интернете.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-4 font-mono text-xs">
+            <div class="p-4 bg-[var(--panel-inner)] border border-[var(--border)] rounded-sm space-y-2">
+              <div class="text-[var(--tech-orange)] font-bold text-sm">1-CLICK УНИВЕРСАЛЬНЫЙ ПАРСЕР</div>
+              <p class="text-[var(--text-muted)] font-sans-ui">
+                Мгновенный сбор карточки товара в один клик прямо со страницы интернет-магазина. 5-уровневый каскад (Schema.org JSON-LD, OpenGraph, специализированные селекторы и эвристический анализ) стабильно работает с 30+ магазинами РФ и мира.
+              </p>
+            </div>
+            <div class="p-4 bg-[var(--panel-inner)] border border-[var(--border)] rounded-sm space-y-2">
+              <div class="text-[var(--tech-orange)] font-bold text-sm">АВТОНОМНЫЙ РАДАР ЦЕН</div>
+              <p class="text-[var(--text-muted)] font-sans-ui">
+                Локальный учет истории изменения цен с наглядными графиками Sparkline. Возможность задать желаемую целевую цену (Target Price) с мгновенным push-уведомлением при ее достижении.
+              </p>
+            </div>
+            <div class="p-4 bg-[var(--panel-inner)] border border-[var(--border)] rounded-sm space-y-2">
+              <div class="text-[var(--tech-orange)] font-bold text-sm">ДЕТЕКТОР ФАЛЬШИВЫХ СКИДОК</div>
+              <p class="text-[var(--text-muted)] font-sans-ui">
+                Алгоритм сопоставляет текущую скидку со среднеисторической стоимостью товара, моментально выявляя искусственные накрутки цен продавцами перед крупными распродажами.
+              </p>
+            </div>
+            <div class="p-4 bg-[var(--panel-inner)] border border-[var(--border)] rounded-sm space-y-2">
+              <div class="text-[var(--tech-orange)] font-bold text-sm">WHITE-HAT МОНЕТИЗАЦИЯ</div>
+              <p class="text-[var(--text-muted)] font-sans-ui">
+                Строгое соответствие стандартам Chrome Web Store: zero cookie-stuffing, полное отсутствие скрытого вмешательства в веб-трафик и прозрачный тумблер добровольной поддержки проекта в один клик.
+              </p>
+            </div>
+          </div>
+        `,
+        changelogTitle: 'ЖУРНАЛ РЕВИЗИЙ И РЕЛИЗОВ (CHANGELOG)',
+        changelogHtml: `
+          <div class="p-4 bg-[var(--panel-inner)] border border-[var(--border)] rounded-sm space-y-2">
+            <div class="flex items-center justify-between border-b border-[var(--border)] pb-2">
+              <span class="text-amber-500 font-extrabold text-sm">v1.8.1 (Октябрь 2026)</span>
+              <span class="text-xs bg-amber-500/10 text-amber-500 px-2 py-0.5 border border-amber-500/30 font-bold">R&D АЛЬФА</span>
+            </div>
+            <ul class="list-disc pl-5 space-y-1 text-[var(--text-muted)] font-sans-ui text-xs">
+              <li>Финальный ребрендинг проекта: официальное имя <strong>OneBag</strong>.</li>
+              <li>Интеграция утвержденного фирменного знака AD LAB — шоппер с сигнальной оранжевой точкой.</li>
+              <li>Внедрен этичный модуль монетизации с Fail-Safe шлюзом через Cloudflare Worker (go.adlab.su).</li>
+              <li>Детектор искусственных накруток цен и алгоритм проверки подлинности скидки.</li>
+            </ul>
+          </div>
+
+          <div class="p-4 bg-[var(--panel-inner)] border border-[var(--border)] rounded-sm space-y-2">
+            <div class="flex items-center justify-between border-b border-[var(--border)] pb-2">
+              <span class="text-[var(--tech-orange)] font-extrabold text-sm">v1.5.0 (Сентябрь 2026)</span>
+              <span class="text-xs bg-[var(--stamp-bg)] text-[var(--tech-orange)] px-2 py-0.5 border border-[var(--tech-orange)]/30 font-bold">БАЗОВАЯ ВЕРСИЯ</span>
+            </div>
+            <ul class="list-disc pl-5 space-y-1 text-[var(--text-muted)] font-sans-ui text-xs">
+              <li>Архитектура ядра на стандарте Chromium Manifest V3 (Service Worker).</li>
+              <li>5-уровневый каскад парсинга карточек товаров (JSON-LD, OpenGraph, DOM).</li>
+              <li>Локальная база данных в IndexedDB и chrome.storage.local (100% Offline First).</li>
+            </ul>
+          </div>
+        `,
+        bottomBack: 'ВЕРНУТЬСЯ НА ГЛАВНУЮ',
+        bottomInfo: 'СТАТУС: ПРОЕКТ НАХОДИТСЯ В АКТИВНОЙ ФАЗЕ R&D // AD-0002-BAG',
+        footerTitle: 'AD LAB // АВТОРСКАЯ ЛАБОРАТОРИЯ ШТЫКОВА А.Д.',
+        footerDesc: 'Физические устройства и программные комплексы. Разработка с открытым исходным кодом.',
+        footerPrivacy: 'Политика конфиденциальности сайта (Privacy Policy)',
+        footerOtk: 'ПРИНЯТО'
+      },
+      en: {
+        navBack: 'RETURN TO HOME',
+        subnavSection: '// TECH DOSSIER: PROJECT 0002 (ONEBAG)',
+        engineer: 'Chief Engineer: Shtykov A.D.',
+        themeTextDark: 'DARK',
+        themeTextLight: 'LIGHT',
+        gostStamp: 'TECH DOSSIER<br><span class="text-[9px] sm:text-[10px] opacity-80 font-normal">GOST-2026</span>',
+        statusActive: 'R&D // ACTIVE',
+        badgeStatus: 'v1.8.1 // IN DEVELOPMENT (R&D)',
+        badgeManifest: 'CHROME EXTENSION (MV3) • OFFLINE FIRST',
+        heroTitle: 'OneBag — Smart Cart & Price Radar',
+        heroDesc: 'Universal shopping wishlist and cross-store price radar for marketplaces (Yandex Market, Ozon, Wildberries, AliExpress, MegaMarket). Features 5-tier resilient scraping, artificial price hike detection, and 100% privacy with zero telemetry.',
+        btnStatus: 'STAGE: CLOSED ALPHA TESTING',
+        btnPrivacy: 'PRIVACY POLICY ➔',
+        galleryTitle: 'VISUAL INTERFACE & SYSTEM MODULES',
+        gallerySubtitle: 'Toggle tabs to inspect system features',
+        btnScrPopup: 'Smart Cart Interface (Popup MV3)',
+        btnScrRadar: 'Price Radar & White-Hat',
+        specsTitle: 'ENGINEERING SPECIFICATIONS (TTX)',
+        specs: {
+          code: 'Project Code:',
+          arch: 'Platform / Engine:',
+          storesLbl: 'Supported Marketplaces:',
+          storesVal: 'Yandex Market, WB, Ozon, Ali, MegaMarket',
+          cascadeLbl: 'Auto-Scraper Cascade:',
+          cascadeVal: '5 tiers (JSON-LD, OG, Selectors)',
+          storageLbl: 'Data Architecture:',
+          storageVal: '100% Offline First (IndexedDB + Storage)',
+          radarLbl: 'Price Tracking Engine:',
+          radarVal: 'Fake deal detection & Sparklines',
+          telemetryLbl: 'Telemetry & Trackers:',
+          telemetryVal: 'ZERO (Full device autonomy)',
+          whitehatLbl: 'Monetization Standard:',
+          whitehatVal: '100% White-Hat (No cookie-stuffing)',
+          gatewayLbl: 'Redirect Gateway:',
+          licenseLbl: 'License:',
+          licenseVal: 'AD LAB Proprietary / Free'
+        },
+        descTitle: 'FULL SPECIFICATIONS & ENGINEERING DETAILS',
+        articleHtml: `
+          <p>
+            <strong>OneBag</strong> is a proprietary cross-platform Chromium extension that eliminates fragmented wishlists while offering autonomous cross-store price tracking.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-4 font-mono text-xs">
+            <div class="p-4 bg-[var(--panel-inner)] border border-[var(--border)] rounded-sm space-y-2">
+              <div class="text-[var(--tech-orange)] font-bold text-sm">1-CLICK SCRAPER CASCADE</div>
+              <p class="text-[var(--text-muted)] font-sans-ui">
+                1-click item saving straight from online stores. 5-tier fallback cascade (Schema.org JSON-LD, OpenGraph, specialized micro-selectors, and heuristic parser) supports 30+ stores.
+              </p>
+            </div>
+            <div class="p-4 bg-[var(--panel-inner)] border border-[var(--border)] rounded-sm space-y-2">
+              <div class="text-[var(--tech-orange)] font-bold text-sm">AUTONOMOUS PRICE RADAR</div>
+              <p class="text-[var(--text-muted)] font-sans-ui">
+                On-device price history with inline SVG Sparklines. Target Price alerts fire instantaneous browser notifications when merchants drop prices below your threshold.
+              </p>
+            </div>
+            <div class="p-4 bg-[var(--panel-inner)] border border-[var(--border)] rounded-sm space-y-2">
+              <div class="text-[var(--tech-orange)] font-bold text-sm">FAKE DEAL DETECTOR</div>
+              <p class="text-[var(--text-muted)] font-sans-ui">
+                Calculates median historical prices and exposes artificial pre-sale price hikes, protecting users against misleading discounts.
+              </p>
+            </div>
+            <div class="p-4 bg-[var(--panel-inner)] border border-[var(--border)] rounded-sm space-y-2">
+              <div class="text-[var(--tech-orange)] font-bold text-sm">100% WHITE-HAT STANDARDS</div>
+              <p class="text-[var(--text-muted)] font-sans-ui">
+                Strict compliance with Chrome Web Store policies: zero background cookie injection, zero web traffic modification, and single-click voluntary developer support.
+              </p>
+            </div>
+          </div>
+        `,
+        changelogTitle: 'REVISION & RELEASE JOURNAL (CHANGELOG)',
+        changelogHtml: `
+          <div class="p-4 bg-[var(--panel-inner)] border border-[var(--border)] rounded-sm space-y-2">
+            <div class="flex items-center justify-between border-b border-[var(--border)] pb-2">
+              <span class="text-amber-500 font-extrabold text-sm">v1.8.1 (October 2026)</span>
+              <span class="text-xs bg-amber-500/10 text-amber-500 px-2 py-0.5 border border-amber-500/30 font-bold">R&D ALPHA</span>
+            </div>
+            <ul class="list-disc pl-5 space-y-1 text-[var(--text-muted)] font-sans-ui text-xs">
+              <li>Official brand finalization: <strong>OneBag</strong>.</li>
+              <li>Approved AD LAB Shopper icon integration with GOST dashed frame and orange dot.</li>
+              <li>White-Hat affiliate engine with Cloudflare Edge Gateway (go.adlab.su) and Fail-Safe fallback.</li>
+              <li>Fake deal detector & price history sparklines.</li>
+            </ul>
+          </div>
+
+          <div class="p-4 bg-[var(--panel-inner)] border border-[var(--border)] rounded-sm space-y-2">
+            <div class="flex items-center justify-between border-b border-[var(--border)] pb-2">
+              <span class="text-[var(--tech-orange)] font-extrabold text-sm">v1.5.0 (September 2026)</span>
+              <span class="text-xs bg-[var(--stamp-bg)] text-[var(--tech-orange)] px-2 py-0.5 border border-[var(--tech-orange)]/30 font-bold">CORE RELEASE</span>
+            </div>
+            <ul class="list-disc pl-5 space-y-1 text-[var(--text-muted)] font-sans-ui text-xs">
+              <li>Chromium Manifest V3 core architecture (Service Worker).</li>
+              <li>5-tier item metadata scraper (JSON-LD, OpenGraph, DOM).</li>
+              <li>100% Offline First local storage in IndexedDB.</li>
+            </ul>
+          </div>
+        `,
+        bottomBack: 'RETURN TO HOME',
+        bottomInfo: 'STATUS: ACTIVE R&D PHASE // AD-0002-BAG',
+        footerTitle: 'AD LAB // SHTYKOV A.D. RESEARCH LABORATORY',
+        footerDesc: 'Hardware apparatuses and software systems. Open source development.',
+        footerPrivacy: 'Website Privacy Policy',
+        footerOtk: 'PASSED'
+      }
+    };
+
+    function setScreenshot(mode) {
+      currentScrMode = mode;
+      const imgEl = document.getElementById('screenshot-viewer');
+      const btnPopup = document.getElementById('btn-scr-popup');
+      const btnRadar = document.getElementById('btn-scr-radar');
+
+      imgEl.src = screenshots[mode];
+
+      const activeClass = 'px-3 py-1.5 bg-[var(--tech-orange)] text-black font-bold transition rounded-xs';
+      const inactiveClass = 'px-3 py-1.5 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-hover)] text-[var(--text)] font-bold transition rounded-xs';
+
+      if (mode === 'popup') {
+        btnPopup.className = activeClass;
+        btnRadar.className = inactiveClass;
+      } else {
+        btnRadar.className = activeClass;
+        btnPopup.className = inactiveClass;
+      }
+    }
+
+    function applyTheme(theme) {
+      currentTheme = theme;
+      document.documentElement.setAttribute('data-theme', theme);
+      const icon = document.getElementById('theme-icon');
+      const text = document.getElementById('theme-text');
+      if (theme === 'light') {
+        icon.textContent = '☀️';
+        text.textContent = (currentLang === 'ru') ? 'СВЕТЛАЯ' : 'LIGHT';
+      } else {
+        icon.textContent = '🌙';
+        text.textContent = (currentLang === 'ru') ? 'ТЕМНАЯ' : 'DARK';
+      }
+      localStorage.setItem('adlab_theme', theme);
+    }
+
+    function toggleTheme() {
+      applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+    }
+
+    function switchLanguage(lang) {
+      currentLang = lang;
+      const t = translations[lang];
+
+      const btnRu = document.getElementById('lang-btn-ru');
+      const btnEn = document.getElementById('lang-btn-en');
+      if (lang === 'ru') {
+        btnRu.className = 'px-2 py-1 bg-[var(--tech-orange)] text-black font-extrabold rounded-xs transition';
+        btnEn.className = 'px-2 py-1 text-[var(--text-muted)] hover:text-[var(--text-heading)] font-bold transition';
+        document.getElementById('txt-header-badge').textContent = 'ОПЫТНАЯ ЛАБОРАТОРИЯ // HARD & SOFT';
+        document.getElementById('txt-header-desc').textContent = 'Инженерные разработки, электроника и программные комплексы.';
+      } else {
+        btnEn.className = 'px-2 py-1 bg-[var(--tech-orange)] text-black font-extrabold rounded-xs transition';
+        btnRu.className = 'px-2 py-1 text-[var(--text-muted)] hover:text-[var(--text-heading)] font-bold transition';
+        document.getElementById('txt-header-badge').textContent = 'R&D EXPERIMENTAL LAB // HARD & SOFT';
+        document.getElementById('txt-header-desc').textContent = 'Hardware engineering, embedded electronics, and software systems.';
+      }
+
+      document.getElementById('txt-nav-back').textContent = t.navBack;
+      document.getElementById('txt-subnav-section').textContent = t.subnavSection;
+      document.getElementById('txt-engineer-name').textContent = t.engineer;
+      document.getElementById('txt-gost-stamp').innerHTML = t.gostStamp;
+      document.getElementById('txt-status-active').textContent = t.statusActive;
+
+      document.getElementById('hero-badge-status').innerHTML = `<span class="w-2 h-2 rounded-full bg-amber-500 inline-block animate-pulse"></span><span>${t.badgeStatus}</span>`;
+      document.getElementById('hero-badge-manifest').textContent = t.badgeManifest;
+      document.getElementById('txt-hero-title').textContent = t.heroTitle;
+      document.getElementById('txt-hero-desc').textContent = t.heroDesc;
+      document.getElementById('txt-btn-status').textContent = t.btnStatus;
+      document.getElementById('txt-btn-privacy').textContent = t.btnPrivacy;
+
+      document.getElementById('txt-gallery-title').textContent = t.galleryTitle;
+      document.getElementById('txt-gallery-subtitle').textContent = t.gallerySubtitle;
+      document.getElementById('btn-scr-popup').textContent = t.btnScrPopup;
+      document.getElementById('btn-scr-radar').textContent = t.btnScrRadar;
+
+      document.getElementById('txt-specs-title').textContent = t.specsTitle;
+      document.getElementById('spec-lbl-code').textContent = t.specs.code;
+      document.getElementById('spec-lbl-arch').textContent = t.specs.arch;
+      document.getElementById('spec-lbl-stores').textContent = t.specs.storesLbl;
+      document.getElementById('spec-val-stores').textContent = t.specs.storesVal;
+      document.getElementById('spec-lbl-cascade').textContent = t.specs.cascadeLbl;
+      document.getElementById('spec-val-cascade').textContent = t.specs.cascadeVal;
+      document.getElementById('spec-lbl-storage').textContent = t.specs.storageLbl;
+      document.getElementById('spec-val-storage').textContent = t.specs.storageVal;
+      document.getElementById('spec-lbl-radar').textContent = t.specs.radarLbl;
+      document.getElementById('spec-val-radar').textContent = t.specs.radarVal;
+      document.getElementById('spec-lbl-telemetry').textContent = t.specs.telemetryLbl;
+      document.getElementById('spec-val-telemetry').textContent = t.specs.telemetryVal;
+      document.getElementById('spec-lbl-whitehat').textContent = t.specs.whitehatLbl;
+      document.getElementById('spec-val-whitehat').textContent = t.specs.whitehatVal;
+      document.getElementById('spec-lbl-gateway').textContent = t.specs.gatewayLbl;
+      document.getElementById('spec-lbl-license').textContent = t.specs.licenseLbl;
+      document.getElementById('spec-val-license').textContent = t.specs.licenseVal;
+
+      document.getElementById('txt-desc-title').textContent = t.descTitle;
+      document.getElementById('txt-full-article').innerHTML = t.articleHtml;
+
+      document.getElementById('txt-changelog-title').textContent = t.changelogTitle;
+      document.getElementById('changelog-list').innerHTML = t.changelogHtml;
+
+      document.getElementById('txt-bottom-back').textContent = t.bottomBack;
+      document.getElementById('txt-bottom-info').textContent = t.bottomInfo;
+
+      document.getElementById('txt-footer-title').textContent = t.footerTitle;
+      document.getElementById('txt-footer-desc').textContent = t.footerDesc;
+      document.getElementById('txt-footer-privacy').textContent = t.footerPrivacy;
+      document.getElementById('txt-footer-otk').textContent = t.footerOtk;
+
+      applyTheme(currentTheme);
+      localStorage.setItem('adlab_lang', lang);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('adlab_theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      applyTheme(savedTheme);
+
+      const savedLang = localStorage.getItem('adlab_lang') || 'ru';
+      switchLanguage(savedLang);
+    });
+  </script>
+</body>
+</html>

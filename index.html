@@ -206,8 +206,8 @@
       <div class="flex flex-wrap items-center justify-between gap-3 pt-4 text-xs font-mono">
         <div class="flex flex-wrap items-center gap-2">
           <span class="text-[var(--text-muted)] uppercase tracking-wider font-semibold" id="txt-filter-label">ФОРМУЛЯРЫ:</span>
-          <button onclick="setCategoryFilter('all')" id="btn-all" class="px-3 py-1 bg-[var(--tech-orange)] text-black font-extrabold uppercase transition">Все объекты [2]</button>
-          <button onclick="setCategoryFilter('software')" id="btn-software" class="px-3 py-1 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-hover)] text-[var(--text)] uppercase transition">Софт [1]</button>
+          <button onclick="setCategoryFilter('all')" id="btn-all" class="px-3 py-1 bg-[var(--tech-orange)] text-black font-extrabold uppercase transition">Все объекты [3]</button>
+          <button onclick="setCategoryFilter('software')" id="btn-software" class="px-3 py-1 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-hover)] text-[var(--text)] uppercase transition">Софт [2]</button>
           <button onclick="setCategoryFilter('hardware')" id="btn-hardware" class="px-3 py-1 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-hover)] text-[var(--text)] uppercase transition">Железо [1]</button>
         </div>
         <div class="text-[var(--text-muted)] text-[11px] hidden sm:block" id="txt-archive-status">
@@ -216,8 +216,8 @@
       </div>
     </header>
 
-    <!-- КАТАЛОГ ПРОЕКТОВ (ЕДИНЫЙ РАЗМЕР, АККУРАТНАЯ 2-КОЛОНОЧНАЯ СЕТКА) -->
-    <main class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch" id="projects-grid">
+    <!-- КАТАЛОГ ПРОЕКТОВ (ЕДИНЫЙ РАЗМЕР, АККУРАТНАЯ СЕТКА) -->
+    <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch" id="projects-grid">
 
       <!-- КАРТОЧКА 1: TABLO TAB (PROJECT 0001) -->
       <article onclick="window.location.href='project-0001/'" class="project-card tech-border p-4 sm:p-5 flex flex-col justify-between hover:border-[var(--tech-orange)] cursor-pointer transition-all duration-200 group rounded-sm shadow-md" data-category="software" data-project-id="0001">
@@ -265,15 +265,61 @@
         </div>
       </article>
 
-      <!-- КАРТОЧКА 2: АППАРАТНЫЙ КОМПЛЕКС (PROJECT 0002) -->
-      <article onclick="openModal('0002')" class="project-card tech-border p-4 sm:p-5 flex flex-col justify-between hover:border-[var(--tech-orange)] cursor-pointer transition-all duration-200 group rounded-sm shadow-md" data-category="hardware" data-project-id="0002">
+      <!-- КАРТОЧКА 2: ONEBAG UNIVERSAL CART (PROJECT 0002) -->
+      <article onclick="window.location.href='project-0002/'" class="project-card tech-border p-4 sm:p-5 flex flex-col justify-between hover:border-[var(--tech-orange)] cursor-pointer transition-all duration-200 group rounded-sm shadow-md" data-category="software" data-project-id="0002">
         <div>
           <div class="flex items-center justify-between border-b border-[var(--border)] pb-3 text-xs font-mono">
             <span class="font-extrabold text-[var(--tech-orange)] tracking-widest text-xs bg-[var(--stamp-bg)] px-2.5 py-0.5 border border-[var(--tech-orange)]/30">
               PROJECT 0002
             </span>
             <span class="text-amber-500 text-[11px] flex items-center gap-1.5 font-bold">
-              <span class="w-2 h-2 rounded-full bg-amber-500 inline-block animate-pulse"></span> <span id="p2-card-status">R&D // В РАБОТЕ</span>
+              <span class="w-2 h-2 rounded-full bg-amber-500 inline-block animate-pulse"></span> <span id="p2-card-status">R&D // В РАЗРАБОТКЕ</span>
+            </span>
+          </div>
+
+          <div class="mt-3.5 relative overflow-hidden rounded-sm border border-[var(--border-subtle)] bg-black/40">
+            <img src="assets/img/onebag_promo_440x280.png" alt="OneBag Universal Cart Preview" class="w-full h-44 sm:h-48 object-cover group-hover:scale-[1.02] transition-transform duration-300">
+            <div class="absolute bottom-2 left-2 flex flex-wrap gap-1 text-[9px] font-mono">
+              <span class="px-1.5 py-0.5 bg-black/80 backdrop-blur-sm text-orange-400 border border-orange-500/30">Chromium MV3</span>
+              <span class="px-1.5 py-0.5 bg-black/80 backdrop-blur-sm text-emerald-400 border border-emerald-500/30">Multi-Store</span>
+              <span class="px-1.5 py-0.5 bg-black/80 backdrop-blur-sm text-cyan-400 border border-cyan-500/30">Price Radar</span>
+            </div>
+          </div>
+
+          <div class="mt-3.5">
+            <div class="text-[10px] sm:text-[11px] text-[var(--text-muted)] uppercase tracking-wider font-mono" id="p2-card-tag">ПРОГРАММНЫЙ КОМПЛЕКС // SOFTWARE</div>
+            <h2 class="text-lg sm:text-xl font-bold text-[var(--text-heading)] group-hover:text-[var(--tech-orange)] transition mt-1 leading-snug" id="p2-card-title">
+              OneBag — Умная корзина и радар цен
+            </h2>
+            <p class="text-xs text-[var(--text-muted)] mt-1.5 font-sans-ui leading-relaxed line-clamp-2" id="p2-card-desc">
+              Единый вишлист и автоматический кросс-поиск скидок на маркетплейсах. Защита от фальшивых распродаж и Offline First хранение.
+            </p>
+          </div>
+
+          <div class="mt-3.5 bg-[var(--panel-inner)] p-2.5 sm:p-3 border border-[var(--border)] space-y-1.5 font-mono text-[11px]">
+            <div class="flex justify-between"><span class="text-[var(--text-muted)]" id="p2-spec-1-lbl">База:</span><span class="text-[var(--text-heading)] font-semibold" id="p2-spec-1-val">Chromium (MV3)</span></div>
+            <div class="flex justify-between"><span class="text-[var(--text-muted)]" id="p2-spec-2-lbl">Магазины:</span><span class="text-[var(--text-heading)] font-semibold" id="p2-spec-2-val">Маркет, WB, Ozon, Ali</span></div>
+            <div class="flex justify-between"><span class="text-[var(--text-muted)]" id="p2-spec-3-lbl">Стадия:</span><span class="text-amber-500 font-semibold" id="p2-spec-3-val">НИОКР // Альфа v1.8.1</span></div>
+          </div>
+        </div>
+
+        <div class="mt-4 pt-3 border-t border-[var(--border)] flex items-center justify-between text-xs font-mono">
+          <span class="text-[var(--text-muted)]" id="p2-card-type">ТИП: СОФТ</span>
+          <a href="project-0002/" class="text-[var(--tech-orange)] group-hover:underline flex items-center gap-1 font-bold" id="p2-card-btn">
+            ТЕХПАСПОРТ ➔
+          </a>
+        </div>
+      </article>
+
+      <!-- КАРТОЧКА 3: АППАРАТНЫЙ КОМПЛЕКС (PROJECT 0003) -->
+      <article onclick="openModal('0003')" class="project-card tech-border p-4 sm:p-5 flex flex-col justify-between hover:border-[var(--tech-orange)] cursor-pointer transition-all duration-200 group rounded-sm shadow-md" data-category="hardware" data-project-id="0003">
+        <div>
+          <div class="flex items-center justify-between border-b border-[var(--border)] pb-3 text-xs font-mono">
+            <span class="font-extrabold text-[var(--tech-orange)] tracking-widest text-xs bg-[var(--stamp-bg)] px-2.5 py-0.5 border border-[var(--tech-orange)]/30">
+              PROJECT 0003
+            </span>
+            <span class="text-amber-500 text-[11px] flex items-center gap-1.5 font-bold">
+              <span class="w-2 h-2 rounded-full bg-amber-500 inline-block animate-pulse"></span> <span id="p3-card-status">R&D // В РАБОТЕ</span>
             </span>
           </div>
 
@@ -287,25 +333,25 @@
           </div>
 
           <div class="mt-3.5">
-            <div class="text-[10px] sm:text-[11px] text-[var(--text-muted)] uppercase tracking-wider font-mono" id="p2-card-tag">АППАРАТНЫЙ МОДУЛЬ // HARDWARE</div>
-            <h2 class="text-lg sm:text-xl font-bold text-[var(--text-heading)] group-hover:text-[var(--tech-orange)] transition mt-1 leading-snug" id="p2-card-title">
+            <div class="text-[10px] sm:text-[11px] text-[var(--text-muted)] uppercase tracking-wider font-mono" id="p3-card-tag">АППАРАТНЫЙ МОДУЛЬ // HARDWARE</div>
+            <h2 class="text-lg sm:text-xl font-bold text-[var(--text-heading)] group-hover:text-[var(--tech-orange)] transition mt-1 leading-snug" id="p3-card-title">
               Аппаратно-приборный комплекс
             </h2>
-            <p class="text-xs text-[var(--text-muted)] mt-1.5 font-sans-ui leading-relaxed line-clamp-2" id="p2-card-desc">
+            <p class="text-xs text-[var(--text-muted)] mt-1.5 font-sans-ui leading-relaxed line-clamp-2" id="p3-card-desc">
               Проектирование авторских аппаратных модулей, схемотехники и микроконтроллерных устройств. Кастомные физические приборы.
             </p>
           </div>
 
           <div class="mt-3.5 bg-[var(--panel-inner)] p-2.5 sm:p-3 border border-[var(--border)] space-y-1.5 font-mono text-[11px]">
-            <div class="flex justify-between"><span class="text-[var(--text-muted)]" id="p2-spec-1-lbl">База:</span><span class="text-[var(--text-heading)] font-semibold" id="p2-spec-1-val">ARM / ESP32</span></div>
-            <div class="flex justify-between"><span class="text-[var(--text-muted)]" id="p2-spec-2-lbl">Корпус:</span><span class="text-[var(--text-heading)] font-semibold" id="p2-spec-2-val">CNC Алюминий</span></div>
-            <div class="flex justify-between"><span class="text-[var(--text-muted)]" id="p2-spec-3-lbl">Стадия:</span><span class="text-amber-500 font-semibold" id="p2-spec-3-val">Опытный образец</span></div>
+            <div class="flex justify-between"><span class="text-[var(--text-muted)]" id="p3-spec-1-lbl">База:</span><span class="text-[var(--text-heading)] font-semibold" id="p3-spec-1-val">ARM / ESP32</span></div>
+            <div class="flex justify-between"><span class="text-[var(--text-muted)]" id="p3-spec-2-lbl">Корпус:</span><span class="text-[var(--text-heading)] font-semibold" id="p3-spec-2-val">CNC Алюминий</span></div>
+            <div class="flex justify-between"><span class="text-[var(--text-muted)]" id="p3-spec-3-lbl">Стадия:</span><span class="text-amber-500 font-semibold" id="p3-spec-3-val">Опытный образец</span></div>
           </div>
         </div>
 
         <div class="mt-4 pt-3 border-t border-[var(--border)] flex items-center justify-between text-xs font-mono">
-          <span class="text-[var(--text-muted)]" id="p2-card-type">ТИП: ЖЕЛЕЗО</span>
-          <span class="text-[var(--tech-orange)] group-hover:underline flex items-center gap-1 font-bold" id="p2-card-btn">
+          <span class="text-[var(--text-muted)]" id="p3-card-type">ТИП: ЖЕЛЕЗО</span>
+          <span class="text-[var(--tech-orange)] group-hover:underline flex items-center gap-1 font-bold" id="p3-card-btn">
             ТЕХПАСПОРТ ➔
           </span>
         </div>
@@ -352,14 +398,14 @@
 
   </div>
 
-  <!-- ОКНО ТЕХПАСПОРТА ДЛЯ PROJECT 0002 -->
+  <!-- ОКНО ТЕХПАСПОРТА (PROJECT 0003) -->
   <div id="modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-6" style="background-color: var(--modal-bg); backdrop-filter: blur(8px);">
-    <div class="tech-border max-w-2xl w-full max-h-[92vh] flex flex-col p-4 sm:p-6 shadow-2xl relative overflow-hidden rounded-sm">
+    <div class="tech-border max-w-3xl w-full max-h-[92vh] flex flex-col p-4 sm:p-6 shadow-2xl relative overflow-hidden rounded-sm">
       
       <div class="flex justify-between items-start border-b border-[var(--border)] pb-4">
         <div>
           <div class="flex items-center gap-2">
-            <span class="text-[var(--tech-orange)] font-bold tracking-widest text-xs font-mono bg-[var(--stamp-bg)] px-2 py-0.5 border border-[var(--tech-orange)]/30" id="modal-project-id">PROJECT 0002</span>
+            <span class="text-[var(--tech-orange)] font-bold tracking-widest text-xs font-mono bg-[var(--stamp-bg)] px-2 py-0.5 border border-[var(--tech-orange)]/30" id="modal-project-id">PROJECT 0003</span>
             <span class="text-amber-500 font-mono text-xs font-semibold" id="modal-project-badge">В РАЗРАБОТКЕ</span>
           </div>
           <h3 class="text-lg sm:text-2xl font-bold text-[var(--text-heading)] mt-1.5" id="modal-project-title">Паспорт изделия</h3>
@@ -370,6 +416,8 @@
       </div>
 
       <div class="overflow-y-auto flex-grow my-4 pr-1 space-y-4 font-sans-ui text-sm text-[var(--text)] leading-relaxed" id="modal-body-container">
+        <!-- Скриншоты и визуальные формуляры разработки -->
+        <div id="modal-screenshots-container" class="space-y-3 hidden"></div>
         <div id="modal-article-text" class="text-xs sm:text-sm text-[var(--text)] space-y-2.5"></div>
         <div class="bg-[var(--panel-inner)] p-3 border border-[var(--border)] space-y-2 font-mono text-xs" id="modal-project-specs-list"></div>
       </div>
@@ -412,7 +460,7 @@
   <script>
     let currentLang = 'ru';
     let currentTheme = 'dark';
-    let activeModalId = '0002';
+    let activeModalId = '0003';
     
     // ПАГИНАЦИЯ И ФИЛЬТРЫ
     const ITEMS_PER_PAGE = 6;
@@ -420,13 +468,19 @@
     let currentCategory = 'all';
 
     const projectDatabase = {
-      '0002': {
+      '0003': {
         ru: {
           badge: 'В РАЗРАБОТКЕ // R&D',
           title: 'Аппаратно-приборный комплекс AD LAB',
           desc: '<p>Приборное научно-исследовательское направление лаборатории AD LAB по проектированию авторских аппаратных устройств, микроконтроллерных систем и прецизионных корпусов.</p><p>Включает схемотехническое моделирование, трассировку многослойных печатных плат (PCB) и изготовление экранированных металлических корпусов на ЧПУ станках.</p>',
+          screenshots: [
+            {
+              src: 'assets/img/hardware_cover.svg',
+              caption: 'ЧЕРТЕЖ МОДУЛЯ // АППАРАТНАЯ ПЛАТФОРМА AD-0003-LAB'
+            }
+          ],
           specs: [
-            ['Шифр разработки:', 'AD-0002-LAB'],
+            ['Шифр разработки:', 'AD-0003-LAB'],
             ['Архитектура SoC:', 'ARM Cortex-M4 / ESP32'],
             ['Корпусирование:', 'Анодированный алюминий CNC'],
             ['Связь:', 'USB Type-C, BLE 5.2, Wi-Fi'],
@@ -438,8 +492,14 @@
           badge: 'IN DEVELOPMENT // R&D',
           title: 'AD LAB Hardware & Embedded System',
           desc: '<p>Dedicated engineering division focusing on proprietary hardware devices, custom embedded microcontrollers, and precision physical computing modules.</p><p>Covers multi-layer PCB routing, low-noise power topologies, and custom CNC milled enclosures.</p>',
+          screenshots: [
+            {
+              src: 'assets/img/hardware_cover.svg',
+              caption: 'MODULE BLUEPRINT // HARDWARE PLATFORM AD-0003-LAB'
+            }
+          ],
           specs: [
-            ['Project Code:', 'AD-0002-LAB'],
+            ['Project Code:', 'AD-0003-LAB'],
             ['SoC Architecture:', 'ARM Cortex-M4 / ESP32'],
             ['Enclosure:', 'Anodized CNC Aluminum'],
             ['Connectivity:', 'USB Type-C, BLE 5.2, Wi-Fi'],
@@ -467,6 +527,20 @@
           btn: 'ТЕХПАСПОРТ ➔'
         },
         p2: {
+          status: 'R&D // В РАЗРАБОТКЕ',
+          tag: 'ПРОГРАММНЫЙ КОМПЛЕКС // SOFTWARE',
+          title: 'OneBag — Умная корзина и радар цен',
+          desc: 'Единый вишлист и автоматический кросс-поиск скидок на маркетплейсах. Защита от фальшивых распродаж и Offline First хранение.',
+          spec1Lbl: 'База:',
+          spec1Val: 'Chromium (MV3)',
+          spec2Lbl: 'Магазины:',
+          spec2Val: 'Маркет, WB, Ozon, Ali',
+          spec3Lbl: 'Стадия:',
+          spec3Val: 'НИОКР // Альфа v1.8.1',
+          type: 'ТИП: СОФТ',
+          btn: 'ТЕХПАСПОРТ ➔'
+        },
+        p3: {
           status: 'R&D // В РАБОТЕ',
           tag: 'АППАРАТНЫЙ МОДУЛЬ // HARDWARE',
           title: 'Аппаратно-приборный комплекс',
@@ -503,6 +577,20 @@
           btn: 'TECH DOSSIER ➔'
         },
         p2: {
+          status: 'R&D // IN DEVELOPMENT',
+          tag: 'CHROME EXTENSION // SOFTWARE',
+          title: 'OneBag — Smart Cart & Price Radar',
+          desc: 'Universal wishlist and cross-store price radar for marketplaces. Real price dynamics, fake discount detection, and offline-first storage.',
+          spec1Lbl: 'Platform:',
+          spec1Val: 'Chromium (MV3)',
+          spec2Lbl: 'Marketplaces:',
+          spec2Val: 'Yandex, Ozon, WB, Ali',
+          spec3Lbl: 'Stage:',
+          spec3Val: 'Active R&D / Alpha v1.8.1',
+          type: 'TYPE: SOFTWARE',
+          btn: 'TECH DOSSIER ➔'
+        },
+        p3: {
           status: 'R&D // ACTIVE',
           tag: 'HARDWARE MODULE // HARDWARE',
           title: 'AD LAB Hardware & Embedded System',
@@ -514,6 +602,24 @@
           spec3Lbl: 'Stage:',
           spec3Val: 'Prototype Assembly',
           type: 'TYPE: HARDWARE',
+          btn: 'TECH DOSSIER ➔'
+        },
+        banner: {
+          title: 'PRIVACY // AD LAB',
+          text: 'This website utilizes local browser storage (localStorage) strictly to preserve your selected theme and language preferences. Zero analytics, zero ad trackers.',
+          more: 'Website Privacy Policy ➔',
+          btn: 'ACCEPT'
+        }
+      }
+    };
+          desc: 'Universal wishlist and cross-store price radar for marketplaces. Real price dynamics, fake discount detection, and offline-first storage.',
+          spec1Lbl: 'Platform:',
+          spec1Val: 'Chromium (MV3)',
+          spec2Lbl: 'Marketplaces:',
+          spec2Val: 'Yandex, Ozon, WB, Ali',
+          spec3Lbl: 'Stage:',
+          spec3Val: 'Active R&D / Alpha v1.8.1',
+          type: 'TYPE: SOFTWARE',
           btn: 'TECH DOSSIER ➔'
         },
         banner: {
@@ -622,6 +728,29 @@
       document.getElementById('modal-article-text').innerHTML = data.desc;
       document.getElementById('modal-btn-close').textContent = data.closeBtn;
 
+      // Скриншоты и визуальные формуляры
+      const screenContainer = document.getElementById('modal-screenshots-container');
+      if (screenContainer) {
+        screenContainer.innerHTML = '';
+        if (data.screenshots && data.screenshots.length > 0) {
+          data.screenshots.forEach(sc => {
+            const wrap = document.createElement('div');
+            wrap.className = 'border border-[var(--border)] rounded-sm overflow-hidden bg-black/40';
+            wrap.innerHTML = `
+              <img src="${sc.src}" alt="${sc.caption}" class="w-full h-auto object-cover border-b border-[var(--border)]">
+              <div class="px-2.5 py-1.5 text-[10px] font-mono text-[var(--tech-orange)] bg-[var(--panel-inner)] flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-[var(--tech-orange)] inline-block"></span>
+                <span>${sc.caption}</span>
+              </div>
+            `;
+            screenContainer.appendChild(wrap);
+          });
+          screenContainer.classList.remove('hidden');
+        } else {
+          screenContainer.classList.add('hidden');
+        }
+      }
+
       const specsContainer = document.getElementById('modal-project-specs-list');
       specsContainer.innerHTML = '';
       data.specs.forEach(([k, v]) => {
@@ -681,8 +810,8 @@
         document.getElementById('txt-gost-stamp').innerHTML = 'ПАСПОРТНЫЙ УЧЕТ<br><span class="text-[9px] sm:text-[10px] opacity-80 font-normal">ГОСТ-2026</span>';
         document.getElementById('txt-status-active').textContent = 'В СТРОЮ';
         document.getElementById('txt-filter-label').textContent = 'ФОРМУЛЯРЫ:';
-        document.getElementById('btn-all').textContent = 'Все объекты [2]';
-        document.getElementById('btn-software').textContent = 'Софт [1]';
+        document.getElementById('btn-all').textContent = 'Все объекты [3]';
+        document.getElementById('btn-software').textContent = 'Софт [2]';
         document.getElementById('btn-hardware').textContent = 'Железо [1]';
         document.getElementById('txt-archive-status').textContent = 'СИСТЕМНЫЙ АРХИВ // ADLAB.SU';
         document.getElementById('txt-footer-title').textContent = 'AD LAB // АВТОРСКАЯ ЛАБОРАТОРИЯ ШТЫКОВА А.Д.';
@@ -698,8 +827,8 @@
         document.getElementById('txt-gost-stamp').innerHTML = 'GOST ARCHIVE<br><span class="text-[9px] sm:text-[10px] opacity-80 font-normal">GOST-2026</span>';
         document.getElementById('txt-status-active').textContent = 'OPERATIONAL';
         document.getElementById('txt-filter-label').textContent = 'CATALOG:';
-        document.getElementById('btn-all').textContent = 'All Objects [2]';
-        document.getElementById('btn-software').textContent = 'Software [1]';
+        document.getElementById('btn-all').textContent = 'All Objects [3]';
+        document.getElementById('btn-software').textContent = 'Software [2]';
         document.getElementById('btn-hardware').textContent = 'Hardware [1]';
         document.getElementById('txt-archive-status').textContent = 'SYSTEM ARCHIVE // ADLAB.SU';
         document.getElementById('txt-footer-title').textContent = 'AD LAB // SHTYKOV A.D. RESEARCH LABORATORY';
@@ -735,6 +864,25 @@
       document.getElementById('p2-spec-3-val').textContent = tCard.p2.spec3Val;
       document.getElementById('p2-card-type').textContent = tCard.p2.type;
       document.getElementById('p2-card-btn').textContent = tCard.p2.btn;
+
+      // Перевод текстов карточки 3 (Аппаратно-приборный комплекс)
+      document.getElementById('p3-card-status').textContent = tCard.p3.status;
+      document.getElementById('p3-card-tag').textContent = tCard.p3.tag;
+      document.getElementById('p3-card-title').textContent = tCard.p3.title;
+      document.getElementById('p3-card-desc').textContent = tCard.p3.desc;
+      document.getElementById('p3-spec-1-lbl').textContent = tCard.p3.spec1Lbl;
+      document.getElementById('p3-spec-1-val').textContent = tCard.p3.spec1Val;
+      document.getElementById('p3-spec-2-lbl').textContent = tCard.p3.spec2Lbl;
+      document.getElementById('p3-spec-2-val').textContent = tCard.p3.spec2Val;
+      document.getElementById('p3-spec-3-lbl').textContent = tCard.p3.spec3Lbl;
+      document.getElementById('p3-spec-3-val').textContent = tCard.p3.spec3Val;
+      document.getElementById('p3-card-type').textContent = tCard.p3.type;
+      document.getElementById('p3-card-btn').textContent = tCard.p3.btn;
+
+      // Если модальное окно открыто, обновляем его содержимое на новом языке
+      if (!document.getElementById('modal').classList.contains('hidden')) {
+        openModal(activeModalId);
+      }
 
       // Cookie banner
       document.getElementById('banner-title').textContent = tCard.banner.title;

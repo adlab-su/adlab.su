@@ -10,7 +10,7 @@ Write-Host "`n[1/3] Индексация изменений (git add)..." -Foreg
 git add -A
 
 Write-Host "[2/3] Фиксация коммита (git commit)..." -ForegroundColor Yellow
-git commit -m "Clean URLs: directory indexes, redirects, sitemap update, 404 page"
+git commit -m "Add OneBag (PROJECT 0002): technical passport, screenshots, promo assets and catalog update"
 
 Write-Host "[3/3] Загрузка на GitHub (git push origin main)..." -ForegroundColor Yellow
 git push origin main
