@@ -1,0 +1,4 @@
+# Local development & sensitive folders
+openwrt_install/
+vpn/
+*.zip
