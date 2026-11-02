@@ -262,17 +262,20 @@
           </div>
           
           <div class="flex items-center gap-2 font-mono text-xs">
-            <button onclick="setScreenshot('win11')" id="btn-scr-win11" class="px-3 py-1.5 bg-[var(--tech-orange)] text-black font-bold transition rounded-xs">
+            <button onclick="setScreenshot('fluent')" id="btn-scr-fluent" class="px-3 py-1.5 bg-[var(--tech-orange)] text-black font-bold transition rounded-xs">
               Fluent Mica
             </button>
-            <button onclick="setScreenshot('win10')" id="btn-scr-win10" class="px-3 py-1.5 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-hover)] text-[var(--text)] font-bold transition rounded-xs">
+            <button onclick="setScreenshot('metro')" id="btn-scr-metro" class="px-3 py-1.5 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-hover)] text-[var(--text)] font-bold transition rounded-xs">
               Metro Classic
+            </button>
+            <button onclick="setScreenshot('settings')" id="btn-scr-settings" class="px-3 py-1.5 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-hover)] text-[var(--text)] font-bold transition rounded-xs">
+              Настройки
             </button>
           </div>
         </div>
 
         <div class="border border-[var(--border-subtle)] rounded-sm overflow-hidden bg-black/50 p-2 sm:p-4">
-          <img id="screenshot-viewer" src="../assets/img/screenshot_1_ru_win11_1280x800.png" alt="Скриншот интерфейса Tablo Tab" class="w-full h-auto rounded-sm border border-[var(--border)] mx-auto shadow-2xl">
+          <img id="screenshot-viewer" src="../assets/img/screenshot_1_ru_fluent_1280x800.png" alt="Скриншот интерфейса Tablo Tab" class="w-full h-auto rounded-sm border border-[var(--border)] mx-auto shadow-2xl">
         </div>
       </section>
 
@@ -379,7 +382,7 @@
   <script>
     let currentLang = 'ru';
     let currentTheme = 'dark';
-    let currentScrStyle = 'win11';
+    let currentScrStyle = 'fluent';
 
     const translations = {
       ru: {
@@ -615,19 +618,28 @@
     function setScreenshot(style) {
       currentScrStyle = style;
       const img = document.getElementById('screenshot-viewer');
-      const btn11 = document.getElementById('btn-scr-win11');
-      const btn10 = document.getElementById('btn-scr-win10');
+      const btnFluent = document.getElementById('btn-scr-fluent');
+      const btnMetro = document.getElementById('btn-scr-metro');
+      const btnSettings = document.getElementById('btn-scr-settings');
       
       const langPrefix = (currentLang === 'ru') ? 'ru' : 'en';
 
-      if (style === 'win11') {
-        img.src = `../assets/img/screenshot_1_${langPrefix}_win11_1280x800.png`;
-        btn11.className = 'px-3 py-1.5 bg-[var(--tech-orange)] text-black font-bold transition rounded-xs';
-        btn10.className = 'px-3 py-1.5 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-hover)] text-[var(--text)] font-bold transition rounded-xs';
-      } else {
-        img.src = `../assets/img/screenshot_2_${langPrefix}_win10_1280x800.png`;
-        btn10.className = 'px-3 py-1.5 bg-[var(--tech-orange)] text-black font-bold transition rounded-xs';
-        btn11.className = 'px-3 py-1.5 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-hover)] text-[var(--text)] font-bold transition rounded-xs';
+      const inactiveClass = 'px-3 py-1.5 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-hover)] text-[var(--text)] font-bold transition rounded-xs';
+      const activeClass = 'px-3 py-1.5 bg-[var(--tech-orange)] text-black font-bold transition rounded-xs';
+
+      if (btnFluent) btnFluent.className = inactiveClass;
+      if (btnMetro) btnMetro.className = inactiveClass;
+      if (btnSettings) btnSettings.className = inactiveClass;
+
+      if (style === 'fluent') {
+        img.src = `../assets/img/screenshot_1_${langPrefix}_fluent_1280x800.png`;
+        if (btnFluent) btnFluent.className = activeClass;
+      } else if (style === 'metro') {
+        img.src = `../assets/img/screenshot_2_${langPrefix}_metro_1280x800.png`;
+        if (btnMetro) btnMetro.className = activeClass;
+      } else if (style === 'settings') {
+        img.src = `../assets/img/screenshot_3_${langPrefix}_settings_1280x800.png`;
+        if (btnSettings) btnSettings.className = activeClass;
       }
     }
 
@@ -709,6 +721,9 @@
         btnEn.className = 'px-2 py-1 bg-[var(--tech-orange)] text-black font-extrabold rounded-xs transition';
         btnRu.className = 'px-2 py-1 text-[var(--text-muted)] hover:text-[var(--text-heading)] font-bold transition';
       }
+
+      const btnSet = document.getElementById('btn-scr-settings');
+      if (btnSet) btnSet.textContent = (lang === 'ru') ? 'Настройки' : 'Settings';
 
       setScreenshot(currentScrStyle);
       applyTheme(currentTheme);
