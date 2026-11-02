@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AD LAB // ТЕХПАСПОРТ: PROJECT 0001 [Tablo Tab]</title>
-  <meta name="description" content="Техпаспорт проекта Tablo Tab (v6.4.1) — эстетичная экспресс-панель для новой вкладки браузеров Chromium в стилях Windows 11 Fluent Mica и Windows 10 Metro Classic.">
+  <meta name="description" content="Техпаспорт проекта Tablo Tab (v6.5.0) — эстетичная экспресс-панель для новой вкладки браузеров Chromium в стилях Fluent Mica и Metro Classic.">
   <link rel="canonical" href="https://adlab.su/project-0001/">
   <link rel="icon" type="image/svg+xml" href="../favicon.svg?v=2">
   <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png?v=2">
@@ -220,7 +220,7 @@
               </span>
               <span class="text-xs font-mono text-emerald-500 font-bold flex items-center gap-1.5" id="hero-badge-status">
                 <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-ping"></span>
-                <span>v6.4.1 // ОФИЦИАЛЬНЫЙ РЕЛИЗ</span>
+                <span>v6.5.0 // ОФИЦИАЛЬНЫЙ РЕЛИЗ</span>
               </span>
               <span class="text-xs font-mono text-[var(--text-muted)]" id="hero-badge-manifest">
                 CHROME EXTENSION (MV3)
@@ -232,7 +232,7 @@
             </h2>
 
             <p class="text-sm sm:text-base text-[var(--text-muted)] font-sans-ui leading-relaxed" id="txt-hero-desc">
-              Эстетичная персональная панель для новой вкладки в знаковых визуальных стилях Windows 11 Fluent Mica и Windows 10 Metro Classic. Неограниченные рабочие пространства, интерактивные смарт-виджеты и приватный бэкап.
+              Эстетичная персональная панель для новой вкладки в стилях Fluent Mica и Metro Classic. Неограниченные рабочие пространства, интерактивные смарт-виджеты и приватный бэкап.
             </p>
 
             <!-- Кнопки действий -->
@@ -263,10 +263,10 @@
           
           <div class="flex items-center gap-2 font-mono text-xs">
             <button onclick="setScreenshot('win11')" id="btn-scr-win11" class="px-3 py-1.5 bg-[var(--tech-orange)] text-black font-bold transition rounded-xs">
-              Windows 11 Fluent Mica
+              Fluent Mica
             </button>
             <button onclick="setScreenshot('win10')" id="btn-scr-win10" class="px-3 py-1.5 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-hover)] text-[var(--text)] font-bold transition rounded-xs">
-              Windows 10 Metro Classic
+              Metro Classic
             </button>
           </div>
         </div>
@@ -293,7 +293,7 @@
           </div>
           <div class="p-3 bg-[var(--panel-inner)] border border-[var(--border)] flex justify-between items-center">
             <span class="text-[var(--text-muted)]" id="spec-lbl-styles">Стили интерфейса:</span>
-            <span class="text-[var(--text-heading)] font-bold" id="spec-val-styles">Windows 11 Mica & Win 10 Metro</span>
+            <span class="text-[var(--text-heading)] font-bold" id="spec-val-styles">Fluent Mica & Metro Classic</span>
           </div>
           <div class="p-3 bg-[var(--panel-inner)] border border-[var(--border)] flex justify-between items-center">
             <span class="text-[var(--text-muted)]" id="spec-lbl-widgets">Смарт-виджеты:</span>
@@ -390,10 +390,10 @@
         themeTextLight: 'СВЕТЛАЯ',
         gostStamp: 'ТЕХПАСПОРТ<br><span class="text-[9px] sm:text-[10px] opacity-80 font-normal">ГОСТ-2026</span>',
         statusActive: 'В СТРОЮ',
-        badgeStatus: 'v6.4.1 // ОФИЦИАЛЬНЫЙ РЕЛИЗ',
+        badgeStatus: 'v6.5.0 // ОФИЦИАЛЬНЫЙ РЕЛИЗ',
         badgeManifest: 'CHROME EXTENSION (MV3)',
         heroTitle: 'Tablo Tab — Экспресс-панель Chromium',
-        heroDesc: 'Эстетичная персональная панель для новой вкладки в знаковых визуальных стилях Windows 11 Fluent Mica и Windows 10 Metro Classic. Неограниченные рабочие пространства, интерактивные смарт-виджеты и приватный бэкап.',
+        heroDesc: 'Эстетичная персональная панель для новой вкладки в стилях Fluent Mica и Metro Classic. Неограниченные рабочие пространства, интерактивные смарт-виджеты и приватный бэкап.',
         btnStore: 'УСТАНОВИТЬ ИЗ CHROME WEB STORE',
         btnPrivacy: 'ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ ➔',
         galleryTitle: 'ВНЕШНИЙ ВИД И ИНТЕРФЕЙС',
@@ -403,7 +403,7 @@
           id: 'ID в Chrome Web Store:',
           arch: 'Архитектура:',
           stylesLbl: 'Стили интерфейса:',
-          stylesVal: 'Windows 11 Mica & Win 10 Metro',
+          stylesVal: 'Fluent Mica & Metro Classic',
           widgetsLbl: 'Смарт-виджеты:',
           widgetsVal: 'Часы, Погода, Курсы валют, Заметки',
           storageLbl: 'Хранилище данных:',
@@ -451,15 +451,28 @@
         changelogHtml: `
           <div class="p-4 bg-[var(--panel-inner)] border border-[var(--border)] rounded-sm space-y-2">
             <div class="flex items-center justify-between border-b border-[var(--border)] pb-2">
-              <span class="text-emerald-500 font-extrabold text-sm">v6.4.1 (19 октября 2026)</span>
-              <span class="text-xs bg-emerald-500/10 text-emerald-500 px-2 py-0.5 border border-emerald-500/30 font-bold">ОФИЦИАЛЬНЫЙ РЕЛИЗ</span>
+              <span class="text-emerald-500 font-extrabold text-sm">v6.5.0 (Ноябрь 2026)</span>
+              <span class="text-xs bg-emerald-500/10 text-emerald-500 px-2 py-0.5 border border-emerald-500/30 font-bold">GLOBAL & FLUENT UPDATE</span>
+            </div>
+            <ul class="list-disc pl-5 space-y-1 text-[var(--text-muted)] font-sans-ui text-xs">
+              <li>Скоростной Cloudflare-прокси виджета погоды без региональных блокировок.</li>
+              <li>Двуязычная умная локализация названий городов (Москва / London).</li>
+              <li>Минималистичный чистый стартовый стол: 6 аккуратных плиток по умолчанию.</li>
+              <li>Защита от сброса при выгрузке неактивных вкладок браузера (Memory Saver).</li>
+              <li>Обновление стилей Fluent Mica и Metro Classic.</li>
+            </ul>
+          </div>
+
+          <div class="p-4 bg-[var(--panel-inner)] border border-[var(--border)] rounded-sm space-y-2">
+            <div class="flex items-center justify-between border-b border-[var(--border)] pb-2">
+              <span class="text-[var(--text-muted)] font-extrabold text-sm">v6.4.1 (19 октября 2026)</span>
+              <span class="text-xs bg-[var(--border)] text-[var(--text-muted)] px-2 py-0.5 border border-[var(--border)] font-bold">ПРЕДЫДУЩИЙ РЕЛИЗ</span>
             </div>
             <ul class="list-disc pl-5 space-y-1 text-[var(--text-muted)] font-sans-ui text-xs">
               <li>Официальная релизная сборка для публикации в Google Chrome Web Store.</li>
-              <li>Поддержка двух полных визуальных тем: Windows 11 Fluent Mica и Windows 10 Metro Classic.</li>
-              <li>Интеграция 4 живых виджетов: Часы, Погода с геопозицией, Курсы валют и криптовалют, Блокнот.</li>
+              <li>Поддержка стилей Fluent Mica и Metro Classic.</li>
+              <li>Интеграция 4 живых виджетов: Часы, Погода с геопозицией, Курсы валют, Блокнот.</li>
               <li>Бесшовная OAuth2 синхронизация с личным хранилищем Google Диск.</li>
-              <li>Полная поддержка русского и английского интерфейсов.</li>
             </ul>
           </div>
 
@@ -491,10 +504,10 @@
         themeTextLight: 'LIGHT',
         gostStamp: 'TECH DOSSIER<br><span class="text-[9px] sm:text-[10px] opacity-80 font-normal">GOST-2026</span>',
         statusActive: 'OPERATIONAL',
-        badgeStatus: 'v6.4.1 // OFFICIAL RELEASE',
+        badgeStatus: 'v6.5.0 // OFFICIAL RELEASE',
         badgeManifest: 'CHROME EXTENSION (MV3)',
         heroTitle: 'Tablo Tab — Speed Dial for Chromium',
-        heroDesc: 'Aesthetic new tab dashboard featuring Windows 11 Fluent Mica & Windows 10 Metro Classic styles. Infinite virtual workspaces, live smart widgets, sticky notes, and private Google Drive cloud sync.',
+        heroDesc: 'Aesthetic new tab dashboard featuring Fluent Mica & Metro Classic styles. Infinite virtual workspaces, live smart widgets, sticky notes, and private Google Drive cloud sync.',
         btnStore: 'INSTALL FROM CHROME WEB STORE',
         btnPrivacy: 'PRIVACY POLICY ➔',
         galleryTitle: 'VISUAL INTERFACE & STYLES',
@@ -504,7 +517,7 @@
           id: 'Chrome Web Store ID:',
           arch: 'Architecture:',
           stylesLbl: 'Interface Styles:',
-          stylesVal: 'Windows 11 Mica & Win 10 Metro',
+          stylesVal: 'Fluent Mica & Metro Classic',
           widgetsLbl: 'Smart Widgets:',
           widgetsVal: 'Clock, Weather, Currency rates, Sticky Notes',
           storageLbl: 'Data Storage:',
@@ -552,15 +565,28 @@
         changelogHtml: `
           <div class="p-4 bg-[var(--panel-inner)] border border-[var(--border)] rounded-sm space-y-2">
             <div class="flex items-center justify-between border-b border-[var(--border)] pb-2">
-              <span class="text-emerald-500 font-extrabold text-sm">v6.4.1 (October 19, 2026)</span>
-              <span class="text-xs bg-emerald-500/10 text-emerald-500 px-2 py-0.5 border border-emerald-500/30 font-bold">OFFICIAL RELEASE</span>
+              <span class="text-emerald-500 font-extrabold text-sm">v6.5.0 (November 2026)</span>
+              <span class="text-xs bg-emerald-500/10 text-emerald-500 px-2 py-0.5 border border-emerald-500/30 font-bold">GLOBAL & FLUENT UPDATE</span>
+            </div>
+            <ul class="list-disc pl-5 space-y-1 text-[var(--text-muted)] font-sans-ui text-xs">
+              <li>High-speed Cloudflare weather worker proxy ensuring global stability.</li>
+              <li>Bilingual smart localization for city names (London / New York).</li>
+              <li>Minimalist & airy default desktop: 6 clean dials by default.</li>
+              <li>Protection against tab unloading state loss (Chrome Memory Saver).</li>
+              <li>Updated Fluent Mica & Metro Classic visual styles.</li>
+            </ul>
+          </div>
+
+          <div class="p-4 bg-[var(--panel-inner)] border border-[var(--border)] rounded-sm space-y-2">
+            <div class="flex items-center justify-between border-b border-[var(--border)] pb-2">
+              <span class="text-[var(--text-muted)] font-extrabold text-sm">v6.4.1 (October 19, 2026)</span>
+              <span class="text-xs bg-[var(--border)] text-[var(--text-muted)] px-2 py-0.5 border border-[var(--border)] font-bold">PREVIOUS RELEASE</span>
             </div>
             <ul class="list-disc pl-5 space-y-1 text-[var(--text-muted)] font-sans-ui text-xs">
               <li>Official release package submitted to Google Chrome Web Store.</li>
-              <li>Full dual-style support: Windows 11 Fluent Mica and Windows 10 Metro Classic.</li>
-              <li>Integrated 4 live smart widgets: Clock, Weather, Currencies & Crypto rates, Sticky Notes.</li>
+              <li>Full dual-style support: Fluent Mica and Metro Classic.</li>
+              <li>Integrated 4 live smart widgets: Clock, Weather, Currency rates, Sticky Notes.</li>
               <li>Seamless native OAuth2 cloud backup integration with personal Google Drive.</li>
-              <li>Full internationalization in Russian and English.</li>
             </ul>
           </div>
 
