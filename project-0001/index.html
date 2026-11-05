@@ -334,7 +334,35 @@
         </h3>
 
         <div class="space-y-4 text-sm font-sans-ui text-[var(--text)] leading-relaxed" id="txt-full-article">
-          <!-- Генерируется через JS для RU/EN -->
+          <p>
+            <strong>Tablo Tab</strong> — авторское браузерное расширение нового поколения, превращающее стандартную новую вкладку Chromium в эстетичную, молниеносную персональную приборную панель с нулевым временем задержки при открытии.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-4 font-mono text-xs">
+            <div class="p-4 bg-[var(--panel-inner)] border border-[var(--border)] rounded-sm space-y-2">
+              <div class="text-[var(--tech-orange)] font-bold text-sm">ВИРТУАЛЬНЫЕ РАБОЧИЕ СТОЛЫ</div>
+              <p class="text-[var(--text-muted)] font-sans-ui">
+                Создавайте неограниченное число рабочих пространств (Workspaces): для работы, учебы, хобби или развлечений. Разделяйте закладки в 1 клик без визуального шума.
+              </p>
+            </div>
+            <div class="p-4 bg-[var(--panel-inner)] border border-[var(--border)] rounded-sm space-y-2">
+              <div class="text-[var(--tech-orange)] font-bold text-sm">4 ИНТЕРАКТИВНЫХ ВИДЖЕТА</div>
+              <p class="text-[var(--text-muted)] font-sans-ui">
+                Точное время с секундной стрелкой, живая погода без сторонних ключей API, актуальные котировки валют (USD, EUR, CNY) и криптовалют (BTC, ETH), а также быстрый To-Do блокнот.
+              </p>
+            </div>
+            <div class="p-4 bg-[var(--panel-inner)] border border-[var(--border)] rounded-sm space-y-2">
+              <div class="text-[var(--tech-orange)] font-bold text-sm">ПРИВАТНОСТЬ И БЕЗОПАСНОСТЬ</div>
+              <p class="text-[var(--text-muted)] font-sans-ui">
+                Никаких скрытых трекеров, аналитики и рекламных баннеров. Все данные хранятся локально в кэше браузера без отправки на серверы третьих лиц.
+              </p>
+            </div>
+            <div class="p-4 bg-[var(--panel-inner)] border border-[var(--border)] rounded-sm space-y-2">
+              <div class="text-[var(--tech-orange)] font-bold text-sm">БЭКАП НА GOOGLE ДИСК</div>
+              <p class="text-[var(--text-muted)] font-sans-ui">
+                Прямая авторизация через официальный OAuth2 API Google: бэкап и восстановление данных на ваш личный Google Диск в приватную защищенную папку расширения.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -345,7 +373,45 @@
         </h3>
 
         <div class="space-y-4 font-mono text-xs" id="changelog-list">
-          <!-- Генерируется через JS для RU/EN -->
+          <div class="p-4 bg-[var(--panel-inner)] border border-[var(--border)] rounded-sm space-y-2">
+            <div class="flex items-center justify-between border-b border-[var(--border)] pb-2">
+              <span class="text-emerald-500 font-extrabold text-sm">v6.5.0 (Ноябрь 2026)</span>
+              <span class="text-xs bg-emerald-500/10 text-emerald-500 px-2 py-0.5 border border-emerald-500/30 font-bold">GLOBAL & FLUENT UPDATE</span>
+            </div>
+            <ul class="list-disc pl-5 space-y-1 text-[var(--text-muted)] font-sans-ui text-xs">
+              <li><strong>Независимый выбор формы:</strong> текстура («Чистое стекло» или «Классические» плитки) и скругление (0px – 24px) настраиваются отдельно.</li>
+              <li><strong>Синхронное скругление интерфейса:</strong> окно настроек и карточки динамически повторяют радиус скругления ваших плиток.</li>
+              <li><strong>Размер плиток в пикселях:</strong> живое масштабирование и пресеты 180px, 220px, 260px, 320px прямо на столе.</li>
+              <li><strong>Обновленная светлая тема (Light Silk):</strong> высокая контрастность, полупрозрачные белые контекстные меню и читаемые шрифты.</li>
+              <li><strong>Улучшенные смарт-виджеты:</strong> Блокнот, Погода и Курсы валют идеально сочетаются по стилю и скруглению с плитками сайтов.</li>
+              <li><strong>Скоростной Cloudflare-прокси:</strong> глобальная стабильность виджета погоды и умная локализация городов (Москва / London).</li>
+            </ul>
+          </div>
+
+          <div class="p-4 bg-[var(--panel-inner)] border border-[var(--border)] rounded-sm space-y-2">
+            <div class="flex items-center justify-between border-b border-[var(--border)] pb-2">
+              <span class="text-[var(--text-muted)] font-extrabold text-sm">v6.4.1 (19 октября 2026)</span>
+              <span class="text-xs bg-[var(--border)] text-[var(--text-muted)] px-2 py-0.5 border border-[var(--border)] font-bold">ПРЕДЫДУЩИЙ РЕЛИЗ</span>
+            </div>
+            <ul class="list-disc pl-5 space-y-1 text-[var(--text-muted)] font-sans-ui text-xs">
+              <li>Официальная релизная сборка для публикации в Google Chrome Web Store.</li>
+              <li>Поддержка стилей Fluent Mica и Metro Classic.</li>
+              <li>Интеграция 4 живых виджетов: Часы, Погода с геопозицией, Курсы валют, Блокнот.</li>
+              <li>Бесшовная OAuth2 синхронизация с личным хранилищем Google Диск.</li>
+            </ul>
+          </div>
+
+          <div class="p-4 bg-[var(--panel-inner)] border border-[var(--border)] rounded-sm space-y-2">
+            <div class="flex items-center justify-between border-b border-[var(--border)] pb-2">
+              <span class="text-[var(--tech-orange)] font-extrabold text-sm">v6.0.0 (Сентябрь 2026)</span>
+              <span class="text-xs bg-[var(--stamp-bg)] text-[var(--tech-orange)] px-2 py-0.5 border border-[var(--tech-orange)]/30 font-bold">АРХИТЕКТУРНЫЙ АПГРЕЙД</span>
+            </div>
+            <ul class="list-disc pl-5 space-y-1 text-[var(--text-muted)] font-sans-ui text-xs">
+              <li>Полный переход расширения на современный стандарт Chrome Manifest V3.</li>
+              <li>Создана система виртуальных рабочих пространств (Workspaces) с drag-and-drop сортировкой.</li>
+              <li>Добавлено быстрое сохранение вкладок через контекстное меню браузера.</li>
+            </ul>
+          </div>
         </div>
       </section>
 
@@ -732,9 +798,6 @@
       if (btn5) btn5.textContent = (lang === 'ru') ? '5. Виджеты' : '5. Smart Widgets';
 
       setScreenshot(currentScrIdx);
-      applyTheme(currentTheme);
-      localStorage.setItem('adlab_lang', lang);
-    }
       applyTheme(currentTheme);
       localStorage.setItem('adlab_lang', lang);
     }
