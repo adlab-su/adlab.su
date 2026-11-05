@@ -253,29 +253,35 @@
         </div>
       </section>
 
-      <!-- ИНТЕРАКТИВНАЯ ГАЛЕРЕЯ СКРИНШОТОВ (ДВА СТИЛЯ) -->
+      <!-- ИНТЕРАКТИВНАЯ ГАЛЕРЕЯ СКРИНШОТОВ (5 СЦЕН) -->
       <section class="tech-border p-5 sm:p-7 rounded-sm shadow-xl space-y-4">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[var(--border)] pb-4">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3 border-b border-[var(--border)] pb-4">
           <div>
-            <h3 class="text-lg font-bold text-[var(--text-heading)] font-mono" id="txt-gallery-title">ВНЕШНИЙ ВИД И ИНТЕРФЕЙС</h3>
-            <p class="text-xs text-[var(--text-muted)] font-sans-ui" id="txt-gallery-subtitle">Переключайте режимы для просмотра оформления</p>
+            <h3 class="text-lg font-bold text-[var(--text-heading)] font-mono" id="txt-gallery-title">ВНЕШНИЙ ВИД И ИНТЕРФЕЙС (5 КЛЮЧЕВЫХ СЦЕН)</h3>
+            <p class="text-xs text-[var(--text-muted)] font-sans-ui" id="txt-gallery-subtitle">Переключайте сцены для просмотра возможностей v6.5.0</p>
           </div>
           
-          <div class="flex items-center gap-2 font-mono text-xs">
-            <button onclick="setScreenshot('fluent')" id="btn-scr-fluent" class="px-3 py-1.5 bg-[var(--tech-orange)] text-black font-bold transition rounded-xs">
-              Fluent Mica
+          <div class="flex flex-wrap items-center gap-1.5 font-mono text-xs" id="gallery-buttons-wrap">
+            <button onclick="setScreenshot(1)" id="btn-scr-1" class="px-3 py-1.5 bg-[var(--tech-orange)] text-black font-bold transition rounded-xs">
+              1. Стили
             </button>
-            <button onclick="setScreenshot('metro')" id="btn-scr-metro" class="px-3 py-1.5 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-hover)] text-[var(--text)] font-bold transition rounded-xs">
-              Metro Classic
+            <button onclick="setScreenshot(2)" id="btn-scr-2" class="px-3 py-1.5 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-hover)] text-[var(--text)] font-bold transition rounded-xs">
+              2. Радиус (0-24px)
             </button>
-            <button onclick="setScreenshot('settings')" id="btn-scr-settings" class="px-3 py-1.5 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-hover)] text-[var(--text)] font-bold transition rounded-xs">
-              Настройки
+            <button onclick="setScreenshot(3)" id="btn-scr-3" class="px-3 py-1.5 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-hover)] text-[var(--text)] font-bold transition rounded-xs">
+              3. Настройки & Масштаб
+            </button>
+            <button onclick="setScreenshot(4)" id="btn-scr-4" class="px-3 py-1.5 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-hover)] text-[var(--text)] font-bold transition rounded-xs">
+              4. День & Ночь
+            </button>
+            <button onclick="setScreenshot(5)" id="btn-scr-5" class="px-3 py-1.5 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-hover)] text-[var(--text)] font-bold transition rounded-xs">
+              5. Виджеты
             </button>
           </div>
         </div>
 
         <div class="border border-[var(--border-subtle)] rounded-sm overflow-hidden bg-black/50 p-2 sm:p-4">
-          <img id="screenshot-viewer" src="../assets/img/screenshot_1_ru_fluent_1280x800.png" alt="Скриншот интерфейса Tablo Tab" class="w-full h-auto rounded-sm border border-[var(--border)] mx-auto shadow-2xl">
+          <img id="screenshot-viewer" src="../assets/img/screenshot_1_ru_1280x800.png" alt="Скриншот интерфейса Tablo Tab" class="w-full h-auto rounded-sm border border-[var(--border)] mx-auto shadow-2xl">
         </div>
       </section>
 
@@ -382,7 +388,7 @@
   <script>
     let currentLang = 'ru';
     let currentTheme = 'dark';
-    let currentScrStyle = 'fluent';
+    let currentScrIdx = 1;
 
     const translations = {
       ru: {
@@ -399,8 +405,8 @@
         heroDesc: 'Эстетичная персональная панель для новой вкладки в стилях Fluent Mica и Metro Classic. Неограниченные рабочие пространства, интерактивные смарт-виджеты и приватный бэкап.',
         btnStore: 'УСТАНОВИТЬ ИЗ CHROME WEB STORE',
         btnPrivacy: 'ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ ➔',
-        galleryTitle: 'ВНЕШНИЙ ВИД И ИНТЕРФЕЙС',
-        gallerySubtitle: 'Переключайте режимы для просмотра оформления',
+        galleryTitle: 'ВНЕШНИЙ ВИД И ИНТЕРФЕЙС (5 КЛЮЧЕВЫХ СЦЕН)',
+        gallerySubtitle: 'Переключайте сцены для просмотра возможностей v6.5.0',
         specsTitle: 'ИНЖЕНЕРНЫЙ ФОРМУЛЯР ПАРАМЕТРОВ (ТТХ)',
         specs: {
           id: 'ID в Chrome Web Store:',
@@ -458,11 +464,12 @@
               <span class="text-xs bg-emerald-500/10 text-emerald-500 px-2 py-0.5 border border-emerald-500/30 font-bold">GLOBAL & FLUENT UPDATE</span>
             </div>
             <ul class="list-disc pl-5 space-y-1 text-[var(--text-muted)] font-sans-ui text-xs">
-              <li>Скоростной Cloudflare-прокси виджета погоды без региональных блокировок.</li>
-              <li>Двуязычная умная локализация названий городов (Москва / London).</li>
-              <li>Минималистичный чистый стартовый стол: 6 аккуратных плиток по умолчанию.</li>
-              <li>Защита от сброса при выгрузке неактивных вкладок браузера (Memory Saver).</li>
-              <li>Обновление стилей Fluent Mica и Metro Classic.</li>
+              <li><strong>Независимый выбор формы:</strong> текстура («Чистое стекло» или «Классические» плитки) и скругление (0px – 24px) настраиваются отдельно.</li>
+              <li><strong>Синхронное скругление интерфейса:</strong> окно настроек и карточки динамически повторяют радиус скругления ваших плиток.</li>
+              <li><strong>Размер плиток в пикселях:</strong> живое масштабирование и пресеты 180px, 220px, 260px, 320px прямо на столе.</li>
+              <li><strong>Обновленная светлая тема (Light Silk):</strong> высокая контрастность, полупрозрачные белые контекстные меню и читаемые шрифты.</li>
+              <li><strong>Улучшенные смарт-виджеты:</strong> Блокнот, Погода и Курсы валют идеально сочетаются по стилю и скруглению с плитками сайтов.</li>
+              <li><strong>Скоростной Cloudflare-прокси:</strong> глобальная стабильность виджета погоды и умная локализация городов (Москва / London).</li>
             </ul>
           </div>
 
@@ -572,11 +579,12 @@
               <span class="text-xs bg-emerald-500/10 text-emerald-500 px-2 py-0.5 border border-emerald-500/30 font-bold">GLOBAL & FLUENT UPDATE</span>
             </div>
             <ul class="list-disc pl-5 space-y-1 text-[var(--text-muted)] font-sans-ui text-xs">
-              <li>High-speed Cloudflare weather worker proxy ensuring global stability.</li>
-              <li>Bilingual smart localization for city names (London / New York).</li>
-              <li>Minimalist & airy default desktop: 6 clean dials by default.</li>
-              <li>Protection against tab unloading state loss (Chrome Memory Saver).</li>
-              <li>Updated Fluent Mica & Metro Classic visual styles.</li>
+              <li><strong>Decoupled Style & Radius:</strong> Choose between Pure Glass or Classic Opaque tiles, and adjust curvature (0px to 24px) independently.</li>
+              <li><strong>Adaptive UI Rounding:</strong> Settings window and context menus dynamically match your chosen tile corner radius.</li>
+              <li><strong>Tile Sizing in Pixels:</strong> One-click size presets (180px, 220px, 260px, 320px) with instant live preview scaling.</li>
+              <li><strong>Refined Light Theme (Light Silk):</strong> High contrast, frosted glass context menus, and crystal-clear readability.</li>
+              <li><strong>Harmonized Smart Widgets:</strong> Weather, Notes, Currency, and Clocks seamlessly adopt your tile design and curvature.</li>
+              <li><strong>High-Speed Cloudflare Proxy:</strong> Global weather reliability and bilingual smart city localization (London / New York).</li>
             </ul>
           </div>
 
@@ -615,32 +623,22 @@
       }
     };
 
-    function setScreenshot(style) {
-      currentScrStyle = style;
+    function setScreenshot(idx) {
+      currentScrIdx = idx;
       const img = document.getElementById('screenshot-viewer');
-      const btnFluent = document.getElementById('btn-scr-fluent');
-      const btnMetro = document.getElementById('btn-scr-metro');
-      const btnSettings = document.getElementById('btn-scr-settings');
-      
       const langPrefix = (currentLang === 'ru') ? 'ru' : 'en';
 
       const inactiveClass = 'px-3 py-1.5 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-hover)] text-[var(--text)] font-bold transition rounded-xs';
       const activeClass = 'px-3 py-1.5 bg-[var(--tech-orange)] text-black font-bold transition rounded-xs';
 
-      if (btnFluent) btnFluent.className = inactiveClass;
-      if (btnMetro) btnMetro.className = inactiveClass;
-      if (btnSettings) btnSettings.className = inactiveClass;
-
-      if (style === 'fluent') {
-        img.src = `../assets/img/screenshot_1_${langPrefix}_fluent_1280x800.png`;
-        if (btnFluent) btnFluent.className = activeClass;
-      } else if (style === 'metro') {
-        img.src = `../assets/img/screenshot_2_${langPrefix}_metro_1280x800.png`;
-        if (btnMetro) btnMetro.className = activeClass;
-      } else if (style === 'settings') {
-        img.src = `../assets/img/screenshot_3_${langPrefix}_settings_1280x800.png`;
-        if (btnSettings) btnSettings.className = activeClass;
+      for (let i = 1; i <= 5; i++) {
+        const btn = document.getElementById('btn-scr-' + i);
+        if (btn) {
+          btn.className = (i === idx) ? activeClass : inactiveClass;
+        }
       }
+
+      img.src = `../assets/img/screenshot_${idx}_${langPrefix}_1280x800.png`;
     }
 
     function applyTheme(theme) {
@@ -722,10 +720,21 @@
         btnRu.className = 'px-2 py-1 text-[var(--text-muted)] hover:text-[var(--text-heading)] font-bold transition';
       }
 
-      const btnSet = document.getElementById('btn-scr-settings');
-      if (btnSet) btnSet.textContent = (lang === 'ru') ? 'Настройки' : 'Settings';
+      const btn1 = document.getElementById('btn-scr-1');
+      const btn2 = document.getElementById('btn-scr-2');
+      const btn3 = document.getElementById('btn-scr-3');
+      const btn4 = document.getElementById('btn-scr-4');
+      const btn5 = document.getElementById('btn-scr-5');
+      if (btn1) btn1.textContent = (lang === 'ru') ? '1. Стили' : '1. Dual Styles';
+      if (btn2) btn2.textContent = (lang === 'ru') ? '2. Радиус (0-24px)' : '2. Radius (0-24px)';
+      if (btn3) btn3.textContent = (lang === 'ru') ? '3. Настройки & Масштаб' : '3. Settings & Scale';
+      if (btn4) btn4.textContent = (lang === 'ru') ? '4. День & Ночь' : '4. Day & Night';
+      if (btn5) btn5.textContent = (lang === 'ru') ? '5. Виджеты' : '5. Smart Widgets';
 
-      setScreenshot(currentScrStyle);
+      setScreenshot(currentScrIdx);
+      applyTheme(currentTheme);
+      localStorage.setItem('adlab_lang', lang);
+    }
       applyTheme(currentTheme);
       localStorage.setItem('adlab_lang', lang);
     }
