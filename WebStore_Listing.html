@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tablo Tab v6.5.0 — Мастер публикации в Chrome Web Store</title>
+  <style>
+    :root {
+      --bg: #0b0d12;
+      --panel: #131722;
+      --panel-inner: #191e2b;
+      --border: #262c3d;
+      --border-accent: #37415c;
+      --text: #e2e8f0;
+      --text-muted: #8b95a8;
+      --text-dim: #5a6477;
+      --orange: #ff5500;
+      --orange-glow: rgba(255, 85, 0, 0.2);
+      --green: #10b981;
+      --green-glow: rgba(16, 185, 129, 0.2);
+      --blue: #38bdf8;
+      --blue-glow: rgba(56, 189, 248, 0.2);
+      --font-mono: "JetBrains Mono", Consolas, "Fira Code", monospace;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      line-height: 1.5;
+      padding: 24px 20px 80px;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(180deg, #181d2c 0%, var(--panel) 100%);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    }
+    .header-info {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .logo-badge {
+      width: 52px;
+      height: 52px;
+      background: #1e2433;
+      border: 1px solid var(--border-accent);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--orange);
+      font-family: var(--font-mono);
+      font-size: 24px;
+      font-weight: 800;
+      box-shadow: 0 0 16px var(--orange-glow);
+    }
+    .header-title h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+    }
+    .header-title p {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      margin-top: 2px;
+    }
+    .meta-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .pill {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--panel-inner);
+      color: var(--text-muted);
+    }
+    .pill.orange {
+      border-color: rgba(255, 85, 0, 0.35);
+      background: rgba(255, 85, 0, 0.08);
+      color: #ffaa80;
+    }
+    .pill.green {
+      border-color: rgba(16, 185, 129, 0.35);
+      background: rgba(16, 185, 129, 0.08);
+      color: #6ee7b7;
+    }
+
+    /* Tabs */
+    .tabs-nav {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+      overflow-x: auto;
+    }
+    .tab-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .tab-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .tab-btn.active {
+      color: #ffffff;
+      background: var(--panel);
+      border-color: var(--orange);
+      box-shadow: 0 0 12px var(--orange-glow);
+    }
+
+    /* Tab Content */
+    .tab-pane {
+      display: none;
+      animation: fadeIn 0.18s ease;
+    }
+    .tab-pane.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Form Section & Cards */
+    .section-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 22px 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+    }
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-subtitle {
+      font-size: 12px;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+    }
+
+    /* Field Group */
+    .field-block {
+      background: var(--panel-inner);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      transition: border-color 0.15s ease;
+    }
+    .field-block:last-child {
+      margin-bottom: 0;
+    }
+    .field-block:hover {
+      border-color: var(--border-accent);
+    }
+    .field-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      gap: 12px;
+    }
+    .field-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .char-badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: #11141c;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+    .char-badge.ok {
+      color: var(--green);
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+
+    /* Copy Button */
+    .btn-copy {
+      background: linear-gradient(180deg, #ff661a 0%, #e04b00 100%);
+      color: #ffffff;
+      border: none;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+      box-shadow: 0 2px 8px rgba(255, 85, 0, 0.3);
+      flex-shrink: 0;
+    }
+    .btn-copy:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(255, 85, 0, 0.45);
+      background: linear-gradient(180deg, #ff7733 0%, #f05505 100%);
+    }
+    .btn-copy:active {
+      transform: translateY(1px);
+    }
+    .btn-copy.copied {
+      background: #10b981 !important;
+      box-shadow: 0 0 12px var(--green-glow) !important;
+    }
+
+    /* Content Area */
+    .field-content {
+      background: #0d0f15;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px 14px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: #cbd5e1;
+      white-space: pre-wrap;
+      word-break: break-word;
+      line-height: 1.55;
+      max-height: 240px;
+      overflow-y: auto;
+    }
+    .field-content.single-line {
+      white-space: normal;
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      color: #ffffff;
+      padding: 10px 14px;
+    }
+
+    /* Screenshots Grid */
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 16px;
+    }
+    .media-card {
+      background: var(--panel-inner);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: all 0.15s ease;
+    }
+    .media-card:hover {
+      border-color: var(--orange);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+    .media-thumb-wrap {
+      width: 100%;
+      height: 170px;
+      background: #08090d;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .media-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .media-badge {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(4px);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      color: #e2e8f0;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .media-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .media-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .media-desc {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+    .media-path {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      color: var(--orange);
+      background: rgba(255, 85, 0, 0.08);
+      border: 1px solid rgba(255, 85, 0, 0.2);
+      padding: 4px 8px;
+      border-radius: 4px;
+      word-break: break-all;
+    }
+
+    /* Notice callout */
+    .callout {
+      border-left: 3px solid var(--orange);
+      background: rgba(255, 85, 0, 0.05);
+      border-radius: 0 6px 6px 0;
+      padding: 12px 16px;
+      font-size: 12.5px;
+      color: #cbd5e1;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+    .callout.info {
+      border-left-color: var(--blue);
+      background: rgba(56, 189, 248, 0.05);
+    }
+    .callout.success {
+      border-left-color: var(--green);
+      background: rgba(16, 185, 129, 0.05);
+    }
+
+    /* Floating Toast */
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #10b981;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 10px 18px;
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 16px var(--green-glow);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1000;
+      pointer-events: none;
+    }
+    #toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Checkbox list */
+    .checklist {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #0d0f15;
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      font-size: 12px;
+      color: #cbd5e1;
+    }
+    .check-item input {
+      accent-color: var(--orange);
+      width: 16px;
+      height: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Header -->
+  <header>
+    <div class="header-info">
+      <div class="logo-badge">T</div>
+      <div class="header-title">
+        <h1>Tablo Tab v6.5.0 — Chrome Web Store Master</h1>
+        <p>Мастер копирования текстов и загрузки ассетов в Developer Dashboard</p>
+      </div>
+    </div>
+    <div class="meta-pills">
+      <span class="pill orange">v6.5.0 (Release)</span>
+      <span class="pill green">ID: jmnpkejnlfmkckbmnanopjglbbmogeck</span>
+      <span class="pill">Manifest V3</span>
+    </div>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <div class="tabs-nav">
+    <button class="tab-btn active" onclick="switchTab('tab-ru')">🇷🇺 Локализованные объекты (RU)</button>
+    <button class="tab-btn" onclick="switchTab('tab-en')">🇬🇧 Глобальные объекты (EN)</button>
+    <button class="tab-btn" onclick="switchTab('tab-privacy')">🛡️ Меры конфиденциальности</button>
+    <button class="tab-btn" onclick="switchTab('tab-media')">🖼️ Скриншоты и Баннеры</button>
+    <button class="tab-btn" onclick="switchTab('tab-checklist')">📋 Пошаговый Чек-лист</button>
+  </div>
+
+  <!-- TAB 1: RU -->
+  <div id="tab-ru" class="tab-pane active">
+
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-title">🇷🇺 Основная карточка продукта (Русский язык)</div>
+        <div class="section-subtitle">Вкладка: Локализованные объекты → Русский</div>
+      </div>
+
+      <!-- Title RU -->
+      <div class="field-block">
+        <div class="field-head">
+          <div class="field-label">
+            <span>Название (Title)</span>
+            <span class="char-badge ok">26 / 45 символов</span>
+          </div>
+          <button class="btn-copy" onclick="copyField('val-ru-title', this)">📋 Копировать</button>
+        </div>
+        <div class="field-content single-line" id="val-ru-title">Tablo Tab — Экспресс-панель</div>
+      </div>
+
+      <!-- Summary RU -->
+      <div class="field-block">
+        <div class="field-head">
+          <div class="field-label">
+            <span>Краткое описание (Summary)</span>
+            <span class="char-badge ok">115 / 132 символа</span>
+          </div>
+          <button class="btn-copy" onclick="copyField('val-ru-summary', this)">📋 Копировать</button>
+        </div>
+        <div class="field-content single-line" id="val-ru-summary">Быстрая экспресс-панель со стилями Fluent Mica и Metro, рабочими столами, виджетами и синхронизацией в Google Диск.</div>
+      </div>
+
+      <!-- Detailed Description RU -->
+      <div class="field-block">
+        <div class="field-head">
+          <div class="field-label">
+            <span>Подробное описание (Detailed Description)</span>
+            <span class="char-badge ok">~2 100 / 16 000 символов</span>
+          </div>
+          <button class="btn-copy" onclick="copyField('val-ru-desc', this)">📋 Копировать всё описание</button>
+        </div>
+        <div class="field-content" id="val-ru-desc">Tablo Tab — современная, невероятно быстрая и эстетичная экспресс-панель для вашей новой вкладки. 
+
+Превратите стартовую страницу браузера в полноценный персональный дашборд в утонченном стиле Fluent Mica и Metro Classic. Организуйте любимые сайты по виртуальным рабочим столам, следите за погодой, курсами валют и криптовалют, делайте заметки и наслаждайтесь идеальным порядком каждый день.
+
+✨ КЛЮЧЕВЫЕ ВОЗМОЖНОСТИ:
+
+📂 Неограниченные рабочие столы (Workspaces)
+• Разделяйте закладки по контексту: «Главная», «Работа», «Медиа», «Покупки», «Учеба».
+• Быстрое переключение с клавиатуры или через элегантный сайдбар.
+• Персональные обои и цветовая гамма для каждого рабочего стола.
+
+🧩 Умные плитки и визуальные закладки
+• Автоматический подбор официальных логотипов, фавиконок и генерация стильных превью.
+• Кастомные бейджи, счетчики и статус-метки.
+• Мгновенный поиск по плиткам (горячая клавиша Ctrl+F).
+• Удобное перемещение Drag-and-Drop и группировка.
+
+⚡ Интерактивные смарт-виджеты:
+• 🕒 Часы и календарь — точное время, дата, день недели и интерактивный планировщик.
+• 🌤️ Погода — текущая температура, прогноз, автоопределение и перевод названий городов на язык интерфейса.
+• 📈 Курсы валют и криптовалют — онлайн-мониторинг USD, EUR, RUB, BTC, ETH, SOL и других активов.
+• 📝 Блокнот и To-Do списки — быстрые заметки, списки дел с чекбоксами прямо на экране.
+• Закрепление и свободное изменение размеров виджетов (1x1, 2x1, 2x2).
+
+☁️ Безопасность и облачная синхронизация:
+• Автоматическая синхронизация закладок между всеми вашими компьютерами через аккаунт Google.
+• Опциональная синхронизация тяжелых скриншотов через личный Google Диск (OAuth2).
+• Быстрый экспорт и импорт базы в JSON в один клик.
+• Полная приватность: ваши данные хранятся локально у вас или в вашем личном облаке. Никаких сторонних серверов и слежки.
+
+🎨 Премиальная эстетика:
+• Поддержка системной темной и светлой темы.
+• Эффекты стекла (Pure Glass / Fluent Mica) и плоский матовый стиль (Classic Opaque).
+• Настройка размера сетки (180px–320px), скруглений (0px–24px), прозрачности и шрифтов под любой монитор.
+
+Сделайте каждую новую вкладку удобной, полезной и вдохновляющей вместе с Tablo Tab!</div>
+      </div>
+
+      <!-- Release Notes v6.5.0 RU -->
+      <div class="field-block">
+        <div class="field-head">
+          <div class="field-label">
+            <span>Что нового в версии 6.5.0 (Release Notes RU)</span>
+            <span class="char-badge ok">Telegram / Чейнджлог</span>
+          </div>
+          <button class="btn-copy" onclick="copyField('val-ru-changelog', this)">📋 Копировать чейнджлог</button>
+        </div>
+        <div class="field-content" id="val-ru-changelog">🚀 Что нового в TabloTab v6.5.0:
+• Независимый выбор текстуры и формы: Выбирайте текстуру плиток («Чистое стекло» с акриловым размытием или «Классические» непрозрачные плитки) и настраивайте скругление углов (от строгих 0px до мягких 24px) независимо друг от друга.
+• Синхронное скругление интерфейса: Окно настроек и меню теперь динамически повторяют радиус скругления ваших плиток.
+• Размер плиток в пикселях: Добавлены быстрые пресеты масштаба (180px, 220px, 260px, 320px) с живым масштабированием прямо на столе.
+• Обновленная светлая тема: Полная контрастность всех элементов, полупрозрачные белые контекстные меню и читаемые шрифты.
+• Улучшенные виджеты: Блокнот, Погода и Курсы валют (1x1) теперь идеально сочетаются по стилю и скруглению с вашими плитками сайтов.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TAB 2: EN -->
+  <div id="tab-en" class="tab-pane">
+
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-title">🇬🇧 Global Listing (English)</div>
+        <div class="section-subtitle">Tab: Глобальные объекты (English - Default)</div>
+      </div>
+
+      <!-- Title EN -->
+      <div class="field-block">
+        <div class="field-head">
+          <div class="field-label">
+            <span>Item Name (Title)</span>
+            <span class="char-badge ok">32 / 45 characters</span>
+          </div>
+          <button class="btn-copy" onclick="copyField('val-en-title', this)">📋 Copy</button>
+        </div>
+        <div class="field-content single-line" id="val-en-title">Tablo Tab — Speed Dial & Widgets</div>
+      </div>
+
+      <!-- Summary EN -->
+      <div class="field-block">
+        <div class="field-head">
+          <div class="field-label">
+            <span>Summary</span>
+            <span class="char-badge ok">120 / 132 characters</span>
+          </div>
+          <button class="btn-copy" onclick="copyField('val-en-summary', this)">📋 Copy</button>
+        </div>
+        <div class="field-content single-line" id="val-en-summary">Fast speed dial new tab with Fluent Mica & Metro styles, multiple virtual desktops, live widgets, and Google Drive sync.</div>
+      </div>
+
+      <!-- Detailed Description EN -->
+      <div class="field-block">
+        <div class="field-head">
+          <div class="field-label">
+            <span>Detailed Description</span>
+            <span class="char-badge ok">~2 000 / 16 000 characters</span>
+          </div>
+          <button class="btn-copy" onclick="copyField('val-en-desc', this)">📋 Copy Full Description</button>
+        </div>
+        <div class="field-content" id="val-en-desc">Tablo Tab transforms your browser's New Tab page into a lightning-fast, beautiful, and deeply customizable productivity dashboard with Fluent Mica and Metro Classic styles.
+
+Organize all your essential links into dedicated virtual workspaces, monitor live weather and currency rates, manage quick to-do notes, and enjoy a clutter-free, aesthetic start page every time you open a tab.
+
+✨ CORE FEATURES:
+
+📂 Virtual Desktops & Workspaces
+• Categorize bookmarks by workflow: "Home", "Work", "Media", "Shopping", "Personal".
+• Effortless switching via mouse or instant keyboard shortcuts.
+• Unique wallpapers, layouts, and accents for each desktop.
+
+🧩 Smart Tiles & Visual Bookmarks
+• Automatic high-res icons, official brand logos, and generated preview thumbnails.
+• Custom badges, notifications, and status tags.
+• Instant real-time tile search (Ctrl+F).
+• Intuitive drag-and-drop reordering.
+
+⚡ Live Smart Widgets
+• 🕒 Clock & Calendar — live time, day, date, and interactive schedule view.
+• 🌤️ Live Weather — real-time local conditions, forecasts, and auto-localized city names.
+• 📈 Market & Crypto Rates — live tracking for USD, EUR, RUB, BTC, ETH, SOL, and more.
+• 📝 Notepad & To-Do Lists — quick checklists and sticky notes directly on your desktop.
+• Flexible widget dimensions (1x1, 2x1, 2x2) with lockable positions.
+
+☁️ Privacy & Cloud Sync
+• Automatic bookmark sync across all your devices using your Chrome account.
+• Optional cloud backup for custom screenshots via personal Google Drive (OAuth2).
+• Instant JSON backup export and import.
+• Complete privacy: zero tracking, zero third-party data collection.
+
+🎨 Clean Modern Aesthetics
+• Native dark and light mode support.
+• Fluent Mica glass (Pure Glass) and flat Metro Classic (Classic Opaque) styles.
+• Fully customizable grid dimensions (180px–320px), gaps, border radius (0px–24px), and typography.
+
+Make every new tab productive, organized, and inspiring with Tablo Tab!</div>
+      </div>
+
+      <!-- Release Notes v6.5.0 EN -->
+      <div class="field-block">
+        <div class="field-head">
+          <div class="field-label">
+            <span>What's New in v6.5.0 (Release Notes EN)</span>
+            <span class="char-badge ok">Changelog</span>
+          </div>
+          <button class="btn-copy" onclick="copyField('val-en-changelog', this)">📋 Copy Changelog</button>
+        </div>
+        <div class="field-content" id="val-en-changelog">🚀 What's New in TabloTab v6.5.0:
+• Decoupled Style & Corner Radius: Choose between Pure Acrylic Glass or Classic Opaque tiles, and adjust corner radius (0px to 24px) completely independently.
+• Adaptive UI Rounding: The settings window and cards dynamically match your chosen tile corner radius.
+• Tile Sizing in Pixels: One-click size presets (180px, 220px, 260px, 320px) with instant live preview scaling.
+• Refined Light Theme: High-contrast controls, frosted glass light context menus, and crystal-clear readability.
+• Harmonized Smart Widgets: Weather, Notes, Currency (1x1), and Clocks seamlessly adopt your tile design and curvature.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TAB 3: PRIVACY -->
+  <div id="tab-privacy" class="tab-pane">
+
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-title">🛡️ Меры по обеспечению конфиденциальности (Privacy Practices)</div>
+        <div class="section-subtitle">Вкладка в консоли: «Конфиденциальность» / Privacy</div>
+      </div>
+
+      <div class="callout success">
+        Все разрешения в Manifest V3 тщательно выверены. Скопируйте соответствующие обоснования в поля консоли разработчика Chrome.
+      </div>
+
+      <!-- Single Purpose -->
+      <div class="field-block">
+        <div class="field-head">
+          <div class="field-label">
+            <span>1. Описание основного назначения (Single Purpose Description)</span>
+          </div>
+          <button class="btn-copy" onclick="copyField('val-priv-purpose', this)">📋 Копировать</button>
+        </div>
+        <div class="field-content" id="val-priv-purpose">Tablo Tab превращает страницу новой вкладки в персонализированную экспресс-панель со стилями Fluent Mica и Metro Classic, настраиваемыми плитками закладок, рабочими столами, интерактивными виджетами (часы, погода, заметки, курсы валют) и безопасной облачной синхронизацией через Google Диск.</div>
+      </div>
+
+      <!-- Permissions Justifications -->
+      <div class="section-title" style="font-size: 14px; margin: 20px 0 10px;">2. Обоснования для каждого разрешения (Permission Justifications)</div>
+
+      <!-- activeTab -->
+      <div class="field-block">
+        <div class="field-head">
+          <div class="field-label">
+            <span style="color: var(--blue);">activeTab</span>
+          </div>
+          <button class="btn-copy" onclick="copyField('val-perm-activetab', this)">📋 Копировать</button>
+        </div>
+        <div class="field-content" id="val-perm-activetab">Используется для получения URL-адреса, заголовка и фавиконки активной вкладки при клике на иконку расширения, позволяя пользователю сохранить открытый сайт в закладки без запроса постоянного доступа к истории браузера.</div>
+      </div>
+
+      <!-- contextMenus -->
+      <div class="field-block">
+        <div class="field-head">
+          <div class="field-label">
+            <span style="color: var(--blue);">contextMenus</span>
+          </div>
+          <button class="btn-copy" onclick="copyField('val-perm-contextmenus', this)">📋 Копировать</button>
+        </div>
+        <div class="field-content" id="val-perm-contextmenus">Используется для добавления пункта «Добавить страницу в Tablo Tab» в контекстное меню правой кнопки мыши на веб-страницах и ссылках для быстрого добавления сайтов на выбранный рабочий стол.</div>
+      </div>
+
+      <!-- identity -->
+      <div class="field-block">
+        <div class="field-head">
+          <div class="field-label">
+            <span style="color: var(--blue);">identity</span>
+          </div>
+          <button class="btn-copy" onclick="copyField('val-perm-identity', this)">📋 Копировать</button>
+        </div>
+        <div class="field-content" id="val-perm-identity">Используется исключительно для опциональной авторизации пользователя в его личном Google Диске (OAuth2) для создания резервных копий и синхронизации закладок между устройствами.</div>
+      </div>
+
+      <!-- storage -->
+      <div class="field-block">
+        <div class="field-head">
+          <div class="field-label">
+            <span style="color: var(--blue);">storage</span>
+          </div>
+          <button class="btn-copy" onclick="copyField('val-perm-storage', this)">📋 Копировать</button>
+        </div>
+        <div class="field-content" id="val-perm-storage">Используется для надежного локального сохранения пользовательских настроек, рабочих столов, плиток закладок, заметок To-Do и конфигураций виджетов на устройстве пользователя.</div>
+      </div>
+
+      <!-- tabs -->
+      <div class="field-block">
+        <div class="field-head">
+          <div class="field-label">
+            <span style="color: var(--blue);">tabs</span>
+          </div>
+          <button class="btn-copy" onclick="copyField('val-perm-tabs', this)">📋 Копировать</button>
+        </div>
+        <div class="field-content" id="val-perm-tabs">Используется для создания скриншотов-превью сохраняемых страниц (chrome.tabs.captureVisibleTab), определения текущего URL в окне добавления плитки и пакетного открытия закладок рабочего стола в новых вкладках.</div>
+      </div>
+
+      <!-- unlimitedStorage -->
+      <div class="field-block">
+        <div class="field-head">
+          <div class="field-label">
+            <span style="color: var(--blue);">unlimitedStorage</span>
+          </div>
+          <button class="btn-copy" onclick="copyField('val-perm-unlimited', this)">📋 Копировать</button>
+        </div>
+        <div class="field-content" id="val-perm-unlimited">Необходимо для предотвращения ошибок квоты памяти при локальном сохранении графических превью сайтов, кэшированных фавиконок и пользовательских фоновых обоев высокого разрешения.</div>
+      </div>
+
+      <!-- Host permissions -->
+      <div class="field-block">
+        <div class="field-head">
+          <div class="field-label">
+            <span style="color: var(--orange);">Доступ к хостам (Host permissions)</span>
+          </div>
+          <button class="btn-copy" onclick="copyField('val-perm-host', this)">📋 Копировать</button>
+        </div>
+        <div class="field-content" id="val-perm-host">Доступ к хостам необходим для автоматической загрузки фавиконок и логотипов для любых сайтов, которые пользователь добавляет на панель, а также для получения актуальных данных встроенных виджетов (прогноз погоды с API Open-Meteo и курсы валют/криптовалют с открытых финансовых API).</div>
+      </div>
+
+      <!-- Remote code & Compliance -->
+      <div class="field-block" style="margin-top: 16px;">
+        <div class="field-label" style="margin-bottom: 8px;">3. Использование удаленного кода (Remote Code)</div>
+        <div class="callout info" style="margin-bottom: 0;">
+          Выберите пункт: <strong>«Нет, я не использую удаленный код»</strong> (No, I do not use remote code).<br>
+          <span style="font-size: 11.5px; color: var(--text-muted);">Все скрипты расширения упакованы локально в архив в строгом соответствии с требованиями Manifest V3.</span>
+        </div>
+      </div>
+
+      <div class="field-block">
+        <div class="field-label" style="margin-bottom: 8px;">4. Чек-листы соответствия правилам (Data Compliance)</div>
+        <div class="checklist">
+          <label class="check-item"><input type="checkbox" checked disabled> Данные пользователей НЕ продаются третьим лицам</label>
+          <label class="check-item"><input type="checkbox" checked disabled> Данные НЕ используются в целях, не связанных с назначением продукта</label>
+          <label class="check-item"><input type="checkbox" checked disabled> Данные НЕ используются для оценки кредитоспособности</label>
+          <label class="check-item"><input type="checkbox" checked disabled> Я подтверждаю соблюдение Правил программы Chrome Web Store</label>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TAB 4: MEDIA -->
+  <div id="tab-media" class="tab-pane">
+
+    <!-- Russian Screenshots -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-title">🇷🇺 Локализованные скриншоты (3 файла)</div>
+        <div class="section-subtitle">Загружать в блок: «Локализованные объекты» → «Локализованные скриншоты»</div>
+      </div>
+
+      <div class="callout">
+        Загрузите эти 3 файла по очереди в блок <strong>«Локализованные скриншоты»</strong>. Все скриншоты сняты с реального расширения в чистом разрешении 1280×800 (24-bit RGB без альфа-канала).
+      </div>
+
+      <div class="media-grid">
+        <!-- RU 1 -->
+        <div class="media-card">
+          <div class="media-thumb-wrap">
+            <img src="screenshot_1_ru_1280x800.png" class="media-thumb" alt="RU Screen 1">
+            <span class="media-badge">1280 × 800</span>
+          </div>
+          <div class="media-info">
+            <div class="media-title">Скриншот 1: Главный экран (Hero)</div>
+            <div class="media-desc">Чистый рабочий стол «Главная», обои Aurora, часы, погода в Москве, 6 плиток сайтов.</div>
+            <div class="media-path">WebStore/screenshot_1_ru_1280x800.png</div>
+          </div>
+          <button class="btn-copy" onclick="copyText('screenshot_1_ru_1280x800.png', this)">📋 Копировать имя файла</button>
+        </div>
+
+        <!-- RU 2 -->
+        <div class="media-card">
+          <div class="media-thumb-wrap">
+            <img src="screenshot_2_ru_1280x800.png" class="media-thumb" alt="RU Screen 2">
+            <span class="media-badge">1280 × 800</span>
+          </div>
+          <div class="media-info">
+            <div class="media-title">Скриншот 2: Стили и Окно настроек</div>
+            <div class="media-desc">Окно настроек v6.5.0: «Чистое стекло» / «Классика», ползунок скругления 14px, масштаб 180px.</div>
+            <div class="media-path">WebStore/screenshot_2_ru_1280x800.png</div>
+          </div>
+          <button class="btn-copy" onclick="copyText('screenshot_2_ru_1280x800.png', this)">📋 Копировать имя файла</button>
+        </div>
+
+        <!-- RU 3 -->
+        <div class="media-card">
+          <div class="media-thumb-wrap">
+            <img src="screenshot_3_ru_1280x800.png" class="media-thumb" alt="RU Screen 3">
+            <span class="media-badge">1280 × 800</span>
+          </div>
+          <div class="media-info">
+            <div class="media-title">Скриншот 3: Смарт-виджеты (1x1 Валюты)</div>
+            <div class="media-desc">Симметричная сетка 6×2: Часы, Погода, Курсы валют 1x1 (USD/EUR/BTC), Блокнот 2x1 с чекбоксами.</div>
+            <div class="media-path">WebStore/screenshot_3_ru_1280x800.png</div>
+          </div>
+          <button class="btn-copy" onclick="copyText('screenshot_3_ru_1280x800.png', this)">📋 Копировать имя файла</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- English Screenshots -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-title">🇬🇧 Глобальные скриншоты (3 файла)</div>
+        <div class="section-subtitle">Загружать в блок: «Глобальные объекты» → «Глобальные скриншоты»</div>
+      </div>
+
+      <div class="callout info">
+        Загрузите эти 3 файла в блок <strong>«Глобальные скриншоты»</strong>. Англоязычный интерфейс, погода в Лондоне, курсы в USD.
+      </div>
+
+      <div class="media-grid">
+        <!-- EN 1 -->
+        <div class="media-card">
+          <div class="media-thumb-wrap">
+            <img src="screenshot_1_en_1280x800.png" class="media-thumb" alt="EN Screen 1">
+            <span class="media-badge">1280 × 800</span>
+          </div>
+          <div class="media-info">
+            <div class="media-title">Screenshot 1: Hero New Tab</div>
+            <div class="media-desc">Clean "Home" desktop, Aurora wallpaper, Clock, London weather, 6 dials.</div>
+            <div class="media-path">WebStore/screenshot_1_en_1280x800.png</div>
+          </div>
+          <button class="btn-copy" onclick="copyText('screenshot_1_en_1280x800.png', this)">📋 Копировать имя файла</button>
+        </div>
+
+        <!-- EN 2 -->
+        <div class="media-card">
+          <div class="media-thumb-wrap">
+            <img src="screenshot_2_en_1280x800.png" class="media-thumb" alt="EN Screen 2">
+            <span class="media-badge">1280 × 800</span>
+          </div>
+          <div class="media-info">
+            <div class="media-title">Screenshot 2: Styles & Settings Modal</div>
+            <div class="media-desc">v6.5.0 Settings modal: Pure glass / Classic styles, 14px radius slider, 180px tile size.</div>
+            <div class="media-path">WebStore/screenshot_2_en_1280x800.png</div>
+          </div>
+          <button class="btn-copy" onclick="copyText('screenshot_2_en_1280x800.png', this)">📋 Копировать имя файла</button>
+        </div>
+
+        <!-- EN 3 -->
+        <div class="media-card">
+          <div class="media-thumb-wrap">
+            <img src="screenshot_3_en_1280x800.png" class="media-thumb" alt="EN Screen 3">
+            <span class="media-badge">1280 × 800</span>
+          </div>
+          <div class="media-info">
+            <div class="media-title">Screenshot 3: Smart Widgets (1x1 Rates)</div>
+            <div class="media-desc">Balanced 6×2 grid: Clock, Weather, Rates 1x1 (EUR/GBP/BTC in USD), Notepad 2x1 with todo tasks.</div>
+            <div class="media-path">WebStore/screenshot_3_en_1280x800.png</div>
+          </div>
+          <button class="btn-copy" onclick="copyText('screenshot_3_en_1280x800.png', this)">📋 Копировать имя файла</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Promo Banners & Archive -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-title">🖼️ Рекламные изображения и Архив расширения</div>
+        <div class="section-subtitle">Загружать в блок: «Глобальные объекты» и вкладку «Пакет»</div>
+      </div>
+
+      <div class="media-grid">
+        <!-- Tile 440x280 -->
+        <div class="media-card">
+          <div class="media-thumb-wrap">
+            <img src="promo_tile_440x280.png" class="media-thumb" alt="Promo Tile 440x280">
+            <span class="media-badge">440 × 280</span>
+          </div>
+          <div class="media-info">
+            <div class="media-title">Маленькое рекламное изображение</div>
+            <div class="media-desc">Баннер карточки в каталоге Web Store (логотип ГОСТ, теги Fluent & Metro).</div>
+            <div class="media-path">WebStore/promo_tile_440x280.png</div>
+          </div>
+          <button class="btn-copy" onclick="copyText('promo_tile_440x280.png', this)">📋 Копировать имя файла</button>
+        </div>
+
+        <!-- Marquee 1400x560 -->
+        <div class="media-card">
+          <div class="media-thumb-wrap">
+            <img src="promo_marquee_1400x560.png" class="media-thumb" alt="Promo Marquee 1400x560">
+            <span class="media-badge">1400 × 560</span>
+          </div>
+          <div class="media-info">
+            <div class="media-title">Очень большое рекламное изображение</div>
+            <div class="media-desc">Широкий промо-баннер для витрины и промо-акций (1400×560 px).</div>
+            <div class="media-path">WebStore/promo_marquee_1400x560.png</div>
+          </div>
+          <button class="btn-copy" onclick="copyText('promo_marquee_1400x560.png', this)">📋 Копировать имя файла</button>
+        </div>
+
+        <!-- Zip Archive -->
+        <div class="media-card">
+          <div class="media-thumb-wrap" style="background: #151a26; flex-direction: column; gap: 8px;">
+            <div style="font-size: 38px;">📦</div>
+            <span class="media-badge" style="position: static;">~336 КБ • ZIP</span>
+          </div>
+          <div class="media-info">
+            <div class="media-title">Официальный релизный архив v6.5.0</div>
+            <div class="media-desc">Загружать во вкладку <strong>«Пакет» (Package)</strong> в левом меню консоли разработчика.</div>
+            <div class="media-path">WebStore/TabloTab_Extension_v6.5.0.zip</div>
+          </div>
+          <button class="btn-copy" onclick="copyText('TabloTab_Extension_v6.5.0.zip', this)">📋 Копировать имя файла</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TAB 5: CHECKLIST -->
+  <div id="tab-checklist" class="tab-pane">
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-title">📋 Пошаговый порядок публикации в Chrome Web Store</div>
+        <div class="section-subtitle">Проверьте каждый пункт перед отправкой на модерацию</div>
+      </div>
+
+      <div class="checklist" style="gap: 14px;">
+        <div class="check-item" style="padding: 14px;">
+          <input type="checkbox" id="step1">
+          <label for="step1">
+            <strong>1. Вкладка «Пакет» (Package):</strong> Нажмите «Загрузить новый пакет» и выберите файл <code style="color:var(--orange);">WebStore/TabloTab_Extension_v6.5.0.zip</code>. Убедитесь, что версия обновилась до <strong>6.5.0</strong>.
+          </label>
+        </div>
+
+        <div class="check-item" style="padding: 14px;">
+          <input type="checkbox" id="step2">
+          <label for="step2">
+            <strong>2. Вкладка «Материалы для интернет-магазина» → «Локализованные объекты» (Русский):</strong><br>
+            • Вставьте Название: <em>Tablo Tab — Экспресс-панель</em><br>
+            • Вставьте Краткое описание (115 симв.)<br>
+            • Вставьте Подробное описание<br>
+            • В блок «Локализованные скриншоты» перетащите 3 русских файла: <code style="color:var(--orange);">screenshot_1_ru_1280x800.png</code>, <code style="color:var(--orange);">screenshot_2_ru_1280x800.png</code>, <code style="color:var(--orange);">screenshot_3_ru_1280x800.png</code> (удалите старый скриншот, если был загружен ранее).
+          </label>
+        </div>
+
+        <div class="check-item" style="padding: 14px;">
+          <input type="checkbox" id="step3">
+          <label for="step3">
+            <strong>3. Блок «Глобальные объекты» (English / Default):</strong><br>
+            • Вставьте Item Name: <em>Tablo Tab — Speed Dial & Widgets</em><br>
+            • Вставьте Summary (120 chars)<br>
+            • Вставьте Detailed Description<br>
+            • В «Глобальные скриншоты» перетащите 3 английских файла: <code style="color:var(--orange);">screenshot_1_en_1280x800.png</code>, <code style="color:var(--orange);">screenshot_2_en_1280x800.png</code>, <code style="color:var(--orange);">screenshot_3_en_1280x800.png</code><br>
+            • В «Маленькое рекламное изображение (440×280)» загрузите <code style="color:var(--orange);">promo_tile_440x280.png</code><br>
+            • В «Очень большое рекламное изображение (1400×560)» загрузите <code style="color:var(--orange);">promo_marquee_1400x560.png</code>
+          </label>
+        </div>
+
+        <div class="check-item" style="padding: 14px;">
+          <input type="checkbox" id="step4">
+          <label for="step4">
+            <strong>4. Вкладка «Меры конфиденциальности» (Privacy):</strong><br>
+            • Вставьте текст «Описание основного назначения»<br>
+            • Заполните 7 обоснований для всех разрешений (activeTab, contextMenus, identity, storage, tabs, unlimitedStorage, Host permissions)<br>
+            • Выберите «Нет, я не использую удаленный код»<br>
+            • Отметьте 4 чекбокса соответствия правилам использования данных
+          </label>
+        </div>
+
+        <div class="check-item" style="padding: 14px;">
+          <input type="checkbox" id="step5">
+          <label for="step5">
+            <strong>5. Дополнительные параметры:</strong><br>
+            • Официальный URL: <em>Нет</em><br>
+            • Только для взрослых: <em>ВЫКЛЮЧЕНО</em> (расширение для всех возрастов)<br>
+            • Категория: <em>Продуктивность</em> (Productivity)
+          </label>
+        </div>
+
+        <div class="check-item" style="padding: 14px;">
+          <input type="checkbox" id="step6">
+          <label for="step6">
+            <strong>6. Сохранение и публикация:</strong> Нажмите <strong>«Сохранить черновик»</strong>, затем синюю кнопку <strong>«Отправить на публикацию»</strong> (Submit for review).
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Floating Toast -->
+<div id="toast">✓ Скопировано в буфер обмена!</div>
+
+<script>
+  function switchTab(tabId) {
+    document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    
+    const target = document.getElementById(tabId);
+    if (target) target.classList.add('active');
+    
+    event.currentTarget.classList.add('active');
+  }
+
+  function showToast(msg = '✓ Скопировано в буфер обмена!') {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(window._toastTimer);
+    window._toastTimer = setTimeout(() => {
+      t.classList.remove('show');
+    }, 2200);
+  }
+
+  function copyField(elementId, btn) {
+    const el = document.getElementById(elementId);
+    if (!el) return;
+    const text = el.innerText || el.textContent;
+    copyText(text, btn);
+  }
+
+  function copyText(text, btn) {
+    navigator.clipboard.writeText(text).then(() => {
+      showToast('✓ Скопировано в буфер обмена!');
+      if (btn) {
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '✓ Скопировано!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          btn.classList.remove('copied');
+        }, 1800);
+      }
+    }).catch(err => {
+      // Fallback
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast('✓ Скопировано в буфер обмена!');
+      if (btn) {
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '✓ Скопировано!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          btn.classList.remove('copied');
+        }, 1800);
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
