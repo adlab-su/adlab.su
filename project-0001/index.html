@@ -253,29 +253,23 @@
         </div>
       </section>
 
-      <!-- ИНТЕРАКТИВНАЯ ГАЛЕРЕЯ СКРИНШОТОВ (5 СЦЕН) -->
+      <!-- ИНТЕРАКТИВНАЯ ГАЛЕРЕЯ СКРИНШОТОВ (3 СЦЕНЫ) -->
       <section class="tech-border p-5 sm:p-7 rounded-sm shadow-xl space-y-4">
         <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3 border-b border-[var(--border)] pb-4">
           <div>
-            <h3 class="text-lg font-bold text-[var(--text-heading)] font-mono" id="txt-gallery-title">ВНЕШНИЙ ВИД И ИНТЕРФЕЙС (5 КЛЮЧЕВЫХ СЦЕН)</h3>
-            <p class="text-xs text-[var(--text-muted)] font-sans-ui" id="txt-gallery-subtitle">Переключайте сцены для просмотра возможностей v6.5.0</p>
+            <h3 class="text-lg font-bold text-[var(--text-heading)] font-mono" id="txt-gallery-title">ВНЕШНИЙ ВИД И ИНТЕРФЕЙС (3 КЛЮЧЕВЫХ СЦЕНЫ)</h3>
+            <p class="text-xs text-[var(--text-muted)] font-sans-ui" id="txt-gallery-subtitle">Переключайте сцены для просмотра возможностей</p>
           </div>
           
           <div class="flex flex-wrap items-center gap-1.5 font-mono text-xs" id="gallery-buttons-wrap">
             <button onclick="setScreenshot(1)" id="btn-scr-1" class="px-3 py-1.5 bg-[var(--tech-orange)] text-black font-bold transition rounded-xs">
-              1. Стили
+              1. Главный экран (Hero)
             </button>
             <button onclick="setScreenshot(2)" id="btn-scr-2" class="px-3 py-1.5 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-hover)] text-[var(--text)] font-bold transition rounded-xs">
-              2. Радиус (0-24px)
+              2. Стили (Стекло &amp; Классика)
             </button>
             <button onclick="setScreenshot(3)" id="btn-scr-3" class="px-3 py-1.5 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-hover)] text-[var(--text)] font-bold transition rounded-xs">
-              3. Настройки & Масштаб
-            </button>
-            <button onclick="setScreenshot(4)" id="btn-scr-4" class="px-3 py-1.5 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-hover)] text-[var(--text)] font-bold transition rounded-xs">
-              4. День & Ночь
-            </button>
-            <button onclick="setScreenshot(5)" id="btn-scr-5" class="px-3 py-1.5 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-hover)] text-[var(--text)] font-bold transition rounded-xs">
-              5. Виджеты
+              3. Смарт-виджеты
             </button>
           </div>
         </div>
@@ -471,8 +465,11 @@
         heroDesc: 'Эстетичная персональная панель для новой вкладки в стилях Fluent Mica и Metro Classic. Неограниченные рабочие пространства, интерактивные смарт-виджеты и приватный бэкап.',
         btnStore: 'УСТАНОВИТЬ ИЗ CHROME WEB STORE',
         btnPrivacy: 'ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ ➔',
-        galleryTitle: 'ВНЕШНИЙ ВИД И ИНТЕРФЕЙС (5 КЛЮЧЕВЫХ СЦЕН)',
-        gallerySubtitle: 'Переключайте сцены для просмотра возможностей v6.5.0',
+        galleryTitle: 'ВНЕШНИЙ ВИД И ИНТЕРФЕЙС (3 КЛЮЧЕВЫХ СЦЕНЫ)',
+        gallerySubtitle: 'Переключайте сцены для просмотра возможностей',
+        btnScr1: '1. Главный экран (Hero)',
+        btnScr2: '2. Стили (Стекло & Классика)',
+        btnScr3: '3. Смарт-виджеты',
         specsTitle: 'ИНЖЕНЕРНЫЙ ФОРМУЛЯР ПАРАМЕТРОВ (ТТХ)',
         specs: {
           id: 'ID в Chrome Web Store:',
@@ -586,8 +583,11 @@
         heroDesc: 'Aesthetic new tab dashboard featuring Fluent Mica & Metro Classic styles. Infinite virtual workspaces, live smart widgets, sticky notes, and private Google Drive cloud sync.',
         btnStore: 'INSTALL FROM CHROME WEB STORE',
         btnPrivacy: 'PRIVACY POLICY ➔',
-        galleryTitle: 'VISUAL INTERFACE & STYLES',
-        gallerySubtitle: 'Switch modes to inspect both layouts',
+        galleryTitle: 'VISUAL INTERFACE & STYLES (3 CORE SCENES)',
+        gallerySubtitle: 'Switch scenes to explore features',
+        btnScr1: '1. Main Screen (Hero)',
+        btnScr2: '2. Styles (Glass & Classic)',
+        btnScr3: '3. Smart Widgets',
         specsTitle: 'TECHNICAL SPECIFICATIONS & PARAMETERS',
         specs: {
           id: 'Chrome Web Store ID:',
@@ -697,7 +697,7 @@
       const inactiveClass = 'px-3 py-1.5 bg-[var(--btn-secondary-bg)] hover:bg-[var(--btn-secondary-hover)] text-[var(--text)] font-bold transition rounded-xs';
       const activeClass = 'px-3 py-1.5 bg-[var(--tech-orange)] text-black font-bold transition rounded-xs';
 
-      for (let i = 1; i <= 5; i++) {
+      for (let i = 1; i <= 3; i++) {
         const btn = document.getElementById('btn-scr-' + i);
         if (btn) {
           btn.className = (i === idx) ? activeClass : inactiveClass;
@@ -743,6 +743,9 @@
       document.getElementById('txt-btn-privacy').textContent = t.btnPrivacy;
       document.getElementById('txt-gallery-title').textContent = t.galleryTitle;
       document.getElementById('txt-gallery-subtitle').textContent = t.gallerySubtitle;
+      if (document.getElementById('btn-scr-1')) document.getElementById('btn-scr-1').textContent = t.btnScr1;
+      if (document.getElementById('btn-scr-2')) document.getElementById('btn-scr-2').textContent = t.btnScr2;
+      if (document.getElementById('btn-scr-3')) document.getElementById('btn-scr-3').textContent = t.btnScr3;
       document.getElementById('txt-specs-title').textContent = t.specsTitle;
 
       // ТТХ
@@ -789,13 +792,9 @@
       const btn1 = document.getElementById('btn-scr-1');
       const btn2 = document.getElementById('btn-scr-2');
       const btn3 = document.getElementById('btn-scr-3');
-      const btn4 = document.getElementById('btn-scr-4');
-      const btn5 = document.getElementById('btn-scr-5');
-      if (btn1) btn1.textContent = (lang === 'ru') ? '1. Стили' : '1. Dual Styles';
-      if (btn2) btn2.textContent = (lang === 'ru') ? '2. Радиус (0-24px)' : '2. Radius (0-24px)';
-      if (btn3) btn3.textContent = (lang === 'ru') ? '3. Настройки & Масштаб' : '3. Settings & Scale';
-      if (btn4) btn4.textContent = (lang === 'ru') ? '4. День & Ночь' : '4. Day & Night';
-      if (btn5) btn5.textContent = (lang === 'ru') ? '5. Виджеты' : '5. Smart Widgets';
+      if (btn1) btn1.textContent = (lang === 'ru') ? '1. Главный экран (Hero)' : '1. Main Screen (Hero)';
+      if (btn2) btn2.textContent = (lang === 'ru') ? '2. Стили (Стекло & Классика)' : '2. Styles (Glass & Classic)';
+      if (btn3) btn3.textContent = (lang === 'ru') ? '3. Смарт-виджеты' : '3. Smart Widgets';
 
       setScreenshot(currentScrIdx);
       applyTheme(currentTheme);
